@@ -11,6 +11,7 @@ Processing
 Model
   train                       fixed train/test split, CV on train, report -> outputs/
   predict <photo> [...]       judge one person from one or more photos
+  game                        build the game's data from held-out test people -> game/
 """
 import argparse
 import os
@@ -23,7 +24,7 @@ def main():
     ap = argparse.ArgumentParser(prog="python -m physormath", description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
-    for name in ["fetch", "fetch-subfields", "fetch-extra", "train"]:
+    for name in ["fetch", "fetch-subfields", "fetch-extra", "train", "game"]:
         sub.add_parser(name)
     sub.add_parser("scrape").add_argument("stage", choices=["discover", "probe", "crawl", "simons"])
     p = sub.add_parser("process")
@@ -58,6 +59,9 @@ def main():
     elif a.cmd == "train":
         from .train import main as train
         train()
+    elif a.cmd == "game":
+        from .game import build
+        build()
     elif a.cmd == "predict":
         from .predict import judge
         judge(a.photos)

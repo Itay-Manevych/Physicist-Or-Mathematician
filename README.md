@@ -36,6 +36,7 @@ python -m physormath fetch                         # Wikidata physicists & mathe
 python -m physormath process data/people.csv       # face crops + embeddings
 python -m physormath clean --apply                 # strict labels, real photos only
 python -m physormath train                         # fixed train/test split, report in outputs/
+python -m physormath game                          # game data from held-out test people -> game/
 ```
 
 Optional extra data: `fetch-subfields`, `fetch-extra`, `scrape {discover,probe,crawl,simons}` (each followed by `process <csv> <tag>`).
@@ -46,7 +47,7 @@ Sources and data policy: [docs/DATA.md](docs/DATA.md).
 ```
 physormath/   the code: one module per step, run as `python -m physormath <step>`
 sources/      seed lists for the university scraper
-game/         static "guess the field" game (you vs. the AI)
+game/         retro "human vs. machine" fighting game (static site)
 docs/         results and data notes
 data/         photos, crops, embeddings   (not in git)
 outputs/      models, predictions, reports (not in git)
