@@ -45,8 +45,11 @@
       <button type="button" class="btn mode" id="friendBtn" style="background: var(--math)">VS A FRIEND</button>
     </div>
     <div class="mode-row">
-      <button type="button" class="btn mode" id="partyHostBtn" style="background: var(--phys)">📺 PARTY ON A TV</button>
+      <button type="button" class="btn mode" id="partyHostBtn" style="background: var(--phys)">📺 PARTY MODE</button>
       <button type="button" class="btn white mode" id="partyJoinBtn">📱 JOIN A PARTY</button>
+    </div>
+    <div class="mode-row" id="deptRow" hidden>
+      <button type="button" class="btn mode" id="deptBtn" style="background: var(--hp-ok)">🏛 GUESS THE DEPARTMENT <span class="badge">NEW</span></button>
     </div>
     <p class="px" style="margin: 0; font-size: 11px; color: var(--lav-3); line-height: 1.8" id="globalStats">CREDIT 01</p>
   </section>
@@ -141,10 +144,11 @@
     </section>
 
     <div id="guessArea">
-      <section class="choices" aria-label="Your guess">
+      <section class="choices" id="abChoices" aria-label="Your guess">
         <button type="button" class="choice" id="pickPhys"><span class="knob" style="background: var(--phys)">A</span><span class="choice-label" style="color: var(--phys)">PHYSICIST</span></button>
         <button type="button" class="choice" id="pickMath"><span class="knob" style="background: var(--math)">B</span><span class="choice-label" style="color: var(--math)">MATHEMATICIAN</span></button>
       </section>
+      <section class="dept-choices" id="deptChoices" aria-label="Department" hidden></section>
       <p class="prompt blink" id="prompt">THE MODEL HAS LOCKED IN. YOUR MOVE.</p>
       <span class="timer" id="timer" hidden><div id="timerBar"></div></span>
     </div>
@@ -368,7 +372,8 @@
 <script src="sfx.js"></script>
 <script src="scorecard.js"></script>
 <script src="app.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha384-3zSEDfvllQohrq0PHL1fOXJuC/jSOO34H46t6UQfobFOmxE5BpjjaIJY5F2/bMnU" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="party.js"></script>
+<script src="dept.js"></script>
 </body>
 </html>

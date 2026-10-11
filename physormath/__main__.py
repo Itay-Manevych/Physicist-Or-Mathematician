@@ -12,6 +12,8 @@ Model
   train                       fixed train/test split, CV on train, report -> outputs/
   predict <photo> [...]       judge one person from one or more photos
   game                        build the game's data from held-out test people -> game/
+Guess the department (separate mode)
+  dept {fetch,train,game}     7 departments: data/dept/, outputs/dept/, game/dept/
 """
 import argparse
 import os
@@ -32,6 +34,7 @@ def main():
     p.add_argument("tag", nargs="?", default="")
     sub.add_parser("clean").add_argument("--apply", action="store_true")
     sub.add_parser("predict").add_argument("photos", nargs="+")
+    sub.add_parser("dept").add_argument("stage", choices=["fetch", "train", "game"])
     a = ap.parse_args()
 
     if a.cmd == "fetch":
@@ -62,6 +65,9 @@ def main():
     elif a.cmd == "game":
         from .game import build
         build()
+    elif a.cmd == "dept":
+        from . import departments
+        getattr(departments, a.stage)()
     elif a.cmd == "predict":
         from .predict import judge
         judge(a.photos)

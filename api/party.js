@@ -7,7 +7,7 @@
 // POST /api/party?code=C {action:"reveal", hostToken, round}     -> state   (host: everyone answered or time's up)
 // POST /api/party?code=C {action:"next", hostToken, round}       -> state   (host: start the next round)
 // POST /api/party?code=C {action:"again", hostToken}             -> state   (host: same players, new fighters)
-// GET  /api/party?code=C&token=T                                  -> state   (host or player token)
+// GET  /api/party?code=C   (header x-pom-token: T)                 -> state   (host or player token)
 //
 // Answers stay hidden until the host reveals the round. Each answer stores how fast it came (speed bonus).
 const crypto = require("crypto");
@@ -101,6 +101,7 @@ async function act(req, c) {
     if (me && me.playerId) return [200, { playerId: me.playerId, token: b.token }]; // already in (page reload)
     let name = G.cleanName(b.name);
     if (!name) return [400, { error: "name required" }];
+    if (await G.rateLimited(req, "join", 30)) return [429, { error: "slow down" }]; // slows down code guessing
     if (room.players.length >= MAX_PLAYERS) return [409, { error: "party is full" }];
     const taken = new Set(room.players.map((p) => p.name.toLowerCase()));
     for (let n = 2; taken.has(name.toLowerCase()); n++) name = `${G.cleanName(b.name).slice(0, 10)} ${n}`;
@@ -149,7 +150,7 @@ module.exports = G.handler(async (req) => {
     if (!validCode(c)) return [400, { error: "bad party code" }];
     const room = await load(c);
     if (!room) return [404, { error: "party not found or expired" }];
-    return [200, view(c, room, whoIs(room, q.get("token")), Date.now())];
+    return [200, view(c, room, whoIs(room, G.tokenOf(req)), Date.now())];
   }
   if (req.method === "POST") return act(req, c);
   return [405, { error: "method not allowed" }];

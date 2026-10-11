@@ -46,7 +46,19 @@ async function rateLimited(req, bucket, max = 10) {
 }
 
 function body(req) {
-  return typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
+  // Vercel's req.body getter throws on malformed JSON; treat that (and non-JSON strings) as an empty request
+  try {
+    const b = req.body;
+    if (typeof b !== "string") return b && typeof b === "object" ? b : {};
+    return JSON.parse(b || "{}");
+  } catch {
+    return {};
+  }
+}
+
+/** Session token: sent in a header (kept out of URLs and logs); the ?token= query is still accepted. */
+function tokenOf(req) {
+  return String(req.headers["x-pom-token"] || query(req).get("token") || "") || null;
 }
 
 function query(req) {
@@ -69,4 +81,4 @@ function handler(fn) {
 }
 
 module.exports = { redis, Daily, ROUNDS, FIGHTERS, IDS, cleanName, parseGuesses, score, rankScore, newId,
-  rateLimited, body, query, handler };
+  rateLimited, body, query, tokenOf, handler };

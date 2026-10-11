@@ -6,7 +6,7 @@
 // POST /api/room?code=C {action:"next", token, round}        -> state   (ready for the round after `round`)
 // POST /api/room?code=C {action:"rematch", token}            -> { code, token }   new room, opponent invited
 // POST /api/room?code=C {action:"leave", token}              -> state   (quit mid-duel; the other player is told)
-// GET  /api/room?code=C&token=T                              -> state
+// GET  /api/room?code=C   (header x-pom-token: T)              -> state
 //
 // Round r starts at s{r}; answers lock at s{r} + ANSWER_MS (a missing answer counts as a miss).
 // An answer is only revealed to the other player once both have answered or time is up.
@@ -103,6 +103,7 @@ async function act(req, c) {
     if (!name) return [400, { error: "name required" }];
     const role = roleOf(m, b.token);
     if (role) return [200, { code: c, token: b.token }]; // already in this room
+    if (await G.rateLimited(req, "join", 30)) return [429, { error: "slow down" }]; // slows down code guessing
     const tok = token();
     const [won] = await G.redis.pipeline([["HSETNX", K.meta(c), "guestTok", tok]]);
     if (!won) return [409, { error: "room is full" }];
@@ -156,7 +157,7 @@ module.exports = G.handler(async (req) => {
     if (!validCode(c)) return [400, { error: "bad room code" }];
     const room = await load(c);
     if (!room) return [404, { error: "room not found or expired" }];
-    const role = roleOf(room.m, q.get("token"));
+    const role = roleOf(room.m, G.tokenOf(req));
     const now = Date.now();
     if (role) {
       await G.redis.pipeline([["HSET", K.meta(c), role === "host" ? "seenHost" : "seenGuest", now]]);

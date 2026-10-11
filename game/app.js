@@ -21,8 +21,10 @@ const session = {
 };
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const capital = (s) => (s ? s[0].toUpperCase() + s.slice(1) : "");
-const aiPick = (p) => (p.p >= 0.5 ? "phys" : "math");
-const aiConf = (p) => Math.round(100 * Math.max(p.p, 1 - p.p));
+const aiPick = (p) => typeof p.p === "object"
+  ? Object.keys(p.p).reduce((a, b) => (p.p[a] >= p.p[b] ? a : b))
+  : (p.p >= 0.5 ? "phys" : "math");
+const aiConf = (p) => Math.round(100 * (typeof p.p === "object" ? Math.max(...Object.values(p.p)) : Math.max(p.p, 1 - p.p)));
 const pct = (a, b) => (b ? Math.round((100 * a) / b) : 0);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -49,8 +51,9 @@ function damage(box) {
   replay(box.querySelector(".bar"), "flash");
 }
 
-async function api(url, body) {
-  const opts = body ? { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) } : {};
+async function api(url, body, token) {
+  const headers = token ? { "x-pom-token": token } : {}; // session tokens go in a header, never in the URL
+  const opts = body ? { method: "POST", headers: { ...headers, "Content-Type": "application/json" }, body: JSON.stringify(body) } : { headers };
   const r = await fetch(url, { cache: "no-store", ...opts });
   const data = await r.json().catch(() => ({}));
   if (!r.ok) throw Object.assign(new Error(data.error || r.status), { status: r.status });
@@ -169,11 +172,15 @@ function hudLabels() {
 function showFighter(p, i) {
   $("roundNo").textContent = `${i + 1}/${ROUNDS}`;
   $("fPhoto").src = p.img;
-  $("fClass").textContent = "CLASS: ???";
+  const dept = game.mode === "dept";
+  $("fClass").textContent = dept ? "DEPT: ???" : "CLASS: ???";
   $("fClass").style.background = "var(--white)";
-  $("fMeta").textContent = `FIGHTER ${String(i + 1).padStart(2, "0")} · BORN ${p.born} · CLASS: CLASSIFIED`;
+  $("fMeta").textContent = `FIGHTER ${String(i + 1).padStart(2, "0")} · BORN ${p.born} · ${dept ? "DEPT" : "CLASS"}: CLASSIFIED`;
   $("fName").textContent = "MYSTERY SCIENTIST";
-  $("fBio").textContent = "Study the face. Chalkboard or particle accelerator?";
+  $("fBio").textContent = dept ? "Which department do they work in? Seven doors, one face." : "Study the face. Chalkboard or particle accelerator?";
+  $("abChoices").hidden = dept;
+  $("deptChoices").hidden = !dept;
+  for (const b of $("deptChoices").querySelectorAll("button")) { b.disabled = false; b.classList.remove("picked"); }
   for (const b of [$("pickPhys"), $("pickMath")]) { b.disabled = false; b.classList.remove("picked"); }
   $("guessArea").hidden = false;
   $("revealArea").hidden = true;
@@ -250,6 +257,7 @@ function showReveal(i, myPick, oppPick) {
     ? `Picked ${LABEL[oppPick]} (${aiConf(p)}% sure) · ${oppRight ? `HIT −${HIT} to YOU` : "MISSED"}`
     : line(oppPick, oppRight, "YOU");
 
+  $("cluesRow").hidden = !Array.isArray(p.clues);
   const seen = (p.clues || []).join(" · ") || "nothing obvious — pure gut feeling";
   const verdict = `${LABEL[aiPick(p)]} (${aiConf(p)}%)`;
   $("cluesRow").firstElementChild.textContent = game.opp.isModel ? "THE MACHINE NOTICED ▸ " : "THE MACHINE (NOT PLAYING) SAW ▸ ";
@@ -330,7 +338,7 @@ function renderResults() {
     $("log").appendChild(row);
   });
 
-  const ranked = game.mode !== "duel";
+  const ranked = game.mode === "machine" || game.mode === "daily";
   $("nameForm").hidden = !ranked || Boolean(game.savedId);
   $("nameLabel").textContent = game.mode === "daily" ? `ENTER YOUR NAME FOR DAILY #${Daily.number(game.day)}` : "ENTER YOUR NAME FOR THE LEADERBOARD";
   $("playerName").value = store.get("pom-name", "");
@@ -413,6 +421,11 @@ function shareText() {
     const st = streak();
     return `Physicist or Mathematician? Daily #${Daily.number(game.day)}\n${grid}\n${t.you}/${ROUNDS} vs the machine's ${t.ai}/${ROUNDS}${st > 1 ? ` · 🔥${st} day streak` : ""}\n${SITE}`;
   }
+  if (game.mode === "dept") {
+    return `Guess the Department: I scored ${t.you}/${ROUNDS} vs the machine's ${t.ai}/${ROUNDS} in Physicist or Mathematician?
+${grid}
+Seven departments, one face: ${SITE}`;
+  }
   if (game.mode === "duel") {
     const verb = { win: "beat", lose: "lost to", draw: "tied with" }[game.outcome];
     return `I ${verb} ${game.opp.name} ${t.you}-${t.ai} in a Physicist or Mathematician? duel!\n${grid}\nYour turn: ${SITE}`;
@@ -434,7 +447,7 @@ async function share() {
   const card = await drawScorecard({
     name: store.get("pom-name", "") || "YOU", you: t.you, ai: t.ai, rounds: ROUNDS, outcome: game.outcome, log: game.log, url: SITE,
     oppName: game.opp.isModel ? "THE MACHINE" : oppName(),
-    subtitle: game.mode === "daily" ? `DAILY #${Daily.number(game.day)}` : game.mode === "duel" ? "DUEL" : "",
+    subtitle: game.mode === "daily" ? `DAILY #${Daily.number(game.day)}` : game.mode === "duel" ? "DUEL" : game.mode === "dept" ? "DEPARTMENTS" : "",
   });
   const file = card.blob && new File([card.blob], "physicist-or-mathematician.png", { type: "image/png" });
   if (await shareNative(text, file)) return;
@@ -533,7 +546,7 @@ async function enterRoom(code, token) {
 async function pollDuel() {
   if (!duel.code) return;
   try {
-    const s = await api(`/api/room?code=${duel.code}&token=${duel.token}`);
+    const s = await api(`/api/room?code=${duel.code}`, null, duel.token);
     if (!duel.code || s.code !== duel.code) return;
     duel.offset = s.now - Date.now();
     duel.state = s;
@@ -813,6 +826,9 @@ document.addEventListener("keydown", (e) => {
   const k = e.key.toLowerCase();
   if (!$("title").hidden && (k === "enter" || k === " ") && e.target.tagName !== "A" && e.target.tagName !== "BUTTON") {
     e.preventDefault(); startMachine();
+  } else if (!$("fight").hidden && $("revealArea").hidden && game && game.mode === "dept") {
+    const b = $("deptChoices").querySelectorAll("button")[Number(k) - 1];
+    if (b) b.click();
   } else if (!$("fight").hidden && $("revealArea").hidden && (k === "a" || k === "arrowleft")) guess("phys");
   else if (!$("fight").hidden && $("revealArea").hidden && (k === "b" || k === "arrowright")) guess("math");
 });

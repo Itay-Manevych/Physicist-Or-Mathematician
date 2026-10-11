@@ -26,7 +26,7 @@ async function pollParty() {
   if (!party.code) return;
   const code = party.code;
   try {
-    const s = await api(`/api/party?code=${code}&token=${party.role === "host" ? party.hostToken : party.token}`);
+    const s = await api(`/api/party?code=${code}`, null, party.role === "host" ? party.hostToken : party.token);
     if (party.code !== code) return;
     party.offset = s.now - Date.now();
     party.state = s;
@@ -39,7 +39,7 @@ async function pollParty() {
 function partyGone() {
   $("ppResKicker").textContent = "PARTY OVER";
   $("ppResBig").textContent = "BYE!";
-  $("ppResText").innerHTML = `This party ended or expired. <a href="${SITE}">Back to the title screen</a>`;
+  $("ppResText").innerHTML = `This party ended or expired. <a href="${esc(SITE)}">Back to the title screen</a>`;
 }
 
 /** Points per player (and the machine) over all revealed rounds. */

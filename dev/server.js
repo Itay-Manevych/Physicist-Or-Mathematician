@@ -35,12 +35,16 @@ require("../api/_redis").setClient({ pipeline: async (cmds) => cmds.map(([c, ...
 
 const api = { "/api/leaderboard": require("../api/leaderboard"), "/api/room": require("../api/room"), "/api/party": require("../api/party") };
 
+// same security headers as production (vercel.json), so CSP problems show up locally
+const SECURITY_HEADERS = JSON.parse(fs.readFileSync(path.join(ROOT, "vercel.json"), "utf8")).headers[0].headers;
+
 http.createServer(async (req, res) => {
+  for (const h of SECURITY_HEADERS) res.setHeader(h.key, h.value);
   const url = new URL(req.url, "http://x");
   if (api[url.pathname]) {
     let body = "";
     for await (const chunk of req) body += chunk;
-    req.body = body ? JSON.parse(body) : {};
+    try { req.body = body ? JSON.parse(body) : {}; } catch { req.body = body; } // the API copes with bad JSON
     res.status = (s) => { res.statusCode = s; return res; };
     res.json = (o) => { res.setHeader("Content-Type", "application/json"); res.end(JSON.stringify(o)); };
     return api[url.pathname](req, res);
