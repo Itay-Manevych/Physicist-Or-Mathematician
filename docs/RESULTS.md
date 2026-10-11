@@ -57,6 +57,32 @@ Face shape barely beats chance; most of the signal is presentation and context. 
 | Fine-tuning the last 6 blocks of CLIP ViT-L/14 | none (0.735 vs. 0.732 for a linear probe; overfits after 2 epochs) |
 | More people / more photos per person in training | none |
 
+## University staff photos: the model doesn't transfer
+
+3,116 photos from university maths/physics department pages and the Simons Investigators (only universities where both
+departments were available, balanced per university). Each university held out in turn:
+
+| University | photos | AUC |
+|---|---|---|
+| Stanford | 100 | 0.87 |
+| Cornell | 98 | 0.73 |
+| Yale | 30 | 0.73 |
+| Bar-Ilan | 62 | 0.68 |
+| Duke | 76 | 0.61 |
+| Simons Investigators | 78 | 0.52 |
+| Ohio State | 126 | 0.43 |
+| Penn State | 350 | 0.43 |
+| Weizmann | 576 | 0.40 |
+| **weighted mean** | | **0.50** |
+
+On department headshots the model is at chance: right at some universities, reversed at others. Within one university the
+department's photographer, not the person, decides suit vs. casual, studio vs. candid, so the style cues the model learned
+from Wikidata point the wrong way where the maths page happens to look "formal". Training on the other universities does
+not help (leave-one-university-out mean 0.45). Adding the university photos to training moved the Wikidata test only from
+AUC 0.788 / 70.1% to 0.790 / 71.2% (within noise; overfitting gap 3.7 → 1.7 points).
+
+This is the strongest evidence that the model reads photo presentation, not faces.
+
 ## Shortcuts found along the way
 
 - **Astronauts.** Before label cleaning, the most confident "physicists" were astronauts in official NASA portraits.
