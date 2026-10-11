@@ -90,6 +90,7 @@ function streak() {
 async function renderTitle() {
   clearInterval(countdown);
   stopDuel();
+  if (typeof stopParty === "function") stopParty();
   show("title");
   $("oneUp").textContent = String(store.get("pom-last", 0) * 100).padStart(6, "0");
   const d = dailyDone(), n = Daily.number(today()), st = streak();
@@ -821,8 +822,12 @@ fetch("data.json").then((r) => r.json()).then((d) => {
   pool = d.people;
   byId = new Map(pool.map((p) => [p.id, p]));
   $("modelAcc").textContent = Math.round(100 * d.model_accuracy) + "%";
-  const code = new URLSearchParams(location.search).get("duel");
-  if (code) openInvite(code.toUpperCase()); else renderTitle();
+  const q = new URLSearchParams(location.search);
+  const hostSaved = session.get("pom-party-host");
+  if (q.get("duel")) openInvite(q.get("duel").toUpperCase());
+  else if (q.get("party")) openPartyJoin(q.get("party").toUpperCase());
+  else if (q.get("tv") && hostSaved && hostSaved.code === q.get("tv").toUpperCase()) enterHost(hostSaved.code, hostSaved.hostToken);
+  else renderTitle();
 }).catch(() => {
   $("startBtn").textContent = "LOADING FAILED";
   $("startBtn").disabled = true;

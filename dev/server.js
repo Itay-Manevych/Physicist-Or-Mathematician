@@ -15,6 +15,8 @@ const get = (k, make) => { if (!kv.has(k)) kv.set(k, make()); return kv.get(k); 
 const zsorted = (k) => [...get(k, () => new Map()).entries()].sort((a, b) => b[1] - a[1]).map((e) => e[0]);
 const commands = {
   GET: (k) => kv.get(k) ?? null,
+  DEL: (k) => (kv.delete(k) ? 1 : 0),
+  HDEL: (k, ...fs) => fs.filter((f) => get(k, () => new Map()).delete(f)).length,
   HGET: (k, f) => get(k, () => new Map()).get(f) ?? null,
   SET: (k, v) => { kv.set(k, v); return "OK"; },
   INCR: (k) => { const v = Number(kv.get(k) || 0) + 1; kv.set(k, v); return v; },
@@ -31,7 +33,7 @@ const commands = {
 };
 require("../api/_redis").setClient({ pipeline: async (cmds) => cmds.map(([c, ...a]) => commands[c](...a)) });
 
-const api = { "/api/leaderboard": require("../api/leaderboard"), "/api/room": require("../api/room") };
+const api = { "/api/leaderboard": require("../api/leaderboard"), "/api/room": require("../api/room"), "/api/party": require("../api/party") };
 
 http.createServer(async (req, res) => {
   const url = new URL(req.url, "http://x");

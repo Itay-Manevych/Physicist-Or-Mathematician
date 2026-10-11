@@ -44,6 +44,10 @@
       <button type="button" class="btn white mode" id="dailyBtn">DAILY #1</button>
       <button type="button" class="btn mode" id="friendBtn" style="background: var(--math)">VS A FRIEND</button>
     </div>
+    <div class="mode-row">
+      <button type="button" class="btn mode" id="partyHostBtn" style="background: var(--phys)">📺 PARTY ON A TV</button>
+      <button type="button" class="btn white mode" id="partyJoinBtn">📱 JOIN A PARTY</button>
+    </div>
     <p class="px" style="margin: 0; font-size: 11px; color: var(--lav-3); line-height: 1.8" id="globalStats">CREDIT 01</p>
   </section>
   <section class="wrap how" id="how">
@@ -55,7 +59,7 @@
       </div>
       <div class="how-col">
         <h2>MODES</h2>
-        <p><b>PRESS START</b>: you vs. the machine. <b>DAILY</b>: the same 10 for everyone today, one try. <b>VS A FRIEND</b>: send a link and duel live, same 10 scientists, 15 seconds a round.</p>
+        <p><b>PRESS START</b>: you vs. the machine. <b>DAILY</b>: the same 10 for everyone today, one try. <b>VS A FRIEND</b>: duel live over a link. <b>PARTY</b>: put it on a TV, everyone plays on their phone.</p>
       </div>
       <div class="how-col">
         <h2>THE MACHINE</h2>
@@ -164,6 +168,116 @@
   <div class="intro" id="intro" aria-hidden="true" hidden><span id="introRound">ROUND 1</span><span class="fight-word">FIGHT!</span></div>
 </div>
 
+<!-- PARTY: host screen (TV) -->
+<div id="partyHost" class="screen tv" hidden>
+  <section class="wrap ph-lobby" id="phLobby">
+    <p class="kicker">PARTY MODE</p>
+    <div class="ph-join">
+      <div class="panel ph-code-card">
+        <span class="px ph-small">JOIN ON YOUR PHONE</span>
+        <span class="ph-site" id="phSite"></span>
+        <span class="px ph-small">TAP <b>JOIN A PARTY</b> · CODE</span>
+        <span class="ph-code" id="phCode">----</span>
+        <div class="ph-qr" id="phQr"></div>
+      </div>
+      <div class="panel ph-players-card">
+        <span class="px ph-small" id="phCount">PLAYERS (0)</span>
+        <div class="ph-players" id="phPlayers"></div>
+        <span class="ph-note">The machine plays too 🤖</span>
+      </div>
+    </div>
+    <div class="mode-row">
+      <button type="button" class="btn start" id="phStart" disabled>START ▶</button>
+      <button type="button" class="btn white mode" id="phEnd">END PARTY</button>
+    </div>
+  </section>
+
+  <section class="wrap ph-round" id="phRound" hidden>
+    <div class="ph-top">
+      <span class="px" id="phRoundNo">ROUND 1/10</span>
+      <span class="timer ph-timer"><div id="phTimerBar"></div></span>
+      <span class="px" id="phAnswered">0/0 LOCKED IN</span>
+    </div>
+    <div class="ph-stage">
+      <div class="portrait ph-portrait"><img class="photo" id="phPhoto" alt="Mystery scientist"></div>
+      <div class="ph-question">
+        <span class="px" style="color: var(--phys)">PHYSICIST</span>
+        <span class="px" style="color: var(--yellow); font-size: 0.5em">— OR —</span>
+        <span class="px" style="color: var(--math)">MATHEMATICIAN?</span>
+        <span class="ph-note" id="phHint">Answer on your phone!</span>
+      </div>
+    </div>
+    <div class="ph-chips" id="phChips"></div>
+  </section>
+
+  <section class="wrap ph-reveal" id="phReveal" hidden>
+    <div class="panel ph-answer" id="phAnswerCard">
+      <div class="portrait ph-portrait-sm"><img class="photo" id="phRPhoto" alt=""></div>
+      <div>
+        <span class="px ph-small">CLASS REVEALED</span>
+        <span class="px ph-class" id="phRClass"></span>
+        <span class="px ph-name" id="phRName"></span>
+        <span class="ph-note" id="phRBio"></span>
+        <span class="ph-note" id="phRClues"></span>
+      </div>
+    </div>
+    <div class="ph-cols">
+      <div class="panel ph-col" id="phColPhys"><span class="px ph-col-title" style="background: var(--phys)">PHYSICIST</span><div class="ph-col-list"></div></div>
+      <div class="panel ph-col" id="phColMath"><span class="px ph-col-title" style="background: var(--math)">MATHEMATICIAN</span><div class="ph-col-list"></div></div>
+      <div class="panel ph-col ph-board"><span class="px ph-col-title" style="background: var(--yellow)">SCORES</span><ol class="score-list" id="phBoard"></ol></div>
+    </div>
+    <p class="px blink ph-next" id="phNext"></p>
+  </section>
+
+  <section class="wrap ph-final" id="phFinal" hidden>
+    <p class="kicker">FINAL RESULTS</p>
+    <div class="podium" id="phPodium"></div>
+    <div class="panel scores ph-final-list"><ol class="score-list" id="phFinalList"></ol></div>
+    <div class="mode-row">
+      <button type="button" class="btn start" id="phAgain">PLAY AGAIN ▶</button>
+      <button type="button" class="btn white mode" id="phEnd2">END PARTY</button>
+    </div>
+  </section>
+  <div class="intro" id="phIntro" aria-hidden="true" hidden><span id="phIntroText">ROUND 1</span><span class="fight-word">GET READY!</span></div>
+</div>
+
+<!-- PARTY: player screen (phone) -->
+<div id="partyPlayer" class="screen" hidden>
+  <section class="wrap pp" id="ppJoin">
+    <p class="kicker">JOIN A PARTY</p>
+    <form class="panel name-form" id="ppForm">
+      <label for="ppCode" class="px">PARTY CODE (ON THE TV)</label>
+      <input id="ppCode" maxlength="4" autocomplete="off" required placeholder="ABCD" class="pp-code-input">
+      <label for="ppName" class="px">YOUR NAME</label>
+      <input id="ppName" maxlength="12" autocomplete="nickname" required placeholder="YOUR NAME">
+      <button type="submit" class="btn" id="ppGo">JOIN ▶</button>
+      <span class="form-note" id="ppNote"></span>
+    </form>
+    <button type="button" class="btn white mode" id="ppCancel">TITLE SCREEN</button>
+  </section>
+
+  <section class="wrap pp" id="ppWait" hidden>
+    <p class="kicker" id="ppWaitKicker">YOU'RE IN!</p>
+    <h1 class="title pp-name" id="ppWaitName"></h1>
+    <p id="ppWaitText">Look at the TV. The game starts when the host presses START.</p>
+  </section>
+
+  <section class="wrap pp" id="ppPlay" hidden>
+    <div class="pp-top"><span class="px" id="ppRoundNo">ROUND 1/10</span><span class="px" id="ppScore">0 PTS</span></div>
+    <span class="timer"><div id="ppTimerBar"></div></span>
+    <div class="portrait pp-thumb"><img class="photo" id="ppPhoto" alt="Mystery scientist"></div>
+    <button type="button" class="pp-btn" id="ppPhys" style="background: var(--phys)">PHYSICIST</button>
+    <button type="button" class="pp-btn" id="ppMath" style="background: var(--math)">MATHEMATICIAN</button>
+    <p class="px pp-status" id="ppStatus"></p>
+  </section>
+
+  <section class="wrap pp" id="ppResult" hidden>
+    <p class="kicker" id="ppResKicker"></p>
+    <h1 class="headline" id="ppResBig"></h1>
+    <p id="ppResText"></p>
+  </section>
+</div>
+
 <!-- RESULTS -->
 <div id="results" class="screen" hidden>
   <main class="wrap results">
@@ -254,5 +368,7 @@
 <script src="sfx.js"></script>
 <script src="scorecard.js"></script>
 <script src="app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="party.js"></script>
 </body>
 </html>
