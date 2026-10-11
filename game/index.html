@@ -5,152 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Physicist or Mathematician?</title>
 <meta name="description" content="Human vs. machine: guess whether each scientist is a physicist or a mathematician before the AI does.">
+<meta property="og:title" content="Physicist or Mathematician? — Human vs. Machine">
+<meta property="og:description" content="10 real scientists. One photo each. Can you out-guess the AI?">
+<meta name="theme-color" content="#5B3FE0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%235B3FE0'/%3E%3Crect x='2' y='4' width='5' height='8' fill='%2322D3EE'/%3E%3Crect x='9' y='4' width='5' height='8' fill='%23FF5CB0'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --purple: #5B3FE0; --ink: #1A1033; --yellow: #FFD93D; --white: #FFFFFF;
-    --phys: #22D3EE; --math: #FF5CB0; --hp-ok: #3DDC84; --hp-low: #FF5A5A;
-    --lav: #EDE7FF; --lav-2: #B7A8F0; --lav-3: #E4DCFF; --lav-4: #D9D2F5; --lav-5: #8F7FD6;
-    --muted: #5A5178; --text-2: #2B2148; --text-3: #3A2F5C; --lose: #FF7A7A;
-    --pixel: 'Press Start 2P', monospace; --crt: 'VT323', monospace;
-  }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; background: var(--purple); }
-  body { color: var(--white); font-family: var(--crt); font-size: 30px; line-height: 1.25; min-height: 100vh; position: relative; overflow-x: hidden; }
-  body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 20;
-    background: repeating-linear-gradient(0deg, rgba(26,16,51,0.08) 0 1px, transparent 1px 3px); }
-  a { color: var(--yellow); } a:hover { color: var(--white); }
-  button { font: inherit; cursor: pointer; } button:disabled { cursor: default; }
-  .px { font-family: var(--pixel); font-weight: 400; }
-  @keyframes blink { 50% { opacity: 0.35; } }
-  .blink { animation: blink 1s steps(1) infinite; }
-  @media (prefers-reduced-motion: reduce) { .blink { animation: none; } }
-  [hidden] { display: none !important; }
-  .wrap { max-width: 1200px; margin: 0 auto; padding-left: 32px; padding-right: 32px; position: relative; z-index: 1; }
-  .panel { background: var(--white); color: var(--ink); border: 4px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); }
-  .btn { display: inline-flex; align-items: center; gap: 12px; padding: 16px 22px; font-family: var(--pixel); font-size: 14px;
-    text-decoration: none; color: var(--ink); background: var(--yellow); border: 4px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); }
-  .btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
-  .btn.white { background: var(--white); }
-  .tag { font-family: var(--pixel); font-size: 10px; text-align: center; padding: 8px 6px; border: 4px solid var(--ink); color: var(--ink); background: var(--white); }
-  .photo { image-rendering: pixelated; display: block; width: 100%; height: 100%; object-fit: cover; }
-  .label-sm { font-family: var(--pixel); font-size: 11px; color: var(--purple); }
-
-  /* title */
-  .topbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-top: 20px; padding-bottom: 20px; font-family: var(--pixel); font-size: 12px; }
-  .hero { padding-top: 56px; padding-bottom: 80px; display: flex; flex-direction: column; align-items: center; gap: 32px; text-align: center; }
-  .kicker { margin: 0; font-family: var(--pixel); font-size: 14px; letter-spacing: 0.1em; background: var(--ink); color: var(--yellow); padding: 10px 16px; }
-  .title { margin: 0; font-family: var(--pixel); font-weight: 400; font-size: clamp(26px, 6vw, 72px); line-height: 1.3; text-shadow: 6px 6px 0 var(--ink); }
-  .start { margin-top: 8px; padding: 24px 40px; font-size: clamp(16px, 4vw, 24px); box-shadow: 8px 8px 0 var(--ink); }
-  .how { padding-bottom: 64px; }
-  .how .panel { padding: 36px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
-  .how h2 { margin: 0; font-family: var(--pixel); font-weight: 400; font-size: 16px; }
-  .move { display: flex; align-items: center; gap: 16px; font-size: 28px; }
-  .dot { width: 48px; height: 48px; flex: 0 0 auto; border-radius: 50%; border: 4px solid var(--ink); color: var(--ink);
-    display: flex; align-items: center; justify-content: center; font-family: var(--pixel); font-size: 14px; }
-  footer { background: var(--ink); position: relative; z-index: 1; }
-  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-top: 20px; padding-bottom: 20px; font-family: var(--pixel); font-size: 10px; color: var(--lav-3); }
-
-  /* health bars */
-  .hud { padding-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
-  .hp { flex: 1 1 320px; display: flex; flex-direction: column; gap: 8px; }
-  .hp-head { display: flex; justify-content: space-between; font-family: var(--pixel); font-size: 14px; text-shadow: 3px 3px 0 var(--ink); }
-  .bar { height: 32px; border: 4px solid var(--ink); background: var(--white); display: flex; box-shadow: 4px 4px 0 var(--ink); }
-  .bar.right { justify-content: flex-end; }
-  .bar > div { height: 100%; transition: width 0.4s steps(10); }
-  .round { flex: 0 0 auto; width: 108px; height: 84px; background: var(--yellow); color: var(--ink); border: 4px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-family: var(--pixel); }
-
-  /* fight */
-  .arena { padding-top: 36px; padding-bottom: 56px; display: flex; flex-direction: column; gap: 32px; }
-  .fighter { display: flex; flex-wrap: wrap; gap: 40px; align-items: center; padding: 28px; }
-  .portrait-col { flex: 0 0 auto; width: 220px; max-width: 100%; display: flex; flex-direction: column; gap: 10px; }
-  .portrait { aspect-ratio: 1 / 1; border: 4px solid var(--ink); background: var(--lav); overflow: hidden; }
-  .bio-col { flex: 999 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
-  .meta { margin: 0; font-family: var(--pixel); font-size: 11px; color: var(--muted); line-height: 1.6; }
-  .name { margin: 0; font-family: var(--pixel); font-weight: 400; font-size: clamp(20px, 3.4vw, 40px); line-height: 1.3; color: var(--purple); overflow-wrap: anywhere; }
-  .bio { margin: 0; font-size: 30px; line-height: 1.2; color: var(--text-2); max-width: 640px; }
-  .choices { display: flex; flex-wrap: wrap; justify-content: center; gap: 72px; padding: 8px 0; }
-  .choice { display: flex; flex-direction: column; align-items: center; gap: 20px; background: transparent; border: none; color: var(--white); padding: 0; }
-  .knob { width: 128px; height: 128px; border-radius: 50%; border: 6px solid var(--ink); box-shadow: 0 12px 0 var(--ink);
-    display: flex; align-items: center; justify-content: center; font-family: var(--pixel); font-size: 30px; color: var(--ink); transition: transform 0.05s; }
-  .choice:active .knob { transform: translateY(8px); box-shadow: 0 4px 0 var(--ink); }
-  .choice-label { font-family: var(--pixel); font-size: 16px; background: var(--ink); padding: 10px 14px; }
-  .prompt { margin: 0; text-align: center; font-family: var(--pixel); font-size: 12px; color: var(--yellow); text-shadow: 3px 3px 0 var(--ink); }
-  .reveal { display: flex; flex-direction: column; }
-  .banner { padding: 24px 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 4px solid var(--ink); color: var(--ink); }
-  .banner .big { font-family: var(--pixel); font-size: clamp(24px, 4vw, 48px); }
-  .banner .small { font-family: var(--pixel); font-size: 13px; line-height: 1.8; text-align: right; }
-  .picks { padding: 20px 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; border-bottom: 4px solid var(--ink); font-size: 30px; }
-  .lore { padding: 20px 28px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
-  .lore p { margin: 0; flex: 999 1 420px; font-size: 30px; line-height: 1.2; color: var(--text-2); }
-  .lore a { color: var(--purple); }
-
-  /* results */
-  .results { padding-top: 48px; padding-bottom: 64px; display: flex; flex-direction: column; gap: 48px; }
-  .verdict { display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; }
-  .headline { margin: 0; font-family: var(--pixel); font-weight: 400; font-size: clamp(36px, 7vw, 88px); text-shadow: 8px 8px 0 var(--ink); }
-  .final-bars { width: 100%; max-width: 760px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; padding-top: 8px; }
-  .final-bars .hp-head { font-size: 12px; }
-  .final-bars .bar { height: 28px; }
-  .row-btns { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; padding-top: 8px; }
-  .share { width: 100%; max-width: 640px; padding: 24px; display: flex; flex-direction: column; gap: 18px; text-align: left; }
-  .share-text { margin: 0; background: var(--lav); border: 4px dashed var(--lav-2); padding: 16px; font-size: 28px; line-height: 1.2; }
-  .xbtn { width: 44px; height: 44px; border: 4px solid var(--ink); background: var(--white); color: var(--ink); font-family: var(--pixel); font-size: 12px; }
-  .section-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px; }
-  .section-head h2 { margin: 0; font-family: var(--pixel); font-weight: 400; font-size: 16px; color: var(--yellow); text-shadow: 3px 3px 0 var(--ink); }
-  .log { overflow-x: auto; }
-  .log-row { display: flex; align-items: center; gap: 24px; padding: 16px 24px; min-width: 820px; }
-  .log-row + .log-row { border-top: 4px solid var(--lav); }
-  .thumb { width: 88px; height: 88px; flex: 0 0 auto; padding: 0; border: 4px solid var(--ink); background: var(--lav); overflow: hidden; }
-  .bottom { display: flex; flex-wrap: wrap; gap: 32px; align-items: stretch; }
-  .scores { flex: 1 1 420px; padding: 28px; display: flex; flex-direction: column; gap: 16px; }
-  .scores h2 { margin: 0; font-family: var(--pixel); font-weight: 400; font-size: 16px; }
-  .scores ol { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; font-family: var(--pixel); font-size: 14px; }
-  .scores li { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); }
-  .scores li.me { color: var(--ink); background: var(--yellow); padding: 8px; margin: 0 -8px; }
-  .initials { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; font-size: 26px; }
-  .initials input { width: 120px; font-family: var(--pixel); font-size: 18px; text-transform: uppercase; padding: 10px; border: 4px solid var(--ink); color: var(--ink); }
-  .continue { flex: 1 1 320px; background: var(--ink); border: 4px solid var(--ink); box-shadow: 8px 8px 0 #2E1F7A; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; padding: 28px; }
-  .modal { position: fixed; inset: 0; z-index: 30; background: rgba(26,16,51,0.72); display: flex; align-items: center; justify-content: center; padding: 24px; }
-  .modal .panel { width: 100%; max-width: 420px; display: flex; flex-direction: column; box-shadow: 10px 10px 0 var(--ink); }
-  .modal-head { display: flex; justify-content: space-between; align-items: center; padding: 12px 12px 12px 20px; border-bottom: 4px solid var(--ink); font-family: var(--pixel); font-size: 11px; }
-
-  @media (max-width: 640px) {
-    .wrap { padding-left: 16px; padding-right: 16px; }
-    body { font-size: 24px; }
-    .bio, .lore p, .picks { font-size: 24px; }
-    .choices { gap: 32px; }
-    .knob { width: 96px; height: 96px; font-size: 24px; }
-    .choice { gap: 16px; }
-    .choice-label { font-size: 11px; }
-    .hud { flex-wrap: nowrap; gap: 10px; padding-top: 16px; }
-    .hp { flex: 1 1 0; min-width: 0; }
-    .hp-head { font-size: 8px; text-shadow: 2px 2px 0 var(--ink); }
-    .hud .bar { height: 20px; border-width: 3px; box-shadow: 3px 3px 0 var(--ink); }
-    .round { width: 64px; height: 56px; border-width: 3px; }
-    .round span:first-child { font-size: 7px !important; }
-    .round span:last-child { font-size: 16px !important; }
-    .arena { padding-top: 20px; gap: 20px; }
-    .fighter { padding: 16px; gap: 16px; }
-    .portrait-col { width: 100%; max-width: 200px; margin: 0 auto; }
-    .bio-col { gap: 8px; }
-    .meta { font-size: 9px; }
-    .prompt { font-size: 10px; margin-top: 20px !important; }
-    .final-bars { grid-template-columns: 1fr; }
-    .how .panel { padding: 24px; }
-  }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<button type="button" class="mute" id="muteBtn" aria-pressed="false">SOUND: ON</button>
 
 <!-- TITLE -->
 <div id="title" class="screen">
   <header class="wrap topbar">
     <span style="color: var(--yellow)">1UP &nbsp;<span style="color: var(--white)" id="oneUp">000000</span></span>
-    <span>HI-SCORE &nbsp;<span style="color: var(--yellow)" id="hiScore">[---] -/5</span></span>
+    <span>HI-SCORE &nbsp;<span style="color: var(--yellow)" id="hiScore">[---] -/10</span></span>
     <span style="color: var(--yellow)">2UP &nbsp;<span style="color: var(--white)">MODEL</span></span>
   </header>
   <section class="wrap hero">
@@ -162,29 +34,35 @@
     </h1>
     <p style="margin: 0; max-width: 660px">Ten real scientists. One photo each. Guess their class before the machine does. Every right answer lands a hit.</p>
     <button type="button" class="btn start blink" id="startBtn">PRESS START</button>
-    <p class="px" style="margin: 0; font-size: 11px; color: var(--lav-3)">CREDIT 01</p>
+    <p class="px" style="margin: 0; font-size: 11px; color: var(--lav-3)" id="globalStats">CREDIT 01</p>
   </section>
   <section class="wrap how" id="how">
-    <div class="panel">
-      <div style="display: flex; flex-direction: column; gap: 16px">
+    <div class="panel how-grid">
+      <div class="how-col">
         <h2>MOVE LIST</h2>
         <div class="move"><span class="dot" style="background: var(--phys)">A</span>Call it PHYSICIST</div>
         <div class="move"><span class="dot" style="background: var(--math)">B</span>Call it MATHEMATICIAN</div>
       </div>
-      <div style="display: flex; flex-direction: column; gap: 16px">
+      <div class="how-col">
         <h2>RULES</h2>
-        <p style="margin: 0; font-size: 28px; color: var(--text-3)">Both players start at 100 HP. Each right answer hits your opponent for 10. Whoever has more HP after round 10 wins.</p>
+        <p>Both players start at 100 HP. Each right answer hits your opponent for 10. Whoever has more HP after round 10 wins.</p>
       </div>
-      <div style="display: flex; flex-direction: column; gap: 16px">
+      <div class="how-col">
         <h2>THE MACHINE</h2>
-        <p style="margin: 0; font-size: 28px; color: var(--text-3)">An AI trained on thousands of photos of physicists and mathematicians. It has never seen these fighters. It's right about <span id="modelAcc">70%</span> of the time.</p>
+        <p>An AI trained on thousands of photos of physicists and mathematicians. It has never seen these fighters. It's right about <span id="modelAcc">70%</span> of the time.</p>
       </div>
+    </div>
+  </section>
+  <section class="wrap fame">
+    <div class="panel scores">
+      <h2>HALL OF FAME</h2>
+      <ol class="score-list" id="fameList"><li><span>LOADING…</span></li></ol>
     </div>
   </section>
   <footer>
     <div class="wrap">
       <span>© 2026 ITAY</span>
-      <span style="display: flex; gap: 24px; flex-wrap: wrap"><a href="CREDITS.md" target="_blank" rel="noopener">PHOTO CREDITS</a><a href="https://github.com/Itay-Manevych/Physicist-Or-Mathematician" target="_blank" rel="noopener">ABOUT THE MODEL</a></span>
+      <span class="links"><a href="CREDITS.md" target="_blank" rel="noopener">PHOTO CREDITS</a><a href="https://github.com/Itay-Manevych/Physicist-Or-Mathematician" target="_blank" rel="noopener">ABOUT THE MODEL</a></span>
     </div>
   </footer>
 </div>
@@ -192,17 +70,17 @@
 <!-- FIGHT -->
 <div id="fight" class="screen" hidden>
   <header class="wrap hud" aria-label="Health">
-    <div class="hp">
+    <div class="hp" id="hpBoxYou">
       <div class="hp-head"><span style="color: var(--yellow)">P1 · YOU</span><span><span id="hpYou">100</span> HP</span></div>
       <div class="bar"><div id="barYou"></div></div>
     </div>
-    <div class="round"><span style="font-size: 10px">ROUND</span><span style="font-size: 26px" id="roundNo">1/5</span></div>
-    <div class="hp">
+    <div class="round"><span class="round-label">ROUND</span><span class="round-no" id="roundNo">1/10</span></div>
+    <div class="hp" id="hpBoxAi">
       <div class="hp-head"><span><span id="hpAi">100</span> HP</span><span style="color: var(--yellow)">MODEL · P2</span></div>
       <div class="bar right"><div id="barAi"></div></div>
     </div>
   </header>
-  <main class="wrap arena">
+  <main class="wrap arena" id="arena">
     <section class="panel fighter">
       <div class="portrait-col">
         <div class="portrait"><img class="photo" id="fPhoto" alt="Portrait of the mystery scientist"></div>
@@ -220,7 +98,7 @@
         <button type="button" class="choice" id="pickPhys"><span class="knob" style="background: var(--phys)">A</span><span class="choice-label" style="color: var(--phys)">PHYSICIST</span></button>
         <button type="button" class="choice" id="pickMath"><span class="knob" style="background: var(--math)">B</span><span class="choice-label" style="color: var(--math)">MATHEMATICIAN</span></button>
       </section>
-      <p class="prompt blink" style="margin-top: 32px">THE MODEL HAS LOCKED IN. YOUR MOVE.</p>
+      <p class="prompt blink">THE MODEL HAS LOCKED IN. YOUR MOVE.</p>
     </div>
 
     <section class="panel reveal" id="revealArea" aria-live="polite" hidden>
@@ -238,6 +116,7 @@
       </div>
     </section>
   </main>
+  <div class="intro" id="intro" aria-hidden="true" hidden><span id="introRound">ROUND 1</span><span class="fight-word">FIGHT!</span></div>
 </div>
 
 <!-- RESULTS -->
@@ -245,10 +124,10 @@
   <main class="wrap results">
     <section class="verdict">
       <p class="kicker" id="rKicker"></p>
-      <h1 class="headline" id="rHeadline"></h1>
+      <h1 class="headline ko-pop" id="rHeadline"></h1>
       <div class="final-bars">
         <div class="hp">
-          <div class="hp-head"><span style="color: var(--yellow)">YOU</span><span id="rYou"></span></div>
+          <div class="hp-head"><span style="color: var(--yellow)" id="rYouName">YOU</span><span id="rYou"></span></div>
           <div class="bar"><div id="rBarYou"></div></div>
         </div>
         <div class="hp">
@@ -257,44 +136,53 @@
         </div>
       </div>
       <p style="margin: 0; max-width: 640px" id="rTagline"></p>
+
+      <form class="panel name-form" id="nameForm">
+        <label for="playerName" class="px">ENTER YOUR NAME FOR THE LEADERBOARD</label>
+        <div class="name-row">
+          <input id="playerName" maxlength="12" autocomplete="nickname" required placeholder="YOUR NAME">
+          <button type="submit" class="btn" id="saveBtn">SAVE ▶</button>
+        </div>
+        <span class="form-note" id="nameNote"></span>
+      </form>
+
       <div class="row-btns">
         <button type="button" class="btn" id="shareBtn">
           <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
-          SHARE SCORE
+          SHARE RESULT
         </button>
         <button type="button" class="btn white" id="againBtn">PLAY AGAIN</button>
       </div>
+
       <div class="panel share" id="sharePanel" hidden>
-        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
-          <span class="px" style="font-size: 13px">SHARE YOUR SCORE</span>
+        <div class="share-head">
+          <span class="px" style="font-size: 13px">SHARE YOUR RESULT</span>
           <button type="button" class="xbtn" id="shareClose" aria-label="Close share panel">X</button>
         </div>
+        <img id="scorecardImg" class="scorecard" alt="Your scorecard">
         <p class="share-text" id="shareText"></p>
-        <div style="display: flex; flex-wrap: wrap; gap: 12px">
-          <button type="button" class="btn" id="copyBtn" style="color: var(--white); background: var(--purple); box-shadow: none; font-size: 12px">COPY TEXT</button>
-          <a class="btn" id="xLink" target="_blank" rel="noopener" style="color: var(--white); background: var(--ink); box-shadow: none; font-size: 12px">POST ON X</a>
-          <a class="btn" id="waLink" target="_blank" rel="noopener" style="background: var(--hp-ok); box-shadow: none; font-size: 12px">WHATSAPP</a>
+        <div class="share-btns">
+          <a class="btn small" id="downloadLink" download="physicist-or-mathematician.png" style="color: var(--white); background: var(--purple)">SAVE IMAGE</a>
+          <button type="button" class="btn small white" id="copyBtn">COPY TEXT</button>
+          <a class="btn small" id="xLink" target="_blank" rel="noopener" style="color: var(--white); background: var(--ink)">POST ON X</a>
+          <a class="btn small" id="waLink" target="_blank" rel="noopener" style="background: var(--hp-ok)">WHATSAPP</a>
         </div>
       </div>
     </section>
 
-    <section style="display: flex; flex-direction: column; gap: 16px">
+    <section class="log-section">
       <div class="section-head">
         <h2>FIGHT LOG</h2>
-        <span style="font-size: 24px; color: var(--lav-3)">Tap a portrait to see who it was</span>
+        <span class="hint">Tap a portrait to see who it was</span>
       </div>
       <div class="panel log" id="log"></div>
     </section>
 
     <section class="bottom">
       <div class="panel scores">
-        <h2>HIGH SCORES</h2>
-        <ol id="scoreList"></ol>
-        <form class="initials" id="initialsForm">
-          <label for="initials">Enter your initials:</label>
-          <input id="initials" maxlength="3" autocomplete="off" required pattern="[A-Za-z0-9]{1,3}">
-          <button type="submit" class="btn" style="font-size: 12px">SAVE</button>
-        </form>
+        <h2>LEADERBOARD</h2>
+        <ol class="score-list" id="scoreList"></ol>
+        <span class="form-note" id="rankNote"></span>
       </div>
       <div class="continue">
         <p class="px blink" style="margin: 0; font-size: 18px; color: var(--yellow)" id="continueText">CONTINUE? 9</p>
@@ -308,254 +196,16 @@
   <div class="panel">
     <div class="modal-head" id="mHead"><span id="mClass"></span><button type="button" class="xbtn" id="mClose" aria-label="Close photo">X</button></div>
     <div class="portrait" style="margin: 20px 20px 0"><img class="photo" id="mPhoto" alt=""></div>
-    <div style="padding: 20px; display: flex; flex-direction: column; gap: 8px">
+    <div class="modal-body">
       <span class="px" style="font-size: 18px; line-height: 1.4; color: var(--purple)" id="mName"></span>
       <span style="font-size: 26px; color: var(--text-3)" id="mMeta"></span>
-      <span style="font-size: 22px"><a id="mWiki" target="_blank" rel="noopener" style="color: var(--purple)">Wikipedia</a> · <a id="mSource" target="_blank" rel="noopener" style="color: var(--purple)">Photo: Wikimedia Commons</a></span>
+      <span style="font-size: 22px"><a id="mWiki" target="_blank" rel="noopener">Wikipedia</a> · <a id="mSource" target="_blank" rel="noopener">Photo: Wikimedia Commons</a></span>
     </div>
   </div>
 </div>
 
-<script>
-const ROUNDS = 10, HIT = 100 / ROUNDS;
-const $ = id => document.getElementById(id);
-const LABEL = { phys: "PHYSICIST", math: "MATHEMATICIAN" };
-const COLOR = { phys: "var(--phys)", math: "var(--math)" };
-let pool = [], game = null, countdown = null;
-
-const store = {
-  get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } },
-  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
-};
-
-function show(id) {
-  for (const s of document.querySelectorAll(".screen")) s.hidden = s.id !== id;
-  window.scrollTo(0, 0);
-}
-
-function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
-function capital(s) { return s ? s[0].toUpperCase() + s.slice(1) : ""; }
-function barStyle(el, hp) { el.style.width = hp + "%"; el.style.background = hp > 40 ? "var(--hp-ok)" : "var(--hp-low)"; }
-function aiPick(p) { return p.p >= 0.5 ? "phys" : "math"; }
-function aiConf(p) { return Math.round(100 * Math.max(p.p, 1 - p.p)); }
-
-function renderTitle() {
-  const best = store.get("pom-scores", [])[0];
-  $("hiScore").textContent = best ? `[${best.name}] ${best.score}/${ROUNDS}` : `[---] -/${ROUNDS}`;
-  $("oneUp").textContent = String(store.get("pom-last", 0) * 100).padStart(6, "0");
-  show("title");
-}
-
-function pickFighters() {
-  // avoid repeats across games until the pool is used up
-  let seen = new Set(store.get("pom-seen", []));
-  let fresh = pool.filter(p => !seen.has(p.id));
-  if (fresh.length < ROUNDS) { seen = new Set(); fresh = pool.slice(); }
-  const chosen = shuffle(fresh).slice(0, ROUNDS);
-  chosen.forEach(p => seen.add(p.id));
-  store.set("pom-seen", [...seen]);
-  return chosen;
-}
-
-function startGame() {
-  game = { fighters: pickFighters(), i: 0, you: 0, ai: 0, log: [] };
-  show("fight");
-  renderRound();
-}
-
-function renderRound() {
-  const p = game.fighters[game.i];
-  game.guess = null;
-  $("roundNo").textContent = `${game.i + 1}/${ROUNDS}`;
-  updateHud();
-  $("fPhoto").src = p.img;
-  const next = game.fighters[game.i + 1];
-  if (next) new Image().src = next.img;
-  $("fClass").textContent = "CLASS: ???";
-  $("fClass").style.background = "var(--white)";
-  $("fMeta").textContent = `FIGHTER ${String(game.i + 1).padStart(2, "0")} · BORN ${p.born} · CLASS: CLASSIFIED`;
-  $("fName").textContent = "MYSTERY SCIENTIST";
-  $("fBio").textContent = "Study the face. Chalkboard or particle accelerator? The machine has already made up its mind.";
-  $("guessArea").hidden = false;
-  $("revealArea").hidden = true;
-}
-
-function updateHud() {
-  const hpYou = 100 - HIT * game.ai, hpAi = 100 - HIT * game.you;
-  $("hpYou").textContent = hpYou; $("hpAi").textContent = hpAi;
-  barStyle($("barYou"), hpYou); barStyle($("barAi"), hpAi);
-}
-
-function guess(f) {
-  if (!game || game.guess || $("fight").hidden) return;
-  const p = game.fighters[game.i], ai = aiPick(p);
-  const youRight = f === p.answer, aiRight = ai === p.answer;
-  game.guess = f;
-  game.you += youRight; game.ai += aiRight;
-  game.log.push({ p, youRight, aiRight, ai });
-  updateHud();
-
-  const [text, bg] = youRight && !aiRight ? ["CRITICAL HIT!", "var(--yellow)"]
-    : youRight && aiRight ? ["TRADE!", "var(--hp-ok)"]
-    : !youRight && aiRight ? ["OUCH!", "var(--hp-low)"]
-    : ["DOUBLE MISS", "var(--lav-4)"];
-  $("bannerText").textContent = text;
-  $("banner").style.background = bg;
-  $("answerLabel").textContent = LABEL[p.answer];
-  $("fClass").textContent = "CLASS: " + LABEL[p.answer];
-  $("fClass").style.background = COLOR[p.answer];
-  $("fName").textContent = p.name.toUpperCase();
-  $("fMeta").textContent = `FIGHTER ${String(game.i + 1).padStart(2, "0")} · BORN ${p.born}`;
-  $("fBio").textContent = capital(p.bio) || LABEL[p.answer].toLowerCase();
-  $("youLine").textContent = `Picked ${LABEL[f]} · ${youRight ? `HIT −${HIT} to MODEL` : "MISSED"}`;
-  $("aiLine").textContent = `Picked ${LABEL[ai]} (${aiConf(p)}% sure) · ${aiRight ? `HIT −${HIT} to YOU` : "MISSED"}`;
-  const links = [p.wiki && `<a href="${p.wiki}" target="_blank" rel="noopener">Read about them</a>`,
-                 `<a href="${p.source}" target="_blank" rel="noopener">Photo: Wikimedia Commons</a>`].filter(Boolean).join(" · ");
-  $("lore").innerHTML = `${escapeHtml(loreLine(p, youRight, aiRight))} ${links}`;
-  $("nextBtn").textContent = game.i === ROUNDS - 1 ? "FINAL SCORE ▶" : "NEXT ROUND ▶";
-  $("guessArea").hidden = true;
-  $("revealArea").hidden = false;
-  $("nextBtn").focus({ preventScroll: true });
-}
-
-function loreLine(p, youRight, aiRight) {
-  const c = aiConf(p);
-  if (!aiRight && c >= 75) return `The machine was ${c}% sure — and dead wrong.`;
-  if (aiRight && c >= 85) return `The machine called it at ${c}%. That face is textbook ${LABEL[p.answer].toLowerCase()}.`;
-  if (c < 58) return `Even the machine was guessing (${c}%).`;
-  return youRight ? "Your instincts held." : "Faces can lie.";
-}
-
-function escapeHtml(s) { return s.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
-
-function nextRound() {
-  if (!game || !game.guess) return;
-  if (++game.i < ROUNDS) return renderRound();
-  renderResults();
-}
-
-function renderResults() {
-  const hpYou = 100 - HIT * game.ai, hpAi = 100 - HIT * game.you;
-  const outcome = hpYou > hpAi ? "win" : hpYou < hpAi ? "lose" : "draw";
-  store.set("pom-last", game.you);
-  $("rKicker").textContent = { win: "MODEL · K.O.", lose: "YOU · K.O.", draw: "DOUBLE K.O." }[outcome];
-  $("rHeadline").textContent = { win: "YOU WIN!", lose: "GAME OVER", draw: "DRAW!" }[outcome];
-  $("rHeadline").style.color = { win: "var(--yellow)", lose: "var(--lose)", draw: "var(--white)" }[outcome];
-  $("rYou").textContent = `${game.you}/${ROUNDS} · ${hpYou} HP`;
-  $("rAi").textContent = `${game.ai}/${ROUNDS} · ${hpAi} HP`;
-  barStyle($("rBarYou"), hpYou); barStyle($("rBarAi"), hpAi);
-  const fooled = game.log.filter(r => r.youRight && !r.aiRight).length;
-  $("rTagline").textContent = outcome === "win"
-    ? `You out-read the machine on ${fooled} fighter${fooled === 1 ? "" : "s"}.`
-    : outcome === "lose" ? "The machine read them better this time. Rematch?" : "Dead even. Best of three?";
-
-  const shareText = `${outcome === "win" ? "I beat the AI! " : outcome === "lose" ? "The AI got me this time. " : "I tied the AI! "}`
-    + `I scored ${game.you}/${ROUNDS} vs the model's ${game.ai}/${ROUNDS} in Physicist or Mathematician? Can you beat it? ${location.origin + location.pathname}`;
-  $("shareText").textContent = shareText;
-  $("xLink").href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareText);
-  $("waLink").href = "https://wa.me/?text=" + encodeURIComponent(shareText);
-  $("sharePanel").hidden = true;
-  $("copyBtn").textContent = "COPY TEXT";
-
-  $("log").innerHTML = "";
-  game.log.forEach((r, k) => {
-    const row = document.createElement("div");
-    row.className = "log-row";
-    row.innerHTML = `
-      <button type="button" class="thumb" style="box-shadow: 4px 4px 0 ${COLOR[r.p.answer]}" aria-label="Show photo of ${escapeHtml(r.p.name)}"><img class="photo" src="${r.p.img}" alt=""></button>
-      <span class="px" style="flex: 1 1 220px; font-size: 13px; line-height: 1.6">${escapeHtml(r.p.name.toUpperCase())}</span>
-      <span class="tag" style="flex: 0 0 auto; width: 200px; border-width: 3px; background: ${COLOR[r.p.answer]}">${LABEL[r.p.answer]}</span>
-      <span style="flex: 0 0 150px; font-size: 28px"><span class="label-sm" style="font-size: 9px">YOU </span>${r.youRight ? "✓ HIT" : "✗ MISS"}</span>
-      <span style="flex: 0 0 210px; font-size: 28px"><span class="label-sm" style="font-size: 9px">MODEL </span>${r.aiRight ? "✓" : "✗"} ${r.ai === "phys" ? "PHYS" : "MATH"} ${aiConf(r.p)}%</span>`;
-    row.querySelector("button").onclick = () => openModal(r.p);
-    $("log").appendChild(row);
-  });
-
-  game.savedAt = null;
-  $("initialsForm").hidden = false;
-  $("initials").value = store.get("pom-initials", "");
-  renderScores();
-  startCountdown();
-  show("results");
-}
-
-function renderScores() {
-  // saved local scores + the model's score this game + (until saved) your score this game
-  const rows = store.get("pom-scores", []).slice(0, 4).map(r => ({ ...r, me: r.t === game.savedAt }));
-  rows.push({ name: "MDL", score: game.ai, me: false });
-  if (!game.savedAt) rows.push({ name: "---", score: game.you, me: true });
-  rows.sort((a, b) => b.score - a.score);
-  $("scoreList").innerHTML = rows.slice(0, 5).map((r, k) =>
-    `<li class="${r.me ? "me" : ""}"><span>${["1ST", "2ND", "3RD", "4TH", "5TH"][k]}&nbsp; ${escapeHtml(r.name)}${r.me ? " ◀ YOU" : ""}</span><span>${r.score}/${ROUNDS}</span></li>`).join("");
-}
-
-function saveScore(e) {
-  e.preventDefault();
-  const name = $("initials").value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 3) || "YOU";
-  game.savedAt = Date.now();
-  const scores = store.get("pom-scores", []);
-  scores.push({ name, score: game.you, t: game.savedAt });
-  scores.sort((a, b) => b.score - a.score || a.t - b.t);
-  store.set("pom-scores", scores.slice(0, 10));
-  store.set("pom-initials", name);
-  $("initialsForm").hidden = true;
-  renderScores();
-}
-
-function startCountdown() {
-  clearInterval(countdown);
-  let n = 9;
-  $("continueText").textContent = `CONTINUE? ${n}`;
-  countdown = setInterval(() => {
-    n -= 1;
-    $("continueText").textContent = n > 0 ? `CONTINUE? ${n}` : "INSERT COIN";
-    if (n <= 0) clearInterval(countdown);
-  }, 1000);
-}
-
-function openModal(p) {
-  $("mClass").textContent = LABEL[p.answer];
-  $("mHead").style.background = COLOR[p.answer];
-  $("mPhoto").src = p.img; $("mPhoto").alt = `Photo of ${p.name}`;
-  $("mName").textContent = p.name.toUpperCase();
-  $("mMeta").textContent = `Born ${p.born}${p.bio ? " · " + capital(p.bio) : ""}`;
-  $("mWiki").hidden = !p.wiki; $("mWiki").href = p.wiki || "#";
-  $("mSource").href = p.source;
-  $("modal").hidden = false;
-  $("mClose").focus();
-}
-function closeModal() { $("modal").hidden = true; }
-
-$("startBtn").onclick = startGame;
-$("againBtn").onclick = startGame;
-$("titleBtn").onclick = () => { clearInterval(countdown); renderTitle(); };
-$("pickPhys").onclick = () => guess("phys");
-$("pickMath").onclick = () => guess("math");
-$("nextBtn").onclick = nextRound;
-$("shareBtn").onclick = () => { $("sharePanel").hidden = !$("sharePanel").hidden; };
-$("shareClose").onclick = () => { $("sharePanel").hidden = true; };
-$("copyBtn").onclick = async () => {
-  try { await navigator.clipboard.writeText($("shareText").textContent); $("copyBtn").textContent = "COPIED!"; }
-  catch { $("copyBtn").textContent = "SELECT & COPY"; }
-};
-$("initialsForm").onsubmit = saveScore;
-$("mClose").onclick = closeModal;
-$("modal").onclick = e => { if (e.target.id === "modal") closeModal(); };
-
-document.addEventListener("keydown", e => {
-  if (e.target.tagName === "INPUT") return;
-  if (!$("modal").hidden) { if (e.key === "Escape") closeModal(); return; }
-  const k = e.key.toLowerCase();
-  if (!$("title").hidden && (k === "enter" || k === " ")) { e.preventDefault(); startGame(); }
-  else if (!$("fight").hidden && !game.guess && (k === "a" || k === "arrowleft")) guess("phys");
-  else if (!$("fight").hidden && !game.guess && (k === "b" || k === "arrowright")) guess("math");
-});
-
-fetch("data.json").then(r => r.json()).then(d => {
-  pool = d.people;
-  $("modelAcc").textContent = Math.round(100 * d.model_accuracy) + "%";
-  renderTitle();
-}).catch(() => { $("startBtn").textContent = "LOADING FAILED"; $("startBtn").disabled = true; renderTitle(); });
-</script>
+<script src="sfx.js"></script>
+<script src="scorecard.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

@@ -44,8 +44,14 @@ Sources and data policy: [docs/DATA.md](docs/DATA.md).
 
 ## The game
 
-`game/` is a self-contained static site: 10 rounds, you vs. the model, on held-out test people only.
-Deploys to Vercel as-is (`vercel.json` serves `game/`, no build step). Photo credits: [game/CREDITS.md](game/CREDITS.md).
+`game/` is a static retro fighting game: 10 rounds, you vs. the model, on held-out test people only.
+Sound effects, shareable scorecards, and an online leaderboard (`api/leaderboard.js`, a Vercel function).
+
+- **Deploy:** Vercel serves `game/` and `api/` as-is (`vercel.json`, no build step).
+- **Leaderboard storage:** in the Vercel project, add the free **Upstash Redis** integration
+  (Storage → Upstash → connect to this project) and redeploy. Without it the game keeps scores on each device.
+- **Run locally:** `node dev/server.js` → http://localhost:8137 (in-memory leaderboard).
+- Photo credits: [game/CREDITS.md](game/CREDITS.md).
 
 ## Layout
 
@@ -53,6 +59,8 @@ Deploys to Vercel as-is (`vercel.json` serves `game/`, no build step). Photo cre
 physormath/   the code: one module per step, run as `python -m physormath <step>`
 sources/      seed lists for the university scraper
 game/         retro "human vs. machine" fighting game (static site)
+api/          leaderboard serverless function (Vercel)
+dev/          local server for the game + API
 docs/         results and data notes
 data/         photos, crops, embeddings   (not in git)
 outputs/      models, predictions, reports (not in git)
