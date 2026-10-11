@@ -1,0 +1,12 @@
+# install PyTorch first, matching your CUDA version, e.g.:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
+# facenet-pytorch pins an old torch, so install it with:  pip install facenet-pytorch --no-deps
+open_clip_torch
+scikit-learn
+pandas
+numpy
+pillow
+requests
+tqdm
+beautifulsoup4
+joblib

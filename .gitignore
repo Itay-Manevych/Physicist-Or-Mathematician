@@ -1,21 +1,14 @@
 # environment
 .venv/
 __pycache__/
-*.pyc
+.claude/
 
-# data: photos of real people (Commons images need per-file attribution; university photos stay local)
+# photos of real people, crops and embeddings (see docs/DATA.md)
 data/
 game/img/
 game/data.json
 
-# large / generated artifacts
-*.pt
-*.npy
+# generated: models, predictions, reports, logs
+outputs/
+sources/uni_probe.csv
 *.log
-*_predictions*.csv
-both_scores*.csv
-uni_probe.csv
-
-# local tooling
-.claude/
-*.joblib

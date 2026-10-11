@@ -1,0 +1,98 @@
+"""Image embeddings with test-time augmentation.
+
+Face crops: CLIP-L, CLIP-H, SigLIP2 and FaceNet, each averaged over original / mirrored / grayscale /
+grayscale+mirrored, so colour vs. black-and-white stops being a cue.
+Whole photo and upper body: CLIP-H averaged over original / grayscale.
+
+Writes data/feats_<name><tag>.npy, row-aligned with the input CSV.
+"""
+import numpy as np
+import open_clip
+import pandas as pd
+import torch
+from facenet_pytorch import InceptionResnetV1
+from PIL import Image, ImageOps
+from tqdm import tqdm
+
+from .config import BACKBONES, DATA, DEVICE
+from .faces import detector, open_image, pad_square, tight, upper_body
+
+
+def face_views(img):
+    g = ImageOps.grayscale(img).convert("RGB")
+    return [img, ImageOps.mirror(img), g, ImageOps.mirror(g)]
+
+
+def color_views(img):
+    return [img, ImageOps.grayscale(img).convert("RGB")]
+
+
+def load_backbone(name):
+    """-> (encode(batch) -> features, transform(PIL) -> tensor)"""
+    if name == "facenet":
+        net = InceptionResnetV1(pretrained="vggface2").eval().to(DEVICE)
+
+        def transform(im):
+            return (torch.from_numpy(np.asarray(tight(im), dtype=np.float32)).permute(2, 0, 1) - 127.5) / 128.0
+        return net, transform
+    arch, pretrained = BACKBONES[name]
+    model, _, preprocess = open_clip.create_model_and_transforms(arch, pretrained=pretrained, device=DEVICE)
+    model = model.half().eval()
+    return (lambda x: model.encode_image(x.half())), preprocess
+
+
+def embed_images(encode, transform, images, views):
+    """Mean of the L2-normalised embeddings of each image's augmented views."""
+    vs = [views(im) for im in images]
+    x = torch.stack([transform(v) for group in vs for v in group]).to(DEVICE)
+    with torch.no_grad(), torch.autocast(DEVICE, dtype=torch.float16):
+        e = encode(x).float()
+    e = e / e.norm(dim=-1, keepdim=True)
+    e = e.view(len(images), len(vs[0]), -1).mean(1)
+    return (e / e.norm(dim=-1, keepdim=True)).cpu().numpy()
+
+
+def _done(path, n):
+    return path.exists() and np.load(path, mmap_mode="r").shape[0] == n
+
+
+def embed_faces(csv, tag="", backbones=("facenet", "clipL", "clipH", "siglip2"), bs=16):
+    files = pd.read_csv(csv).face.tolist()
+    for name in backbones:
+        out = DATA / f"feats_{name}{tag}.npy"
+        if _done(out, len(files)):
+            print("already embedded:", out.name)
+            continue
+        encode, transform = load_backbone(name)
+        feats = [embed_images(encode, transform, [Image.open(f).convert("RGB") for f in files[i:i + bs]], face_views)
+                 for i in tqdm(range(0, len(files), bs), desc=name)]
+        np.save(out, np.concatenate(feats))
+        del encode
+        torch.cuda.empty_cache()
+
+
+def embed_context(csv, tag="", bs=16):
+    """Whole photo (padded to square) and upper-body crop, with CLIP-H. Upper crops are saved to data/upper/."""
+    df = pd.read_csv(csv)
+    outs = {k: DATA / f"feats_clipH_{k}{tag}.npy" for k in ("full", "upper")}
+    if all(_done(p, len(df)) for p in outs.values()):
+        print("already embedded: whole photo + upper body")
+        return
+    (DATA / "upper").mkdir(exist_ok=True)
+    mtcnn = detector()
+    encode, transform = load_backbone("clipH")
+    feats = {"full": [], "upper": []}
+    for i in tqdm(range(0, len(df), bs), desc="whole photo + upper body"):
+        fulls, uppers = [], []
+        for row in df.iloc[i:i + bs].itertuples():
+            img = open_image(row.file)
+            boxes, probs = mtcnn.detect(img)
+            box = boxes[int(np.argmax(probs))] if boxes is not None else (0, 0, img.size[0], img.size[1] / 3)
+            up = upper_body(img, box)
+            up.resize((256, 256)).save(DATA / "upper" / row.file.split("/")[-1])
+            fulls.append(pad_square(img))
+            uppers.append(up)
+        feats["full"].append(embed_images(encode, transform, fulls, color_views))
+        feats["upper"].append(embed_images(encode, transform, uppers, color_views))
+    for k, p in outs.items():
+        np.save(p, np.concatenate(feats[k]))

@@ -1,0 +1,122 @@
+university,label,url
+Hebrew University,physicist,https://phys.huji.ac.il/people/staff/academic
+Hebrew University,mathematician,https://mathematics.huji.ac.il/people/directory/faculty
+Hebrew University,mathematician,https://mathematics.huji.ac.il/directory
+Weizmann,mathematician,https://www.weizmann.ac.il/math/people/faculty
+Weizmann,physicist,https://www.weizmann.ac.il/physics/people/faculty
+Technion,physicist,https://phys.technion.ac.il/en/people/faculty
+Ben-Gurion,mathematician,https://www.math.bgu.ac.il/en/people/faculty
+Ben-Gurion,physicist,https://physics.bgu.ac.il/en/people/faculty
+Bar-Ilan,mathematician,https://math.biu.ac.il/en/faculty
+Bar-Ilan,physicist,https://physics.biu.ac.il/en/faculty
+Harvard,mathematician,https://www.math.harvard.edu/people/
+Harvard,physicist,https://www.physics.harvard.edu/people/faculty
+Stanford,mathematician,https://mathematics.stanford.edu/people/faculty
+Stanford,physicist,https://physics.stanford.edu/people/faculty
+Berkeley,mathematician,https://math.berkeley.edu/people/faculty
+Berkeley,physicist,https://physics.berkeley.edu/people/faculty
+Chicago,mathematician,https://mathematics.uchicago.edu/people/faculty/
+Chicago,physicist,https://physics.uchicago.edu/people/faculty/
+Columbia,mathematician,https://www.math.columbia.edu/people/faculty/
+Columbia,physicist,https://physics.columbia.edu/content/faculty
+Yale,mathematician,https://math.yale.edu/people/faculty
+Yale,physicist,https://physics.yale.edu/people/faculty
+Cornell,mathematician,https://math.cornell.edu/faculty
+Cornell,physicist,https://physics.cornell.edu/faculty
+UCLA,mathematician,https://www.math.ucla.edu/people/ladder
+UCLA,physicist,https://www.pa.ucla.edu/faculty.html
+Michigan,mathematician,https://lsa.umich.edu/math/people/faculty.html
+Michigan,physicist,https://lsa.umich.edu/physics/people/faculty.html
+Rutgers,mathematician,https://www.math.rutgers.edu/people/faculty
+Rutgers,physicist,https://www.physics.rutgers.edu/people/faculty
+Penn,mathematician,https://www.math.upenn.edu/people/standing-faculty
+Penn,physicist,https://www.physics.upenn.edu/people/standing-faculty
+Duke,mathematician,https://math.duke.edu/people/faculty
+Duke,physicist,https://physics.duke.edu/people/faculty
+UIUC,mathematician,https://math.illinois.edu/directory/faculty
+UIUC,physicist,https://physics.illinois.edu/people/directory/faculty
+Wisconsin,mathematician,https://math.wisc.edu/faculty/
+Wisconsin,physicist,https://www.physics.wisc.edu/directory/faculty/
+Brown,mathematician,https://www.math.brown.edu/people/faculty
+Brown,physicist,https://physics.brown.edu/people/faculty
+Northwestern,mathematician,https://www.math.northwestern.edu/people/faculty/
+Northwestern,physicist,https://physics.northwestern.edu/people/faculty/
+Washington,mathematician,https://math.washington.edu/faculty
+Washington,physicist,https://phys.washington.edu/people/faculty
+Oxford,mathematician,https://www.maths.ox.ac.uk/people/faculty
+ETH Zurich,mathematician,https://math.ethz.ch/the-department/people/professors.html
+ETH Zurich,physicist,https://phys.ethz.ch/the-department/people/professors.html
+Imperial,mathematician,https://www.imperial.ac.uk/mathematics/people/academic-staff/
+Imperial,physicist,https://www.imperial.ac.uk/physics/people/academic-staff/
+Warwick,mathematician,https://warwick.ac.uk/fac/sci/maths/people/staff/
+Warwick,physicist,https://warwick.ac.uk/fac/sci/physics/staff/academic/
+Edinburgh,mathematician,https://www.maths.ed.ac.uk/school-of-mathematics/people/a-z
+Edinburgh,physicist,https://www.ph.ed.ac.uk/people
+Tel Aviv,mathematician,https://en-exact-sciences.tau.ac.il/math
+Tel Aviv,physicist,https://physics.tau.ac.il/staff_postdocs
+Weizmann,mathematician,https://www.weizmann.ac.il/math/people
+Weizmann,physicist,https://www.weizmann.ac.il/condmat/people
+Weizmann,physicist,https://www.weizmann.ac.il/particle/people
+Tel Aviv,physicist,https://physics.tau.ac.il/staff_academic_physics
+Weizmann,physicist,https://www.weizmann.ac.il/complex/people
+Princeton,mathematician,https://www.math.princeton.edu/people
+Stanford,mathematician,https://mathematics.stanford.edu/people/graduate-students
+Berkeley,physicist,https://physics.berkeley.edu/research-faculty
+Chicago,physicist,https://physics.uchicago.edu/
+UCLA,mathematician,https://ww3.math.ucla.edu/
+Penn State,mathematician,https://science.psu.edu/people?person_type=47&department=15&unit=All&items_per_page=200&taxonomy_entity_index_tid_depth_1=All&field_offices_and_centers=All
+Penn State,physicist,https://science.psu.edu/people?person_type=48&department=16&unit=All&items_per_page=200
+Ohio State,mathematician,https://math.osu.edu/people
+Ohio State,physicist,https://physics.osu.edu/research/atomic-molecular-and-optical-physics/agostini-dimauro-atomic-physics-research-group/research-group-members
+Maryland,physicist,https://umdphysics.umd.edu/people/faculty.html
+UC San Diego,mathematician,https://math.ucsd.edu/people
+UC San Diego,physicist,https://physics.ucsd.edu/people/graduate-students
+UC Santa Barbara,physicist,https://www.physics.ucsb.edu/people
+UC Davis,mathematician,https://www.math.ucdavis.edu/people
+UC Irvine,physicist,https://www.physics.uci.edu/
+Texas,mathematician,https://math.utexas.edu/
+Texas,physicist,https://physics.utexas.edu/
+Georgia Tech,mathematician,https://math.gatech.edu/people?field_job_type_tid=11
+Georgia Tech,physicist,https://physics.gatech.edu/people/graduate-students
+Purdue,mathematician,https://www.math.purdue.edu/people/faculty.html
+Purdue,physicist,https://www.physics.purdue.edu/news/2026/purdue-researchers-find-a-clearer-way-to-measure-quantum-entanglement.html
+Indiana,mathematician,https://math.indiana.edu/about/faculty/index.html
+Indiana,physicist,https://physics.indiana.edu/about/directory/all-faculty-scientists/index.html
+Arizona,mathematician,https://www.math.arizona.edu/
+Arizona,physicist,https://physics.arizona.edu/people/phd-students
+Utah,mathematician,https://www.math.utah.edu/directory/faculty.php
+Stony Brook,mathematician,https://www.math.stonybrook.edu/faculty-areas-interest
+Boston University,mathematician,https://www.bu.edu/math/people/complete-directory/
+Boston University,physicist,https://www.bu.edu/physics/people/graduate-students/
+Notre Dame,mathematician,https://math.nd.edu/
+Notre Dame,physicist,https://physics.nd.edu/people/faculty/
+Vanderbilt,mathematician,https://as.vanderbilt.edu/math/faculty/
+Vanderbilt,physicist,https://as.vanderbilt.edu/physics-astronomy/people/?group=graduate-students
+Toronto,physicist,https://www.physics.utoronto.ca/
+McGill,mathematician,https://www.mcgill.ca/mathstat/people
+UBC,mathematician,https://www.math.ubc.ca/about-our-department/memoriam
+Waterloo,mathematician,https://uwaterloo.ca/pure-mathematics/news?audience%5B7%5D=7
+Oxford,mathematician,https://www.maths.ox.ac.uk/
+Oxford,physicist,https://www.physics.ox.ac.uk/
+Cambridge,physicist,https://www.phy.cam.ac.uk/people/
+UCL,physicist,https://www.ucl.ac.uk/staff
+Manchester,mathematician,https://www.maths.manchester.ac.uk/
+Manchester,physicist,https://www.physics.manchester.ac.uk/
+Zurich,mathematician,https://www.math.uzh.ch/
+Zurich,physicist,https://www.physik.uzh.ch/de/
+Heidelberg,mathematician,https://www.mathinf.uni-heidelberg.de/en
+Heidelberg,physicist,https://www.physik.uni-heidelberg.de/
+LMU Munich,mathematician,https://www.math.lmu.de/de/index.html
+LMU Munich,physicist,https://www.physik.lmu.de/de/
+Copenhagen,mathematician,https://www.math.ku.dk/
+Copenhagen,physicist,https://nbi.ku.dk/
+Leiden,mathematician,https://www.universiteitleiden.nl/en/news/2026/07/veni-grants-for-leiden-researchers-2026
+Leiden,physicist,https://www.universiteitleiden.nl/en/news/2026/10/members-of-parliament-visit-leiden-to-discuss-quantum-technology-and-society
+KU Leuven,mathematician,https://wis.kuleuven.be/
+Sorbonne,mathematician,https://www.imj-prg.fr/
+Uppsala,mathematician,https://www.uu.se/en/department/mathematics
+ANU,mathematician,https://maths.anu.edu.au/people/academics
+ANU,physicist,https://physics.anu.edu.au/
+Tokyo,physicist,https://www.phys.s.u-tokyo.ac.jp/en/
+HKUST,mathematician,https://www.math.hkust.edu.hk/people/
+HKUST,physicist,https://physics.hkust.edu.hk/
