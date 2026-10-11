@@ -3,10 +3,8 @@
 __pycache__/
 .claude/
 
-# photos of real people, crops and embeddings (see docs/DATA.md)
+# photos of real people, crops and embeddings (see docs/DATA.md); game/ ships its own small credited portraits
 data/
-game/img/
-game/data.json
 
 # generated: models, predictions, reports, logs
 outputs/

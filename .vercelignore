@@ -1,0 +1,5 @@
+# Only the static game is deployed (see vercel.json); keep the Python pipeline out of the upload
+physormath/
+sources/
+docs/
+requirements.txt

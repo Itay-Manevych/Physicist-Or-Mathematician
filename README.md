@@ -42,6 +42,11 @@ python -m physormath game                          # game data from held-out tes
 Optional extra data: `fetch-subfields`, `fetch-extra`, `scrape {discover,probe,crawl,simons}` (each followed by `process <csv> <tag>`).
 Sources and data policy: [docs/DATA.md](docs/DATA.md).
 
+## The game
+
+`game/` is a self-contained static site: 10 rounds, you vs. the model, on held-out test people only.
+Deploys to Vercel as-is (`vercel.json` serves `game/`, no build step). Photo credits: [game/CREDITS.md](game/CREDITS.md).
+
 ## Layout
 
 ```

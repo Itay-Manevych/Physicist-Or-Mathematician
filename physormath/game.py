@@ -70,4 +70,9 @@ def build(per_class=80, seed=0):
     random.Random(seed).shuffle(people)
     acc = sum((p["p"] > 0.5) == (p["answer"] == "phys") for p in people) / len(people)
     json.dump({"model_accuracy": round(acc, 3), "people": people}, open(GAME / "data.json", "w"), indent=1)
+    credits = ["# Photo credits", "",
+               "Portraits are cropped from freely licensed images on Wikimedia Commons.",
+               "Author and license for each photo are on its Commons page.", ""]
+    credits += [f"- `{p['img']}` {p['name']}: {p['source']}" for p in sorted(people, key=lambda p: p["id"])]
+    (GAME / "CREDITS.md").write_text("\n".join(credits) + "\n", encoding="utf-8")
     print(f"{len(people)} fighters -> game/data.json  (model accuracy on them: {acc:.0%})")

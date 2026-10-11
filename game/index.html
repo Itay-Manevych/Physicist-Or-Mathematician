@@ -59,7 +59,7 @@
   .hp-head { display: flex; justify-content: space-between; font-family: var(--pixel); font-size: 14px; text-shadow: 3px 3px 0 var(--ink); }
   .bar { height: 32px; border: 4px solid var(--ink); background: var(--white); display: flex; box-shadow: 4px 4px 0 var(--ink); }
   .bar.right { justify-content: flex-end; }
-  .bar > div { height: 100%; transition: width 0.4s steps(5); }
+  .bar > div { height: 100%; transition: width 0.4s steps(10); }
   .round { flex: 0 0 auto; width: 108px; height: 84px; background: var(--yellow); color: var(--ink); border: 4px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-family: var(--pixel); }
 
@@ -160,7 +160,7 @@
       <span style="color: var(--yellow); font-size: 0.5em">— OR —</span><br>
       <span style="color: var(--math)">MATHEMATICIAN</span>
     </h1>
-    <p style="margin: 0; max-width: 660px">Five real scientists. One photo each. Guess their class before the machine does. Every right answer lands a hit.</p>
+    <p style="margin: 0; max-width: 660px">Ten real scientists. One photo each. Guess their class before the machine does. Every right answer lands a hit.</p>
     <button type="button" class="btn start blink" id="startBtn">PRESS START</button>
     <p class="px" style="margin: 0; font-size: 11px; color: var(--lav-3)">CREDIT 01</p>
   </section>
@@ -173,7 +173,7 @@
       </div>
       <div style="display: flex; flex-direction: column; gap: 16px">
         <h2>RULES</h2>
-        <p style="margin: 0; font-size: 28px; color: var(--text-3)">Both players start at 100 HP. Each right answer hits your opponent for 20. Whoever has more HP after round 5 wins.</p>
+        <p style="margin: 0; font-size: 28px; color: var(--text-3)">Both players start at 100 HP. Each right answer hits your opponent for 10. Whoever has more HP after round 10 wins.</p>
       </div>
       <div style="display: flex; flex-direction: column; gap: 16px">
         <h2>THE MACHINE</h2>
@@ -184,7 +184,7 @@
   <footer>
     <div class="wrap">
       <span>© 2026 ITAY</span>
-      <a href="https://github.com/Itay-Manevych/Physicist-Or-Mathematician" target="_blank" rel="noopener">ABOUT THE MODEL</a>
+      <span style="display: flex; gap: 24px; flex-wrap: wrap"><a href="CREDITS.md" target="_blank" rel="noopener">PHOTO CREDITS</a><a href="https://github.com/Itay-Manevych/Physicist-Or-Mathematician" target="_blank" rel="noopener">ABOUT THE MODEL</a></span>
     </div>
   </footer>
 </div>
@@ -317,7 +317,7 @@
 </div>
 
 <script>
-const ROUNDS = 5, HIT = 20;
+const ROUNDS = 10, HIT = 100 / ROUNDS;
 const $ = id => document.getElementById(id);
 const LABEL = { phys: "PHYSICIST", math: "MATHEMATICIAN" };
 const COLOR = { phys: "var(--phys)", math: "var(--math)" };
@@ -407,8 +407,8 @@ function guess(f) {
   $("fName").textContent = p.name.toUpperCase();
   $("fMeta").textContent = `FIGHTER ${String(game.i + 1).padStart(2, "0")} · BORN ${p.born}`;
   $("fBio").textContent = capital(p.bio) || LABEL[p.answer].toLowerCase();
-  $("youLine").textContent = `Picked ${LABEL[f]} · ${youRight ? "HIT −20 to MODEL" : "MISSED"}`;
-  $("aiLine").textContent = `Picked ${LABEL[ai]} (${aiConf(p)}% sure) · ${aiRight ? "HIT −20 to YOU" : "MISSED"}`;
+  $("youLine").textContent = `Picked ${LABEL[f]} · ${youRight ? `HIT −${HIT} to MODEL` : "MISSED"}`;
+  $("aiLine").textContent = `Picked ${LABEL[ai]} (${aiConf(p)}% sure) · ${aiRight ? `HIT −${HIT} to YOU` : "MISSED"}`;
   const links = [p.wiki && `<a href="${p.wiki}" target="_blank" rel="noopener">Read about them</a>`,
                  `<a href="${p.source}" target="_blank" rel="noopener">Photo: Wikimedia Commons</a>`].filter(Boolean).join(" · ");
   $("lore").innerHTML = `${escapeHtml(loreLine(p, youRight, aiRight))} ${links}`;

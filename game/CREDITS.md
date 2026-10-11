@@ -1,0 +1,161 @@
+# Photo credits
+
+Portraits are cropped from freely licensed images on Wikimedia Commons.
+Author and license for each photo are on its Commons page.
+
+- `img/000.jpg` Tim Cochran: https://commons.wikimedia.org/wiki/File:Tim%20Cochran%201986%20%28enlarged%20headshot%29.jpg
+- `img/001.jpg` Bill Parry: https://commons.wikimedia.org/wiki/File:Parry%20william%20oberwolfach.jpg
+- `img/002.jpg` Leonid Kulikov: https://commons.wikimedia.org/wiki/File:Kulikov%20L%20Y-750-%D0%B4%D0%BB%D1%8F%20e-mail.jpg
+- `img/003.jpg` Q120281111: https://commons.wikimedia.org/wiki/File:%D0%90%D1%80%D0%BA%D0%B0%D0%B4%D0%B8%D0%B9%20%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB%D0%B0%D0%B5%D0%B2%D0%B8%D1%87%20%D0%91%D0%BE%D1%80%D0%B8%D1%81%D0%BE%D0%B2.png
+- `img/004.jpg` Charles Read: https://commons.wikimedia.org/wiki/File:Charles%20Read.jpg
+- `img/005.jpg` Klaus Schmitt: https://commons.wikimedia.org/wiki/File:KlausSchmittPortrait.png
+- `img/006.jpg` Georgiy Malineckiy: https://commons.wikimedia.org/wiki/File:Georgiy%20Malineckiy%20foto.jpg
+- `img/007.jpg` Niko Prijatelj: https://commons.wikimedia.org/wiki/File:Niko%20Prijatelj.jpg
+- `img/008.jpg` Herbert John Ryser: https://commons.wikimedia.org/wiki/File:Herbert%20John%20Ryser.jpeg
+- `img/009.jpg` Victor Goryunov: https://commons.wikimedia.org/wiki/File:VictorGoryunov.JPG
+- `img/010.jpg` John L. Kelley: https://commons.wikimedia.org/wiki/File:John%20L.%20Kelley%201968.jpeg
+- `img/011.jpg` Alexander Pinus: https://commons.wikimedia.org/wiki/File:%D0%9F%D0%B8%D0%BD%D1%83%D1%81%20%D0%90%D0%93.jpg
+- `img/012.jpg` Marius Crainic: https://commons.wikimedia.org/wiki/File:Marius%20Crainic.jpg
+- `img/013.jpg` Andrew M. Stuart: https://commons.wikimedia.org/wiki/File:Andrew%20M.%20Stuart.jpg
+- `img/014.jpg` Po-Shen Loh: https://commons.wikimedia.org/wiki/File:Po-Shen%20Loh.jpg
+- `img/015.jpg` Hryhorii Bevz: https://commons.wikimedia.org/wiki/File:%D0%91%D0%B5%D0%B2%D0%B7%20%D0%93.%D0%9F.jpg
+- `img/016.jpg` Martin Bridson: https://commons.wikimedia.org/wiki/File:Martin%20Bridson2.jpg
+- `img/017.jpg` H. P. Schlickewei: https://commons.wikimedia.org/wiki/File:Schlickewei.jpg
+- `img/018.jpg` Hassler Whitney: https://commons.wikimedia.org/wiki/File:HasslerWhitney-April1973.jpg
+- `img/019.jpg` Joachim Lambek: https://commons.wikimedia.org/wiki/File:Lambek%20Joachim.jpg
+- `img/020.jpg` Edward Szpilewski: https://commons.wikimedia.org/wiki/File:Edward%20Szpilewski%202.jpg
+- `img/021.jpg` Claude Ambrose Rogers: https://commons.wikimedia.org/wiki/File:C%20A%20Rogers.jpg
+- `img/022.jpg` Gennady Makanin: https://commons.wikimedia.org/wiki/File:%D0%9C%D0%B0%D0%BA%D0%B0%D0%BD%D0%B8%D0%BD%20%D0%93.%D0%A1..jpg
+- `img/023.jpg` Boris M. Schein: https://commons.wikimedia.org/wiki/File:Boris%20M.%20Schein.jpg
+- `img/024.jpg` Harald Garcke: https://commons.wikimedia.org/wiki/File:Garcke.jpeg
+- `img/025.jpg` Samuel Gitler Hammer: https://commons.wikimedia.org/wiki/File:Samuel%20Gitler.png
+- `img/026.jpg` Aharon Aspis: https://commons.wikimedia.org/wiki/File:%D7%90%D7%94%D7%A8%D7%95%D7%9F%20%D7%90%D7%A1%D7%A4%D7%99%D7%A1.jpg
+- `img/027.jpg` Klaus Habetha: https://commons.wikimedia.org/wiki/File:Klaus%20Habetha.jpg
+- `img/028.jpg` Preda Mihăilescu: https://commons.wikimedia.org/wiki/File:Preda%20Mihailescu%20vor%20Tafel.png
+- `img/029.jpg` Peter Jones: https://commons.wikimedia.org/wiki/File:Peter%20W.%20Jones%202012.jpg
+- `img/030.jpg` Günter Harder: https://commons.wikimedia.org/wiki/File:Guenter%20Harder.jpg
+- `img/031.jpg` Renu C. Laskar: https://commons.wikimedia.org/wiki/File:Renu-2048x1512.jpg
+- `img/032.jpg` Robert Guralnick: https://commons.wikimedia.org/wiki/File:Robert%20Guralnick.jpg
+- `img/033.jpg` Shiing-Shen Chern: https://commons.wikimedia.org/wiki/File:Shiing-shen%20Chern%201988%20%28re-scanned%29%20%28cropped-1%29.jpg
+- `img/034.jpg` Morris Hirsch: https://commons.wikimedia.org/wiki/File:Hirsch%20morris.jpg
+- `img/035.jpg` Christof Geiß: https://commons.wikimedia.org/wiki/File:Geiss%20christof.jpg
+- `img/036.jpg` Carlos Kenig: https://commons.wikimedia.org/wiki/File:Carlos%20Kenig.jpg
+- `img/037.jpg` Thomas W. Hungerford: https://commons.wikimedia.org/wiki/File:Thomas%20Hungerford.jpg
+- `img/038.jpg` Kristina Reiss: https://commons.wikimedia.org/wiki/File:Kristina%20Reiss.jpg
+- `img/039.jpg` Hermann Witting: https://commons.wikimedia.org/wiki/File:Witting%202004.jpg
+- `img/040.jpg` John Pardon: https://commons.wikimedia.org/wiki/File:John%20Pardon4%20c.Simons%20Foundation.jpg
+- `img/041.jpg` Richard Pollack: https://commons.wikimedia.org/wiki/File:Richard%20M.%20Pollack.jpg
+- `img/042.jpg` Ferran Sunyer i Balaguer: https://commons.wikimedia.org/wiki/File:Ferran%20Sunyer%20Balaguer.jpg
+- `img/043.jpg` Xavier Tolsa: https://commons.wikimedia.org/wiki/File:Xavier%20Tolsa%20Oberwolfach%202015.jpg
+- `img/044.jpg` Martin Liebeck: https://commons.wikimedia.org/wiki/File:Martin%20W.%20Liebeck%20Oberwolfach%202008.jpg
+- `img/045.jpg` Benjamin Gess: https://commons.wikimedia.org/wiki/File:Benjamin%20Gess%20Oberwolfach%202025.jpg
+- `img/046.jpg` Gustave Choquet: https://commons.wikimedia.org/wiki/File:Gustave%20Choquet.jpg
+- `img/047.jpg` Ian Wanless: https://commons.wikimedia.org/wiki/File:IanWanless.jpg
+- `img/048.jpg` Hans Jürgen Prömel: https://commons.wikimedia.org/wiki/File:Hans%20J%C3%BCrgen%20Pr%C3%B6mel%202012.jpg
+- `img/049.jpg` Wilhelm Maak: https://commons.wikimedia.org/wiki/File:Wilhelm%20Maak.jpg
+- `img/050.jpg` Emmanuel Ullmo: https://commons.wikimedia.org/wiki/File:Emmanuel%20Ullmo.jpg
+- `img/051.jpg` Andrzej Wieczorek: https://commons.wikimedia.org/wiki/File:Andrzej%20Wieczorek.jpg
+- `img/052.jpg` Michael Kapovich: https://commons.wikimedia.org/wiki/File:Kapovich%20misha.jpg
+- `img/053.jpg` Werner Fenchel: https://commons.wikimedia.org/wiki/File:Werner%20Fenchel.jpeg
+- `img/054.jpg` Peter Scholze: https://commons.wikimedia.org/wiki/File:Peter%20Scholze%20%28cropped%29.jpg
+- `img/055.jpg` Efim Zelmanov: https://commons.wikimedia.org/wiki/File:EfimIZelmanov.jpg
+- `img/056.jpg` Alexander Givental: https://commons.wikimedia.org/wiki/File:Alexander%20Givental.jpg
+- `img/057.jpg` Carol S. Wood: https://commons.wikimedia.org/wiki/File:Carol%20Wood%202017.jpg
+- `img/058.jpg` Vasily Fomichev: https://commons.wikimedia.org/wiki/File:%D0%A4%D0%BE%D0%BC%D0%B8%D1%87%D1%91%D0%B2%20%D0%92%D0%B0%D1%81%D0%B8%D0%BB%D0%B8%D0%B9%20%D0%92%D0%BB%D0%B0%D0%B4%D0%B8%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B8%D1%87.jpg
+- `img/059.jpg` Guy David: https://commons.wikimedia.org/wiki/File:Guy%20David%20Berkeley%202014.jpg
+- `img/060.jpg` Shmuel Agmon: https://commons.wikimedia.org/wiki/File:Shmuel%20Agmon.jpeg
+- `img/061.jpg` Charles-Albert Lehalle: https://commons.wikimedia.org/wiki/File:Charles-Albert%20Lehalle.jpg
+- `img/062.jpg` Andreas Blass: https://commons.wikimedia.org/wiki/File:AndreasBlass.jpg
+- `img/063.jpg` Guy Henniart: https://commons.wikimedia.org/wiki/File:Guy%20Henniart%20%282006%29.jpg
+- `img/064.jpg` Ray Kunze: https://commons.wikimedia.org/wiki/File:Kunze%20ray.jpg
+- `img/065.jpg` Georgios C. Papanicolaou: https://commons.wikimedia.org/wiki/File:George%20Papanicolaou.jpg
+- `img/066.jpg` David B. A. Epstein: https://commons.wikimedia.org/wiki/File:David%20Epstein%202009.jpg
+- `img/067.jpg` Alain Chenciner: https://commons.wikimedia.org/wiki/File:Chenciner%20alain.jpg
+- `img/068.jpg` Raphaël Krikorian: https://commons.wikimedia.org/wiki/File:Rapha%C3%ABl%20Krikorian%20MFO.jpg
+- `img/069.jpg` François Ledrappier: https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois%20Ledrappier%2C%20July%202018.jpg
+- `img/070.jpg` Giovanni Alberti: https://commons.wikimedia.org/wiki/File:Giovanni%20Alberti.jpg
+- `img/071.jpg` Per Bjørnstad: https://commons.wikimedia.org/wiki/File:Per%20Bjornstad.JPG
+- `img/072.jpg` Q131824719: https://commons.wikimedia.org/wiki/File:Csm%200098784001.094468a%207026c36f57.jpg
+- `img/073.jpg` Karl Heinz Borgwardt: https://commons.wikimedia.org/wiki/File:Borgwardt%20karl%20heinz.jpg
+- `img/074.jpg` Sergey Amelkin: https://commons.wikimedia.org/wiki/File:P-amelkin-sa-8906.jpg
+- `img/075.jpg` S. G. Dani: https://commons.wikimedia.org/wiki/File:Shrikrishna%20Dani.jpeg
+- `img/076.jpg` Jun Sasaki: https://commons.wikimedia.org/wiki/File:Sasakij.jpg
+- `img/077.jpg` Cristiano Ciuti: https://commons.wikimedia.org/wiki/File:Photo%20Ciuti%20MPQ%20Seine.jpg
+- `img/078.jpg` Sushanta Kumar Dattagupta: https://commons.wikimedia.org/wiki/File:Professor%20Sushanta%20Dattagupta%20in%202016.jpg
+- `img/079.jpg` Jeroen van Dongen: https://commons.wikimedia.org/wiki/File:Publieke%20Domeindag%202026%20%28187%29%20%2855143346136%29.jpg
+- `img/080.jpg` Christine Silberhorn: https://commons.wikimedia.org/wiki/File:2025-11-24%20Gesellschaft%20von%20Freunden%20der%20TU%20Berlin%20Technologieforum%202025%20Quantentechnologie%20Christine%20Silberhorn%20Diskussion.jpg
+- `img/081.jpg` Walter Oelert: https://commons.wikimedia.org/wiki/File:WalterOelert%20%28cropped%29.JPG
+- `img/082.jpg` Evelina Domashevskaya: https://commons.wikimedia.org/wiki/File:Domashevskaya%20EP.JPG
+- `img/083.jpg` Robert Blinc: https://commons.wikimedia.org/wiki/File:Robert%20Blinc.png
+- `img/084.jpg` Vladimir Iosifovich Petviashvili: https://commons.wikimedia.org/wiki/File:Vladimir%20Petviashvili.jpg
+- `img/085.jpg` Inger-Lena Hultberg: https://commons.wikimedia.org/wiki/File:Inger-lena-hultberg.jpg
+- `img/086.jpg` A. K. Jonscher: https://commons.wikimedia.org/wiki/File:Andrew%20Jonscher.jpg
+- `img/087.jpg` Robert Brandenberger: https://commons.wikimedia.org/wiki/File:RobertBrandenberger1987.jpg
+- `img/088.jpg` Ambrogio Fasoli: https://commons.wikimedia.org/wiki/File:EPFL%20Ambrogio%20Fasoli%202005.jpg
+- `img/089.jpg` Teresa Rząca-Urban: https://commons.wikimedia.org/wiki/File:Teresa%20Rz%C4%85ca-Urban%20%281%29.jpg
+- `img/090.jpg` Constantino Tsallis: https://commons.wikimedia.org/wiki/File:Constantino%20Tsallis%20February%202010.jpg
+- `img/091.jpg` J. Virginia Lincoln: https://commons.wikimedia.org/wiki/File:JVirginiaLincoln1976.png
+- `img/092.jpg` Lawrence H. Johnston: https://commons.wikimedia.org/wiki/File:Lawrence%20Johnston%20on%20Tinian%20%28cropped%29.jpg
+- `img/093.jpg` Paul H. Carr: https://commons.wikimedia.org/wiki/File:Paul%20H.%20Carr%20Photo.jpg
+- `img/094.jpg` Vasyl Ilchenko: https://commons.wikimedia.org/wiki/File:%D0%86%D0%BB%D1%8C%D1%87%D0%B5%D0%BD%D0%BA%D0%BE%20%D0%92%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%20%D0%92%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%D0%BE%D0%B2%D0%B8%D1%87.jpg
+- `img/095.jpg` Stephen Shenker: https://commons.wikimedia.org/wiki/File:SteveShenkerStanford2009.jpg
+- `img/096.jpg` Gustavo Esteban Romero: https://commons.wikimedia.org/wiki/File:Dr.%20Gustavo%20Romero.jpg
+- `img/097.jpg` Parviz H. Ansari: https://commons.wikimedia.org/wiki/File:Parviz%20Ansari%20photo.jpg
+- `img/098.jpg` Mathias Fink: https://commons.wikimedia.org/wiki/File:Villeneuve-d%27Ascq%20-%20IEMN%20-%20Mathias%20Fink%20-%202.jpg
+- `img/099.jpg` Leszek Łukaszuk: https://commons.wikimedia.org/wiki/File:Leszek%20%C5%81ukaszuk.jpg
+- `img/100.jpg` Lutz Feld: https://commons.wikimedia.org/wiki/File:Lutz%20Feld.jpg
+- `img/101.jpg` Valentin Gapontsev: https://commons.wikimedia.org/wiki/File:Gapontsev.png
+- `img/102.jpg` Luciano Maiani: https://commons.wikimedia.org/wiki/File:Luciano%20Maiani%201996.jpg
+- `img/103.jpg` James L. Tuck: https://commons.wikimedia.org/wiki/File:James%20Leslie%20Tuck%2C%20Los%20Alamos%20Laboratory%20ID%20badge.jpg
+- `img/104.jpg` Stuart Parkin: https://commons.wikimedia.org/wiki/File:Stuart%20Parkin%202023%202.jpg
+- `img/105.jpg` Karsten Danzmann: https://commons.wikimedia.org/wiki/File:Karsten%20Danzmann%20Wissenschaftspreis%202016%20Halbprofil.jpg
+- `img/106.jpg` Einar Stenij: https://commons.wikimedia.org/wiki/File:Einar%20Stenij.jpg
+- `img/107.jpg` Eckart Marsch: https://commons.wikimedia.org/wiki/File:Eckart%20Marsch%20Friedrichstadt%20Juli%202018.tif
+- `img/108.jpg` Alejandro Frank: https://commons.wikimedia.org/wiki/File:Doctor%20Alejandro%20Frank.jpg
+- `img/109.jpg` Marla Dowell: https://commons.wikimedia.org/wiki/File:Marla%20L.%20Dowell%20at%20NIST%20%28cropped%29.jpg
+- `img/110.jpg` A. R. Frank Wazzan: https://commons.wikimedia.org/wiki/File:Frank%20Wazzan%2C%20Ph.D..jpg
+- `img/111.jpg` Yasunobu Nakamura: https://commons.wikimedia.org/wiki/File:Yasunobu%20Nakamura%20cropped%20Yasunobu%20Nakamura%20202303.jpg
+- `img/112.jpg` Ulrich Hofmann: https://commons.wikimedia.org/wiki/File:Hofmann%2C%20Ulrich%20%28Physiker%29.jpg
+- `img/113.jpg` Luc Blanchet: https://commons.wikimedia.org/wiki/File:Luc%20Blanchet.png
+- `img/114.jpg` Hiranmay Sengupta: https://commons.wikimedia.org/wiki/File:H.M.%20SEN%20GUPTA.jpg
+- `img/115.jpg` Lan Jen Chu: https://commons.wikimedia.org/wiki/File:Portrait%20of%20Lan%20Jen%20Chu%2C%20c.%201952.jpg
+- `img/116.jpg` Wang Yening: https://commons.wikimedia.org/wiki/File:Wang%20Yening.jpg
+- `img/117.jpg` Marc Henneaux: https://commons.wikimedia.org/wiki/File:Henneaux11.jpeg
+- `img/118.jpg` Philip H. Bucksbaum: https://commons.wikimedia.org/wiki/File:PHBucksbaum.Feb07.jpg
+- `img/119.jpg` Hélène Perrin: https://commons.wikimedia.org/wiki/File:H%C3%A9l%C3%A8ne%20Perrin%20Versailles.jpg
+- `img/120.jpg` Taner Edis: https://commons.wikimedia.org/wiki/File:Taner%20Edis%20at%20TAM13%207-17-15.JPG
+- `img/121.jpg` Manuel Cardona Castro: https://commons.wikimedia.org/wiki/File:Manuel%20Cardona.jpg
+- `img/122.jpg` Sun Kee Kim: https://commons.wikimedia.org/wiki/File:Sun%20Kee%20Kim.jpg
+- `img/123.jpg` Emilio Lora-Tamayo: https://commons.wikimedia.org/wiki/File:Emilio%20Lora-Tamayo%202014%20%28cropped%29.jpg
+- `img/124.jpg` Donald D. Clayton: https://commons.wikimedia.org/wiki/File:Donald%20D%20Clayton.jpg
+- `img/125.jpg` Chih-Kung Jen: https://commons.wikimedia.org/wiki/File:Photograph%20of%20Chih-Kung%20Jen%20from%20the%20Press%20Communications%20Office%20of%20the%20Applied%20Physics%20Laboratory%2C%20February%201962%20%28JScholarship%29.jpg
+- `img/126.jpg` Hosur Narasimhaiah: https://commons.wikimedia.org/wiki/File:H-Narasimhaiah.jpg
+- `img/127.jpg` José Fernando Ferreira Mendes: https://commons.wikimedia.org/wiki/File:JFFMendes.JPG
+- `img/128.jpg` Nikola Sabotinov: https://commons.wikimedia.org/wiki/File:Nikola-Sabotinov-20101110.jpg
+- `img/129.jpg` Feodor Vilesov: https://commons.wikimedia.org/wiki/File:Vilesov%20in%201977.jpg
+- `img/130.jpg` Jorge Sabato: https://commons.wikimedia.org/wiki/File:Jorge%20alberto%20sabato.JPG
+- `img/131.jpg` Ille Gebeshuber: https://commons.wikimedia.org/wiki/File:Ille%20C.%20Gebeshuber.jpg
+- `img/132.jpg` Richard Blaikie: https://commons.wikimedia.org/wiki/File:Richard%20Blaikie%202023%20%28cropped%29.jpg
+- `img/133.jpg` Iwo Białynicki-Birula: https://commons.wikimedia.org/wiki/File:Iwo%20Bia%C5%82ynicki-Birula.jpg
+- `img/134.jpg` Władysław Bogusz: https://commons.wikimedia.org/wiki/File:Bogusz%20Wladyslaw.jpg
+- `img/135.jpg` Stefan Karol Estreicher: https://commons.wikimedia.org/wiki/File:Stefan%20Karol%20Estreicher.jpg
+- `img/136.jpg` Karl-Heinz Althoff: https://commons.wikimedia.org/wiki/File:201607bonn%20nr%2009.jpg
+- `img/137.jpg` Rod Boswell: https://commons.wikimedia.org/wiki/File:Roderick%20William%20Boswell%20%28born%201932%29%20in%20the%20video%20%27Behind%20the%20mission%20to%20get%20a%20new%20satellite%20thruster%20to%20space%27.png
+- `img/138.jpg` Jan de Boer: https://commons.wikimedia.org/wiki/File:Jan%20de%20Boer.jpg
+- `img/139.jpg` Q12158594: https://commons.wikimedia.org/wiki/File:%D0%A1%D1%83%D0%BA%D0%B0%D1%87%20%D0%93%D0%B5%D0%BE%D1%80%D0%B3%D1%96%D0%B9%20%D0%9E%D0%BB%D0%B5%D0%BA%D1%81%D1%96%D0%B9%D0%BE%D0%B2%D0%B8%D1%87.jpg
+- `img/140.jpg` Gersh Grodzovsky: https://commons.wikimedia.org/wiki/File:%D0%93%D1%80%D0%BE%D0%B4%D0%B7%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9%20%D0%93%D0%B5%D1%80%D1%88%20%D0%9B%D0%B5%D0%B9%D0%B1%D0%BE%D0%B2%D0%B8%D1%87%2C%20%D0%BD%D0%B0%D1%87%D0%B0%D0%BB%D1%8C%D0%BD%D0%B8%D0%BA%20%D0%9D%D0%98%D0%9E-20%20%D0%A6%D0%90%D0%93%D0%98.jpg
+- `img/141.jpg` Bentsion Vul: https://commons.wikimedia.org/wiki/File:Vul%20B.M.jpg
+- `img/142.jpg` Andrzej Białas: https://commons.wikimedia.org/wiki/File:Andrzej%20Bia%C5%82as%20w%202015%20cropped.jpg
+- `img/143.jpg` Lene V. Hau: https://commons.wikimedia.org/wiki/File:Professor%20Lene%20Hau%20%28cropped%29.jpg
+- `img/144.jpg` Alexander Kusenko: https://commons.wikimedia.org/wiki/File:Alexander%20Kusenko.jpg
+- `img/145.jpg` Jan Sobczyk: https://commons.wikimedia.org/wiki/File:Prof.J.Sobczyk.png
+- `img/146.jpg` Claudio Pellegrini: https://commons.wikimedia.org/wiki/File:Claudio-Pellegrini-2015.jpg
+- `img/147.jpg` Charles Shank: https://commons.wikimedia.org/wiki/File:Charles%20V.%20Shank%20%282015%29%20%28cropped%29.jpg
+- `img/148.jpg` Hirosi Ooguri: https://commons.wikimedia.org/wiki/File:Hirosi%20Ooguri.JPG
+- `img/149.jpg` Sergio Doplicher: https://commons.wikimedia.org/wiki/File:Doplicher%20sergio.jpg
+- `img/150.jpg` Pablo Jarillo-Herrero: https://commons.wikimedia.org/wiki/File:Pablo%20Jarillo-Herrero%20%28born%201976%29%20giving%20the%202024%20Segr%C3%A9%20Lecture%20Magic%20Angle%20Graphene.png
+- `img/151.jpg` Michael Komorek: https://commons.wikimedia.org/wiki/File:Michael%20Komorek%20%282017%29.jpg
+- `img/152.jpg` Jenny Nelson: https://commons.wikimedia.org/wiki/File:Professor%20Jenny%20Nelson%20FRS.jpg
+- `img/153.jpg` Angelo Vulpiani: https://commons.wikimedia.org/wiki/File:Angelo%20Vulpiani-2019.jpg
+- `img/154.jpg` Kenneth Case: https://commons.wikimedia.org/wiki/File:Kenneth%20Myron%20Case%2C%20December%201965.jpg
+- `img/155.jpg` Janusz Morkowski: https://commons.wikimedia.org/wiki/File:J.%20A.%20Morkowski%2024.07.2018%20jpg..jpg
