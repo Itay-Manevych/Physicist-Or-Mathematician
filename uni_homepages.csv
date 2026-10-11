@@ -1,0 +1,108 @@
+university,label,url
+Princeton,mathematician,https://www.math.princeton.edu/
+Princeton,physicist,https://phy.princeton.edu/
+MIT,mathematician,https://math.mit.edu/
+MIT,physicist,https://physics.mit.edu/
+Caltech,mathematician,https://pma.caltech.edu/research-and-academics/mathematics
+Caltech,physicist,https://pma.caltech.edu/research-and-academics/physics
+Stanford,mathematician,https://mathematics.stanford.edu/
+Berkeley,mathematician,https://math.berkeley.edu/
+Berkeley,physicist,https://physics.berkeley.edu/
+Chicago,mathematician,https://mathematics.uchicago.edu/
+Chicago,physicist,https://physics.uchicago.edu/
+UCLA,mathematician,https://www.math.ucla.edu/
+Johns Hopkins,mathematician,https://mathematics.jhu.edu/
+Johns Hopkins,physicist,https://physics-astronomy.jhu.edu/
+Penn State,mathematician,https://science.psu.edu/math
+Penn State,physicist,https://science.psu.edu/physics
+Ohio State,mathematician,https://math.osu.edu/
+Ohio State,physicist,https://physics.osu.edu/
+Minnesota,mathematician,https://cse.umn.edu/math
+Minnesota,physicist,https://cse.umn.edu/physics
+Maryland,mathematician,https://www.math.umd.edu/
+Maryland,physicist,https://umdphysics.umd.edu/
+UC San Diego,mathematician,https://math.ucsd.edu/
+UC San Diego,physicist,https://physics.ucsd.edu/
+UC Santa Barbara,mathematician,https://www.math.ucsb.edu/
+UC Santa Barbara,physicist,https://www.physics.ucsb.edu/
+UC Davis,mathematician,https://www.math.ucdavis.edu/
+UC Davis,physicist,https://physics.ucdavis.edu/
+UC Irvine,mathematician,https://www.math.uci.edu/
+UC Irvine,physicist,https://www.physics.uci.edu/
+Texas,mathematician,https://www.ma.utexas.edu/
+Texas,physicist,https://physics.utexas.edu/
+Rice,mathematician,https://math.rice.edu/
+Rice,physicist,https://physics.rice.edu/
+Georgia Tech,mathematician,https://math.gatech.edu/
+Georgia Tech,physicist,https://physics.gatech.edu/
+Purdue,mathematician,https://www.math.purdue.edu/
+Purdue,physicist,https://www.physics.purdue.edu/
+Indiana,mathematician,https://math.indiana.edu/
+Indiana,physicist,https://physics.indiana.edu/
+Arizona,mathematician,https://www.math.arizona.edu/
+Arizona,physicist,https://www.physics.arizona.edu/
+Colorado,mathematician,https://www.colorado.edu/math/
+Colorado,physicist,https://www.colorado.edu/physics/
+Utah,mathematician,https://www.math.utah.edu/
+Utah,physicist,https://www.physics.utah.edu/
+Stony Brook,mathematician,https://www.math.stonybrook.edu/
+Stony Brook,physicist,https://www.physics.stonybrook.edu/
+Boston University,mathematician,https://www.bu.edu/math/
+Boston University,physicist,https://www.bu.edu/physics/
+Notre Dame,mathematician,https://math.nd.edu/
+Notre Dame,physicist,https://physics.nd.edu/
+Vanderbilt,mathematician,https://as.vanderbilt.edu/math/
+Vanderbilt,physicist,https://as.vanderbilt.edu/physics-astronomy/
+Toronto,mathematician,https://www.math.toronto.edu/
+Toronto,physicist,https://www.physics.utoronto.ca/
+McGill,mathematician,https://www.mcgill.ca/mathstat/
+McGill,physicist,https://www.mcgill.ca/physics/
+UBC,mathematician,https://www.math.ubc.ca/
+UBC,physicist,https://phas.ubc.ca/
+Waterloo,mathematician,https://uwaterloo.ca/pure-mathematics/
+Waterloo,physicist,https://uwaterloo.ca/physics-astronomy/
+Oxford,mathematician,https://www.maths.ox.ac.uk/
+Oxford,physicist,https://www.physics.ox.ac.uk/
+Cambridge,mathematician,https://www.dpmms.cam.ac.uk/
+Cambridge,physicist,https://www.phy.cam.ac.uk/
+UCL,mathematician,https://www.ucl.ac.uk/mathematics-physical-sciences/mathematics
+UCL,physicist,https://www.ucl.ac.uk/physics-astronomy/
+Bristol,mathematician,https://www.bristol.ac.uk/maths/
+Bristol,physicist,https://www.bristol.ac.uk/physics/
+Manchester,mathematician,https://www.maths.manchester.ac.uk/
+Manchester,physicist,https://www.physics.manchester.ac.uk/
+Durham,mathematician,https://www.durham.ac.uk/departments/academic/mathematical-sciences/
+Durham,physicist,https://www.durham.ac.uk/departments/academic/physics/
+ETH Zurich,mathematician,https://math.ethz.ch/
+ETH Zurich,physicist,https://phys.ethz.ch/
+Zurich,mathematician,https://www.math.uzh.ch/
+Zurich,physicist,https://www.physik.uzh.ch/
+EPFL,mathematician,https://www.epfl.ch/schools/sb/research/math/
+EPFL,physicist,https://www.epfl.ch/schools/sb/research/iphys/
+Bonn,mathematician,https://www.math.uni-bonn.de/
+Bonn,physicist,https://www.physik-astro.uni-bonn.de/
+Heidelberg,mathematician,https://www.mathinf.uni-heidelberg.de/
+Heidelberg,physicist,https://www.physik.uni-heidelberg.de/
+LMU Munich,mathematician,https://www.mathematik.uni-muenchen.de/
+LMU Munich,physicist,https://www.physik.uni-muenchen.de/
+Copenhagen,mathematician,https://www.math.ku.dk/
+Copenhagen,physicist,https://www.nbi.ku.dk/
+Leiden,mathematician,https://www.universiteitleiden.nl/en/science/mathematics
+Leiden,physicist,https://www.universiteitleiden.nl/en/science/physics
+KU Leuven,mathematician,https://wis.kuleuven.be/
+KU Leuven,physicist,https://fys.kuleuven.be/
+Sorbonne,mathematician,https://www.imj-prg.fr/
+Uppsala,mathematician,https://www.uu.se/en/department/mathematics
+Uppsala,physicist,https://www.uu.se/en/department/physics-and-astronomy
+Melbourne,mathematician,https://ms.unimelb.edu.au/
+Melbourne,physicist,https://physics.unimelb.edu.au/
+Sydney,mathematician,https://www.maths.usyd.edu.au/
+Sydney,physicist,https://www.sydney.edu.au/science/schools/school-of-physics.html
+ANU,mathematician,https://maths.anu.edu.au/
+ANU,physicist,https://physics.anu.edu.au/
+Tokyo,mathematician,https://www.ms.u-tokyo.ac.jp/index_e.html
+Tokyo,physicist,https://www.phys.s.u-tokyo.ac.jp/en/
+NUS,mathematician,https://www.math.nus.edu.sg/
+NUS,physicist,https://www.physics.nus.edu.sg/
+HKUST,mathematician,https://www.math.hkust.edu.hk/
+HKUST,physicist,https://physics.hkust.edu.hk/

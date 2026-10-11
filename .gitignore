@@ -1,0 +1,21 @@
+# environment
+.venv/
+__pycache__/
+*.pyc
+
+# data: photos of real people (Commons images need per-file attribution; university photos stay local)
+data/
+game/img/
+game/data.json
+
+# large / generated artifacts
+*.pt
+*.npy
+*.log
+*_predictions*.csv
+both_scores*.csv
+uni_probe.csv
+
+# local tooling
+.claude/
+*.joblib

@@ -1,0 +1,56 @@
+{
+  "face shape only (FaceNet)": {
+    "cv_auc": 0.609,
+    "cv_acc": 0.584,
+    "test_auc": 0.603,
+    "test_acc": 0.582,
+    "C": 0.3
+  },
+  "face (3 CLIP models)": {
+    "cv_auc": 0.768,
+    "cv_acc": 0.688,
+    "test_auc": 0.77,
+    "test_acc": 0.705,
+    "C": 3
+  },
+  "upper body": {
+    "cv_auc": 0.762,
+    "cv_acc": 0.691,
+    "test_auc": 0.762,
+    "test_acc": 0.697,
+    "C": 3
+  },
+  "whole photo": {
+    "cv_auc": 0.776,
+    "cv_acc": 0.699,
+    "test_auc": 0.772,
+    "test_acc": 0.708,
+    "C": 3
+  },
+  "face + whole photo": {
+    "cv_auc": 0.78,
+    "cv_acc": 0.702,
+    "test_auc": 0.777,
+    "test_acc": 0.705,
+    "C": 1
+  },
+  "face + upper + whole photo": {
+    "cv_auc": 0.779,
+    "cv_acc": 0.701,
+    "test_auc": 0.779,
+    "test_acc": 0.711,
+    "C": 1
+  },
+  "best": "face + whole photo",
+  "selective_accuracy": {
+    "top 100%": 0.702,
+    "top 50%": 0.829,
+    "top 25%": 0.927,
+    "top 10%": 0.983
+  },
+  "style_meta_auc": 0.691,
+  "academic_subset": {
+    "n": 4254,
+    "cv_auc": 0.796
+  }
+}
