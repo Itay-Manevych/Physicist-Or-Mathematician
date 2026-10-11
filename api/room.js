@@ -5,6 +5,7 @@
 // POST /api/room?code=C {action:"answer", token, round, g}   -> state
 // POST /api/room?code=C {action:"next", token, round}        -> state   (ready for the round after `round`)
 // POST /api/room?code=C {action:"rematch", token}            -> { code, token }   new room, opponent invited
+// POST /api/room?code=C {action:"leave", token}              -> state   (quit mid-duel; the other player is told)
 // GET  /api/room?code=C&token=T                              -> state
 //
 // Round r starts at s{r}; answers lock at s{r} + ANSWER_MS (a missing answer counts as a miss).
@@ -56,6 +57,7 @@ function view(c, { m, a }, role, now) {
   }
   return {
     code: c, you: role, now, fighters, answerMs: ANSWER_MS, rematch: m.rematch || null,
+    left: { host: Boolean(m.leftHost), guest: Boolean(m.leftGuest) },
     players: {
       host: { name: m.host, seen: Number(m.seenHost) || 0 },
       guest: m.guest ? { name: m.guest, seen: Number(m.seenGuest) || 0 } : null,
@@ -129,6 +131,8 @@ async function act(req, c) {
       ["HMGET", K.ans(c), `n${r}:host`, `n${r}:guest`],
     ]);
     if (ready[0] && ready[1]) await G.redis.pipeline([["HSETNX", K.ans(c), `s${r + 1}`, now + NEXT_DELAY_MS]]);
+  } else if (b.action === "leave") {
+    await G.redis.pipeline([["HSET", K.meta(c), role === "host" ? "leftHost" : "leftGuest", now]]);
   } else if (b.action === "rematch") {
     if (m.rematch) return [200, { code: m.rematch, token: null }]; // the other player already asked: join theirs
     const name = role === "host" ? m.host : m.guest;

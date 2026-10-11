@@ -194,3 +194,9 @@ footer .links { display: flex; gap: 24px; flex-wrap: wrap; }
 .timer { display: block; height: 10px; margin: 14px auto 0; max-width: 420px; border: 3px solid var(--ink); background: var(--white); }
 .timer > div { height: 100%; background: var(--yellow); transition: width 0.25s linear; }
 .intro.hold { animation: none; opacity: 1; }
+.quit-bar { padding-top: 14px; }
+.quit { font-family: var(--pixel); font-size: 10px; padding: 8px 10px; color: var(--white); background: transparent; border: 3px solid var(--white); }
+.quit:hover { background: rgba(26,16,51,0.25); }
+.quit.sure { color: var(--ink); background: var(--yellow); border-color: var(--ink); }
+.hud { padding-top: 12px; }
+@media (max-width: 640px) { .quit-bar { padding-top: 10px; } .quit { font-size: 9px; padding: 6px 8px; } }

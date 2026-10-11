@@ -25,9 +25,12 @@
     };
   }
 
+  // Daily #1 was played on the original 156-fighter pool (ids 0-155); later dailies use every fighter.
+  const FIRST_POOL = { lastDay: "2026-10-11", maxId: 155 };
+
   // ids of the day's fighters, from the full pool of fighter ids
   function fighters(day, ids, rounds = 10) {
-    const pool = [...ids].sort((a, b) => a - b);
+    const pool = [...ids].filter((id) => day > FIRST_POOL.lastDay || id <= FIRST_POOL.maxId).sort((a, b) => a - b);
     const rand = rng("pom-daily-" + day);
     for (let i = pool.length - 1; i > 0; i--) {
       const j = Math.floor(rand() * (i + 1));

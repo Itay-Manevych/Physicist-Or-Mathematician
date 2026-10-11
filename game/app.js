@@ -93,7 +93,10 @@ async function renderTitle() {
   show("title");
   $("oneUp").textContent = String(store.get("pom-last", 0) * 100).padStart(6, "0");
   const d = dailyDone(), n = Daily.number(today()), st = streak();
-  $("dailyBtn").innerHTML = `DAILY #${n} ${d ? `✓ ${d.you}/${ROUNDS}` : '<span class="badge">NEW</span>'}${st > 1 ? ` 🔥${st}` : ""}`;
+  const prog = store.get("pom-daily-progress", null);
+  const started = prog && prog.day === today() && prog.log.length;
+  const badge = d ? `✓ ${d.you}/${ROUNDS}` : started ? `<span class="badge">RESUME ${started}/${ROUNDS}</span>` : '<span class="badge">NEW</span>';
+  $("dailyBtn").innerHTML = `DAILY #${n} ${badge}${st > 1 ? ` 🔥${st}` : ""}`;
   try { board = await api(`/api/leaderboard?day=${today()}`); } catch { board = null; }
   const top = board ? board.top : store.get("pom-scores-v2", []).slice(0, 10);
   const best = top[0];
@@ -133,6 +136,16 @@ function startDaily() {
   Sfx.start();
   const day = today();
   newGame("daily", Daily.fighters(day, pool.map((p) => p.id), ROUNDS).map((id) => byId.get(id)), MACHINE, { day });
+  // quitting mid-daily doesn't give a fresh start: earlier answers are kept and you resume where you left off
+  const progress = store.get("pom-daily-progress", null);
+  if (progress && progress.day === day) {
+    progress.log.forEach((x, i) => {
+      const p = game.fighters[i], opp = aiPick(p);
+      if (p && p.id === x.id) game.log[i] = { p, guess: x.g, oppPick: opp, youRight: x.g === p.answer, oppRight: opp === p.answer };
+    });
+    game.i = game.log.filter(Boolean).length;
+    if (game.i >= ROUNDS) return renderResults();
+  }
   show("fight");
   renderRound();
 }
@@ -195,10 +208,14 @@ function updateHud() {
 
 function guess(f) {
   if (!game || $("fight").hidden || busy) return;
+  resetQuit();
   if (game.mode === "duel") return duelAnswer(f);
   if (game.log[game.i]) return;
   const p = game.fighters[game.i];
   showReveal(game.i, f, aiPick(p));
+  if (game.mode === "daily") {
+    store.set("pom-daily-progress", { day: game.day, log: game.log.map((r) => ({ id: r.p.id, g: r.guess })) });
+  }
 }
 
 /** Reveal round i: record it, play hit effects, fill the reveal panel. myPick/oppPick may be null (ran out of time). */
@@ -279,6 +296,7 @@ function renderResults() {
     const hist = store.get("pom-daily-history", {});
     hist[game.day] = { you: t.you, ai: t.ai };
     store.set("pom-daily-history", hist);
+    store.set("pom-daily-progress", null);
   }
 
   $("rKicker").textContent = { win: `${opp} · K.O.`, lose: "YOU · K.O.", draw: "DOUBLE K.O." }[out];
@@ -546,6 +564,7 @@ function renderDuel() {
     hudLabels();
   }
   if (game.ended) return checkRematch(s);
+  if (s.left && s.left[opp]) return opponentLeft();
   const r = s.rounds.length - 1;
   if (r < 0) return;
   const round = s.rounds[r];
@@ -629,7 +648,9 @@ async function duelAnswer(f) {
   $(f === "phys" ? "pickPhys" : "pickMath").classList.add("picked");
   $("prompt").textContent = `LOCKED IN. WAITING FOR ${oppName()}…`;
   try {
-    duel.state = await api(`/api/room?code=${duel.code}`, { action: "answer", token: duel.token, round: r, g: f });
+    const state = await api(`/api/room?code=${duel.code}`, { action: "answer", token: duel.token, round: r, g: f });
+    if (duel.code !== state.code) return; // quit while the answer was in flight
+    duel.state = state;
     renderDuel();
   } catch { /* the next poll shows the real state */ }
 }
@@ -651,9 +672,22 @@ async function duelNext() {
   $("nextBtn").disabled = true;
   $("nextBtn").textContent = `WAITING FOR ${oppName()}…`;
   try {
-    duel.state = await api(`/api/room?code=${duel.code}`, { action: "next", token: duel.token, round: r });
+    const state = await api(`/api/room?code=${duel.code}`, { action: "next", token: duel.token, round: r });
+    if (duel.code !== state.code) return;
+    duel.state = state;
     renderDuel();
   } catch {}
+}
+
+function opponentLeft() {
+  clearInterval(duel.poll); clearInterval(duel.tick); clearTimeout(duel.autoNext);
+  if ($("fight").hidden) show("fight");
+  $("intro").hidden = true;
+  $("guessArea").hidden = false;
+  $("revealArea").hidden = true;
+  $("timer").hidden = true;
+  $("pickPhys").disabled = $("pickMath").disabled = true;
+  $("prompt").textContent = `${oppName()} LEFT THE DUEL. PRESS ◀ QUIT TO GO BACK.`;
 }
 
 function checkRematch(s) {
@@ -686,6 +720,34 @@ async function shareInvite() {
   const link = $("lLink").textContent;
   if (await shareNative(`Duel me in Physicist or Mathematician? ${link}`)) return;
   try { await navigator.clipboard.writeText(link); $("lCopy").textContent = "COPIED!"; } catch {}
+}
+
+/* ---------- quitting mid-game ---------- */
+let quitTimer = null;
+function resetQuit() {
+  clearTimeout(quitTimer);
+  $("quitBtn").classList.remove("sure");
+  $("quitBtn").textContent = "◀ QUIT";
+}
+function quit() {
+  const b = $("quitBtn");
+  if (!b.classList.contains("sure")) { // first tap asks for confirmation
+    b.classList.add("sure");
+    b.textContent = "SURE? TAP TO QUIT";
+    clearTimeout(quitTimer);
+    quitTimer = setTimeout(resetQuit, 3000);
+    return;
+  }
+  resetQuit();
+  Sfx.select();
+  if (game && game.mode === "duel") {
+    if (duel.code && !game.ended) api(`/api/room?code=${duel.code}`, { action: "leave", token: duel.token }).catch(() => {});
+    session.set("pom-duel", null);
+  }
+  game = null;
+  busy = false;
+  $("intro").hidden = true;
+  renderTitle();
 }
 
 /* ---------- misc ---------- */
@@ -728,6 +790,7 @@ $("lCancel").onclick = () => { Sfx.select(); renderTitle(); };
 $("pickPhys").onclick = () => guess("phys");
 $("pickMath").onclick = () => guess("math");
 $("nextBtn").onclick = nextRound;
+$("quitBtn").onclick = quit;
 $("shareBtn").onclick = share;
 $("rematchBtn").onclick = rematch;
 $("shareClose").onclick = () => { $("sharePanel").hidden = true; };

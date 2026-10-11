@@ -3,7 +3,6 @@
 Writes game/data.json and game/img/*.jpg (small square portraits around the face).
 """
 import json
-import random
 
 import pandas as pd
 import requests
@@ -85,34 +84,41 @@ def concept_clues(clean, game_rows, train_mask, picks, k=2):
     return out
 
 
-def build(per_class=80, seed=0):
+def build():
+    """Every held-out test person with a clear single-face photo becomes a fighter.
+
+    Incremental: fighters already in game/data.json keep their id and portrait (saved games and dailies refer to
+    ids); new people are appended with new ids. Model scores and clues are refreshed for everyone.
+    """
     test = pd.read_csv(OUTPUTS / "test_predictions.csv")
-    test = test[test.source == "wiki"]
-    clean = pd.read_csv(DATA / "clean.csv")[["qid", "birth_year"]]
-    test = test.merge(clean, on="qid")
-    pool = pd.concat([g.sample(min(per_class, len(g)), random_state=seed) for _, g in test.groupby("label")])
+    test = test[test.source == "wiki"].merge(pd.read_csv(DATA / "clean.csv")[["qid", "birth_year"]], on="qid")
+    test["source_url"] = "https://commons.wikimedia.org/wiki/File:" + test.img.str.rsplit("/", n=1).str[1]
+    old = json.load(open(GAME / "data.json"))["people"] if (GAME / "data.json").exists() else []
+    by_source = {p["source"]: p for p in old}
     (GAME / "img").mkdir(parents=True, exist_ok=True)
-    for old in (GAME / "img").glob("*.jpg"):
-        old.unlink()
-    mtcnn, people = detector(), []
-    info = descriptions(pool.qid.tolist())
-    for row in pool.itertuples():
-        img = open_image(row.file)
-        box = main_face(mtcnn, img, min_prob=0.9)
-        if box is None:
-            continue
-        boxes, probs = mtcnn.detect(img)
-        main_w = box[2] - box[0]
-        if sum(pr > 0.9 and b[2] - b[0] > 0.5 * main_w for b, pr in zip(boxes, probs)) > 1:
-            continue  # someone else is in the photo too: ambiguous who you are guessing
-        k = len(people)
-        portrait(img, box).save(GAME / "img" / f"{k:03d}.jpg", quality=88)
-        file_title = row.img.rsplit("/", 1)[1]
+    info = descriptions(test.qid.tolist())
+    mtcnn, people, next_id = detector(), [], max([p["id"] for p in old], default=-1) + 1
+    for row in test.sort_values("qid").itertuples():
+        kept = by_source.get(row.source_url)
+        if kept:
+            k, img_path = kept["id"], kept["img"]
+        else:
+            img = open_image(row.file)
+            box = main_face(mtcnn, img, min_prob=0.9)
+            if box is None:
+                continue
+            boxes, probs = mtcnn.detect(img)
+            main_w = box[2] - box[0]
+            if sum(pr > 0.9 and b[2] - b[0] > 0.5 * main_w for b, pr in zip(boxes, probs)) > 1:
+                continue  # someone else is in the photo too: ambiguous who you are guessing
+            k, next_id = next_id, next_id + 1
+            img_path = f"img/{k:03d}.jpg"
+            portrait(img, box).save(GAME / img_path, quality=88)
         people.append({
-            "id": k, "qid": row.qid, "img": f"img/{k:03d}.jpg", "name": row.name, "born": int(row.birth_year),
+            "id": k, "qid": row.qid, "img": img_path, "name": row.name, "born": int(row.birth_year),
             "answer": "phys" if row.label == "physicist" else "math", "p": round(float(row.p), 3),
             "bio": info.get(row.qid, {}).get("bio", ""), "wiki": info.get(row.qid, {}).get("wiki", ""),
-            "source": f"https://commons.wikimedia.org/wiki/File:{file_title}",
+            "source": row.source_url,
         })
     # "the machine noticed ..." clues, with concept directions learned on training people only
     clean_all = pd.read_csv(DATA / "clean.csv")
@@ -120,16 +126,14 @@ def build(per_class=80, seed=0):
     train_mask = ~clean_all.qid.map(split).fillna(True).astype(bool).values
     row_of = {q: i for i, q in enumerate(clean_all.qid)}
     picks = ["phys" if p["p"] >= 0.5 else "math" for p in people]
-    clues = concept_clues(clean_all, [row_of[p["qid"]] for p in people], train_mask, picks)
-    for p, c in zip(people, clues):
+    for p, c in zip(people, concept_clues(clean_all, [row_of[p["qid"]] for p in people], train_mask, picks)):
         p["clues"] = c
-        del p["qid"]
-    random.Random(seed).shuffle(people)
-    acc = sum((p["p"] > 0.5) == (p["answer"] == "phys") for p in people) / len(people)
-    json.dump({"model_accuracy": round(acc, 3), "people": people}, open(GAME / "data.json", "w"), indent=1)
+    people.sort(key=lambda p: p["id"])
+    acc = sum((p["p"] >= 0.5) == (p["answer"] == "phys") for p in people) / len(people)
+    json.dump({"model_accuracy": round(acc, 3), "people": people}, open(GAME / "data.json", "w"), indent=0)
     credits = ["# Photo credits", "",
                "Portraits are cropped from freely licensed images on Wikimedia Commons.",
                "Author and license for each photo are on its Commons page.", ""]
-    credits += [f"- `{p['img']}` {p['name']}: {p['source']}" for p in sorted(people, key=lambda p: p["id"])]
+    credits += [f"- `{p['img']}` {p['name']}: {p['source']}" for p in people]
     (GAME / "CREDITS.md").write_text("\n".join(credits) + "\n", encoding="utf-8")
-    print(f"{len(people)} fighters -> game/data.json  (model accuracy on them: {acc:.0%})")
+    print(f"{len(people)} fighters ({len(people) - len(old)} new) -> game/data.json  (model accuracy on them: {acc:.0%})")
