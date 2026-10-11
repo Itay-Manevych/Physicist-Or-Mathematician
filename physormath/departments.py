@@ -66,7 +66,7 @@ def fetch():
     df = df[~df.qid.duplicated(keep=False)]                      # listed under two departments' occupations
     df = df.merge(occupations(df.qid.tolist()), on="qid")
     df = df[[is_strict_for(k, o) for k, o in zip(df.label, df.occupations)]]
-    df = df.groupby("label", group_keys=False).apply(lambda g: g.sample(min(CAP, len(g)), random_state=0))
+    df = df.sample(frac=1, random_state=0).groupby("label").head(CAP)  # up to CAP random people per department
     df["file"] = df.img.map(lambda u: image_path(u, "data/dept/images"))
     s = session()
     df["thumb"] = df.img.map(resolve_thumbs(s, df.img.unique()))
@@ -146,7 +146,7 @@ def game(per_dept=150):
     from .faces import detector, main_face, open_image
     from .game import descriptions, portrait
     test = pd.read_csv(OUT / "test_predictions.csv")
-    pool = test.groupby("dept", group_keys=False).apply(lambda g: g.sample(min(per_dept, len(g)), random_state=0))
+    pool = test.sample(frac=1, random_state=0).groupby("dept").head(per_dept)
     (GAME / "img").mkdir(parents=True, exist_ok=True)
     info = descriptions(pool.qid.tolist())
     mtcnn, people = detector(), []
