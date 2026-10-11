@@ -1,5 +1,5 @@
 // Draws a shareable 1200x630 scorecard image of a finished game.
-async function drawScorecard({ name, you, ai, rounds, outcome, log, url }) {
+async function drawScorecard({ name, you, ai, rounds, outcome, log, url, oppName = "THE MACHINE", subtitle = "" }) {
   try { await Promise.all([document.fonts.load("40px 'Press Start 2P'"), document.fonts.load("40px 'VT323'")]); } catch {}
   const W = 1200, H = 630;
   const c = document.createElement("canvas");
@@ -36,22 +36,23 @@ async function drawScorecard({ name, you, ai, rounds, outcome, log, url }) {
   box(640, 250, 500, 150, C.white);
   text(who, 90, 300, 22, C.ink);
   text(`${you}/${rounds}`, 90, 375, 52, C.purple);
-  text("THE MACHINE", 670, 300, 22, C.ink);
+  text(oppName.slice(0, 12), 670, 300, 22, C.ink);
+  if (subtitle) text(subtitle, W - 60, 128, 18, C.yellow, "right", 3);
   text(`${ai}/${rounds}`, 670, 375, 52, C.purple);
 
   // round-by-round hits
   const sq = 36, gap = 10, x0 = (W - (rounds * sq + (rounds - 1) * gap)) / 2;
   text("YOU", x0 - 20, 468, 14, C.yellow, "right");
-  text("AI", x0 - 20, 518, 14, C.yellow, "right");
+  text(oppName === "THE MACHINE" ? "AI" : oppName.slice(0, 6), x0 - 20, 518, 14, C.yellow, "right");
   log.forEach((r, i) => {
     const x = x0 + i * (sq + gap);
     g.fillStyle = C.ink; g.fillRect(x - 3, 440, sq + 6, sq + 6); g.fillRect(x - 3, 490, sq + 6, sq + 6);
     g.fillStyle = r.youRight ? C.ok : C.bad; g.fillRect(x, 443, sq, sq);
-    g.fillStyle = r.aiRight ? C.ok : C.bad; g.fillRect(x, 493, sq, sq);
+    g.fillStyle = (r.oppRight ?? r.aiRight) ? C.ok : C.bad; g.fillRect(x, 493, sq, sq);
   });
 
   g.fillStyle = C.ink; g.fillRect(0, H - 70, W, 70);
-  text("CAN YOU BEAT THE MACHINE?", 60, H - 25, 16, C.yellow);
+  text(oppName === "THE MACHINE" ? "CAN YOU BEAT THE MACHINE?" : "CHALLENGE YOUR FRIENDS!", 60, H - 25, 16, C.yellow);
   g.font = "34px 'VT323', monospace"; g.textAlign = "right"; g.fillStyle = C.white;
   g.fillText(url.replace(/^https?:\/\//, "").replace(/\/$/, ""), W - 60, H - 25);
 

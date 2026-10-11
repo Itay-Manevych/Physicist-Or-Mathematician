@@ -44,13 +44,19 @@ Sources and data policy: [docs/DATA.md](docs/DATA.md).
 
 ## The game
 
-`game/` is a static retro fighting game: 10 rounds, you vs. the model, on held-out test people only.
-Sound effects, shareable scorecards, and an online leaderboard (`api/leaderboard.js`, a Vercel function).
+`game/` is a retro fighting game on held-out test people only (the model never trained on them):
 
-- **Deploy:** Vercel serves `game/` and `api/` as-is (`vercel.json`, no build step).
-- **Leaderboard storage:** in the Vercel project, add the free **Upstash Redis** integration
-  (Storage → Upstash → connect to this project) and redeploy. Without it the game keeps scores on each device.
-- **Run locally:** `node dev/server.js` → http://localhost:8137 (in-memory leaderboard).
+- **Vs the machine**: 10 rounds against the model; online leaderboard.
+- **Daily challenge**: the same 10 fighters for everyone each day (`game/daily.js`, shared with the API), one try, daily leaderboard, streaks.
+- **Live duel**: create a room, send the link, fight a friend in real time (15 s per round, answers hidden until both lock in, rematch).
+- After each guess the reveal shows what the machine noticed (CLIP concept probe), plus shareable scorecards and an OG link preview.
+
+Running it:
+
+- **Deploy:** Vercel serves `game/` and the functions in `api/` (`vercel.json`, no build step).
+- **Storage:** leaderboards and duel rooms use Upstash Redis — add the free **Upstash** integration in the Vercel project
+  (Storage → Upstash → Redis → connect) and redeploy. Without it, vs-machine scores stay on each device and duels are off.
+- **Local:** `node dev/server.js` → http://localhost:8137 (in-memory store).
 - Photo credits: [game/CREDITS.md](game/CREDITS.md).
 
 ## Layout
@@ -59,7 +65,7 @@ Sound effects, shareable scorecards, and an online leaderboard (`api/leaderboard
 physormath/   the code: one module per step, run as `python -m physormath <step>`
 sources/      seed lists for the university scraper
 game/         retro "human vs. machine" fighting game (static site)
-api/          leaderboard serverless function (Vercel)
+api/          serverless functions: leaderboards, live duel rooms
 dev/          local server for the game + API
 docs/         results and data notes
 data/         photos, crops, embeddings   (not in git)

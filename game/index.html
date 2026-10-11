@@ -4,9 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Physicist or Mathematician?</title>
-<meta name="description" content="Human vs. machine: guess whether each scientist is a physicist or a mathematician before the AI does.">
+<meta name="description" content="Human vs. machine: guess whether each scientist is a physicist or a mathematician before the AI does. Daily challenge, friend duels, leaderboards.">
+<meta property="og:type" content="website">
 <meta property="og:title" content="Physicist or Mathematician? — Human vs. Machine">
-<meta property="og:description" content="10 real scientists. One photo each. Can you out-guess the AI?">
+<meta property="og:description" content="10 real scientists. One photo each. Can you out-guess the AI — or your friends?">
+<meta property="og:image" content="https://physicist-or-mathematician.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://physicist-or-mathematician.vercel.app/og.png">
 <meta name="theme-color" content="#5B3FE0">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%235B3FE0'/%3E%3Crect x='2' y='4' width='5' height='8' fill='%2322D3EE'/%3E%3Crect x='9' y='4' width='5' height='8' fill='%23FF5CB0'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,9 +38,13 @@
       <span style="color: var(--yellow); font-size: 0.5em">— OR —</span><br>
       <span style="color: var(--math)">MATHEMATICIAN</span>
     </h1>
-    <p style="margin: 0; max-width: 660px">Ten real scientists. One photo each. Guess their class before the machine does. Every right answer lands a hit.</p>
+    <p style="margin: 0; max-width: 660px">Ten real scientists. One photo each. Guess their class before your opponent does. Every right answer lands a hit.</p>
     <button type="button" class="btn start blink" id="startBtn">PRESS START</button>
-    <p class="px" style="margin: 0; font-size: 11px; color: var(--lav-3)" id="globalStats">CREDIT 01</p>
+    <div class="mode-row">
+      <button type="button" class="btn white mode" id="dailyBtn">DAILY #1</button>
+      <button type="button" class="btn mode" id="friendBtn" style="background: var(--math)">VS A FRIEND</button>
+    </div>
+    <p class="px" style="margin: 0; font-size: 11px; color: var(--lav-3); line-height: 1.8" id="globalStats">CREDIT 01</p>
   </section>
   <section class="wrap how" id="how">
     <div class="panel how-grid">
@@ -44,8 +54,8 @@
         <div class="move"><span class="dot" style="background: var(--math)">B</span>Call it MATHEMATICIAN</div>
       </div>
       <div class="how-col">
-        <h2>RULES</h2>
-        <p>Both players start at 100 HP. Each right answer hits your opponent for 10. Whoever has more HP after round 10 wins.</p>
+        <h2>MODES</h2>
+        <p><b>PRESS START</b>: you vs. the machine. <b>DAILY</b>: the same 10 for everyone today, one try. <b>VS A FRIEND</b>: send a link and duel live, same 10 scientists, 15 seconds a round.</p>
       </div>
       <div class="how-col">
         <h2>THE MACHINE</h2>
@@ -58,6 +68,10 @@
       <h2>HALL OF FAME</h2>
       <ol class="score-list" id="fameList"><li><span>LOADING…</span></li></ol>
     </div>
+    <div class="panel scores">
+      <h2 id="dailyTitle">DAILY #1</h2>
+      <ol class="score-list" id="dailyList"><li><span>LOADING…</span></li></ol>
+    </div>
   </section>
   <footer>
     <div class="wrap">
@@ -67,6 +81,34 @@
   </footer>
 </div>
 
+<!-- DUEL LOBBY (create a room, or join from a friend's link) -->
+<div id="lobby" class="screen" hidden>
+  <section class="wrap hero">
+    <p class="kicker" id="lKicker">VS A FRIEND · LIVE</p>
+    <h1 class="title" id="lTitle" style="font-size: clamp(24px, 5vw, 56px)">DUEL</h1>
+    <p style="margin: 0; max-width: 660px" id="lText">Create a room, send the link, and fight your friend live on the same 10 scientists.</p>
+    <form class="panel name-form" id="lForm">
+      <label for="lName" class="px">YOUR FIGHTER NAME</label>
+      <div class="name-row">
+        <input id="lName" maxlength="12" autocomplete="nickname" required placeholder="YOUR NAME">
+        <button type="submit" class="btn" id="lGo">CREATE ROOM ▶</button>
+      </div>
+      <span class="form-note" id="lNote"></span>
+    </form>
+    <div class="panel share" id="lInvite" hidden>
+      <span class="px" style="font-size: 13px; line-height: 1.6">SEND THIS LINK TO YOUR FRIEND:</span>
+      <p class="share-text" id="lLink"></p>
+      <div class="share-btns">
+        <button type="button" class="btn small" id="lShare" style="color: var(--white); background: var(--purple)">SEND IT</button>
+        <button type="button" class="btn small white" id="lCopy">COPY LINK</button>
+        <a class="btn small" id="lWa" target="_blank" rel="noopener" style="background: var(--hp-ok)">WHATSAPP</a>
+      </div>
+    </div>
+    <p class="px blink" style="margin: 0; font-size: 13px; color: var(--yellow); line-height: 1.8" id="lStatus"></p>
+    <button type="button" class="btn white mode" id="lCancel">TITLE SCREEN</button>
+  </section>
+</div>
+
 <!-- FIGHT -->
 <div id="fight" class="screen" hidden>
   <header class="wrap hud" aria-label="Health">
@@ -74,9 +116,9 @@
       <div class="hp-head"><span style="color: var(--yellow)">P1 · YOU</span><span><span id="hpYou">100</span> HP</span></div>
       <div class="bar"><div id="barYou"></div></div>
     </div>
-    <div class="round"><span class="round-label">ROUND</span><span class="round-no" id="roundNo">1/10</span></div>
+    <div class="round"><span class="round-label" id="roundLabel">ROUND</span><span class="round-no" id="roundNo">1/10</span></div>
     <div class="hp" id="hpBoxAi">
-      <div class="hp-head"><span><span id="hpAi">100</span> HP</span><span style="color: var(--yellow)">MODEL · P2</span></div>
+      <div class="hp-head"><span><span id="hpAi">100</span> HP</span><span style="color: var(--yellow)" id="oppLabel">MODEL · P2</span></div>
       <div class="bar right"><div id="barAi"></div></div>
     </div>
   </header>
@@ -98,7 +140,8 @@
         <button type="button" class="choice" id="pickPhys"><span class="knob" style="background: var(--phys)">A</span><span class="choice-label" style="color: var(--phys)">PHYSICIST</span></button>
         <button type="button" class="choice" id="pickMath"><span class="knob" style="background: var(--math)">B</span><span class="choice-label" style="color: var(--math)">MATHEMATICIAN</span></button>
       </section>
-      <p class="prompt blink">THE MODEL HAS LOCKED IN. YOUR MOVE.</p>
+      <p class="prompt blink" id="prompt">THE MODEL HAS LOCKED IN. YOUR MOVE.</p>
+      <span class="timer" id="timer" hidden><div id="timerBar"></div></span>
     </div>
 
     <section class="panel reveal" id="revealArea" aria-live="polite" hidden>
@@ -108,8 +151,9 @@
       </div>
       <div class="picks">
         <div><span class="label-sm">P1 YOU</span><br><span id="youLine"></span></div>
-        <div><span class="label-sm">P2 MODEL</span><br><span id="aiLine"></span></div>
+        <div><span class="label-sm" id="oppLineLabel">P2 MODEL</span><br><span id="aiLine"></span></div>
       </div>
+      <div class="clues" id="cluesRow"><span class="label-sm">THE MACHINE NOTICED ▸ </span><span id="clues"></span></div>
       <div class="lore">
         <p><span class="label-sm">LORE ▸ </span><span id="lore"></span></p>
         <button type="button" class="btn" id="nextBtn">NEXT ROUND ▶</button>
@@ -131,14 +175,14 @@
           <div class="bar"><div id="rBarYou"></div></div>
         </div>
         <div class="hp">
-          <div class="hp-head"><span id="rAi"></span><span style="color: var(--yellow)">MODEL</span></div>
+          <div class="hp-head"><span id="rAi"></span><span style="color: var(--yellow)" id="rOppName">MODEL</span></div>
           <div class="bar right"><div id="rBarAi"></div></div>
         </div>
       </div>
       <p style="margin: 0; max-width: 640px" id="rTagline"></p>
 
       <form class="panel name-form" id="nameForm">
-        <label for="playerName" class="px">ENTER YOUR NAME FOR THE LEADERBOARD</label>
+        <label for="playerName" class="px" id="nameLabel">ENTER YOUR NAME FOR THE LEADERBOARD</label>
         <div class="name-row">
           <input id="playerName" maxlength="12" autocomplete="nickname" required placeholder="YOUR NAME">
           <button type="submit" class="btn" id="saveBtn">SAVE ▶</button>
@@ -151,6 +195,7 @@
           <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
           SHARE RESULT
         </button>
+        <button type="button" class="btn" id="rematchBtn" style="background: var(--math)" hidden>REMATCH ⚔</button>
         <button type="button" class="btn white" id="againBtn">PLAY AGAIN</button>
       </div>
 
@@ -178,9 +223,9 @@
       <div class="panel log" id="log"></div>
     </section>
 
-    <section class="bottom">
+    <section class="bottom" id="boardSection">
       <div class="panel scores">
-        <h2>LEADERBOARD</h2>
+        <h2 id="boardTitle">LEADERBOARD</h2>
         <ol class="score-list" id="scoreList"></ol>
         <span class="form-note" id="rankNote"></span>
       </div>
@@ -204,6 +249,7 @@
   </div>
 </div>
 
+<script src="daily.js"></script>
 <script src="sfx.js"></script>
 <script src="scorecard.js"></script>
 <script src="app.js"></script>

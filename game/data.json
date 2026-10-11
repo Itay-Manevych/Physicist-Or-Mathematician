@@ -10,7 +10,11 @@
    "p": 0.076,
    "bio": "British mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Martin_Bridson",
-   "source": "https://commons.wikimedia.org/wiki/File:Martin%20Bridson2.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Martin%20Bridson2.jpg",
+   "clues": [
+    "the great outdoors",
+    "a big smile"
+   ]
   },
   {
    "id": 83,
@@ -21,7 +25,11 @@
    "p": 0.797,
    "bio": "Slovene physicist",
    "wiki": "https://en.wikipedia.org/wiki/Robert_Blinc",
-   "source": "https://commons.wikimedia.org/wiki/File:Robert%20Blinc.png"
+   "source": "https://commons.wikimedia.org/wiki/File:Robert%20Blinc.png",
+   "clues": [
+    "bookshelves",
+    "lab equipment"
+   ]
   },
   {
    "id": 150,
@@ -32,7 +40,11 @@
    "p": 0.696,
    "bio": "Spanish physicist at MIT",
    "wiki": "https://en.wikipedia.org/wiki/Pablo_Jarillo-Herrero",
-   "source": "https://commons.wikimedia.org/wiki/File:Pablo%20Jarillo-Herrero%20%28born%201976%29%20giving%20the%202024%20Segr%C3%A9%20Lecture%20Magic%20Angle%20Graphene.png"
+   "source": "https://commons.wikimedia.org/wiki/File:Pablo%20Jarillo-Herrero%20%28born%201976%29%20giving%20the%202024%20Segr%C3%A9%20Lecture%20Magic%20Angle%20Graphene.png",
+   "clues": [
+    "a lecture pose",
+    "a blackboard"
+   ]
   },
   {
    "id": 112,
@@ -43,7 +55,11 @@
    "p": 0.646,
    "bio": "German physicist",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Hofmann%2C%20Ulrich%20%28Physiker%29.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Hofmann%2C%20Ulrich%20%28Physiker%29.jpg",
+   "clues": [
+    "a suit and tie",
+    "a studio headshot"
+   ]
   },
   {
    "id": 29,
@@ -54,7 +70,10 @@
    "p": 0.645,
    "bio": "American mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Peter_Jones_(mathematician)",
-   "source": "https://commons.wikimedia.org/wiki/File:Peter%20W.%20Jones%202012.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Peter%20W.%20Jones%202012.jpg",
+   "clues": [
+    "a studio headshot"
+   ]
   },
   {
    "id": 75,
@@ -65,7 +84,11 @@
    "p": 0.068,
    "bio": "Indian mathematician",
    "wiki": "https://en.wikipedia.org/wiki/S._G._Dani",
-   "source": "https://commons.wikimedia.org/wiki/File:Shrikrishna%20Dani.jpeg"
+   "source": "https://commons.wikimedia.org/wiki/File:Shrikrishna%20Dani.jpeg",
+   "clues": [
+    "hippie vibes",
+    "a sweater"
+   ]
   },
   {
    "id": 145,
@@ -76,7 +99,10 @@
    "p": 0.549,
    "bio": "Polish physicist",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Prof.J.Sobczyk.png"
+   "source": "https://commons.wikimedia.org/wiki/File:Prof.J.Sobczyk.png",
+   "clues": [
+    "a lecture pose"
+   ]
   },
   {
    "id": 14,
@@ -87,7 +113,11 @@
    "p": 0.093,
    "bio": "American mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Po-Shen_Loh",
-   "source": "https://commons.wikimedia.org/wiki/File:Po-Shen%20Loh.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Po-Shen%20Loh.jpg",
+   "clues": [
+    "the great outdoors",
+    "a big smile"
+   ]
   },
   {
    "id": 141,
@@ -98,7 +128,10 @@
    "p": 0.48,
    "bio": "Soviet physicist (1903\u20131985)",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Vul%20B.M.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Vul%20B.M.jpg",
+   "clues": [
+    "long hair"
+   ]
   },
   {
    "id": 121,
@@ -109,7 +142,11 @@
    "p": 0.565,
    "bio": "Spanish physicist (1934\u20132014)",
    "wiki": "https://en.wikipedia.org/wiki/Manuel_Cardona",
-   "source": "https://commons.wikimedia.org/wiki/File:Manuel%20Cardona.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Manuel%20Cardona.jpg",
+   "clues": [
+    "a suit and tie",
+    "a studio headshot"
+   ]
   },
   {
    "id": 21,
@@ -120,7 +157,11 @@
    "p": 0.179,
    "bio": "British mathematician (1920\u20132005)",
    "wiki": "https://en.wikipedia.org/wiki/Claude_Ambrose_Rogers",
-   "source": "https://commons.wikimedia.org/wiki/File:C%20A%20Rogers.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:C%20A%20Rogers.jpg",
+   "clues": [
+    "hippie vibes",
+    "the great outdoors"
+   ]
   },
   {
    "id": 19,
@@ -131,7 +172,11 @@
    "p": 0.627,
    "bio": "German mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Joachim_Lambek",
-   "source": "https://commons.wikimedia.org/wiki/File:Lambek%20Joachim.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Lambek%20Joachim.jpg",
+   "clues": [
+    "a lecture pose",
+    "lab equipment"
+   ]
   },
   {
    "id": 54,
@@ -142,7 +187,11 @@
    "p": 0.117,
    "bio": "German mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Peter_Scholze",
-   "source": "https://commons.wikimedia.org/wiki/File:Peter%20Scholze%20%28cropped%29.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Peter%20Scholze%20%28cropped%29.jpg",
+   "clues": [
+    "hippie vibes",
+    "a big smile"
+   ]
   },
   {
    "id": 12,
@@ -153,7 +202,11 @@
    "p": 0.022,
    "bio": "Romanian mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Marius_Crainic",
-   "source": "https://commons.wikimedia.org/wiki/File:Marius%20Crainic.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Marius%20Crainic.jpg",
+   "clues": [
+    "the great outdoors",
+    "hippie vibes"
+   ]
   },
   {
    "id": 71,
@@ -164,7 +217,11 @@
    "p": 0.332,
    "bio": "Norwegian mathematician (1916-2002)",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Per%20Bjornstad.JPG"
+   "source": "https://commons.wikimedia.org/wiki/File:Per%20Bjornstad.JPG",
+   "clues": [
+    "hippie vibes",
+    "a big smile"
+   ]
   },
   {
    "id": 115,
@@ -175,7 +232,11 @@
    "p": 0.717,
    "bio": "American engineer",
    "wiki": "https://en.wikipedia.org/wiki/Lan_Jen_Chu",
-   "source": "https://commons.wikimedia.org/wiki/File:Portrait%20of%20Lan%20Jen%20Chu%2C%20c.%201952.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Portrait%20of%20Lan%20Jen%20Chu%2C%20c.%201952.jpg",
+   "clues": [
+    "a suit and tie",
+    "an old black-and-white photo"
+   ]
   },
   {
    "id": 104,
@@ -186,7 +247,11 @@
    "p": 0.961,
    "bio": "British physicist",
    "wiki": "https://en.wikipedia.org/wiki/Stuart_Parkin",
-   "source": "https://commons.wikimedia.org/wiki/File:Stuart%20Parkin%202023%202.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Stuart%20Parkin%202023%202.jpg",
+   "clues": [
+    "lab equipment",
+    "a blackboard"
+   ]
   },
   {
    "id": 39,
@@ -197,7 +262,10 @@
    "p": 0.674,
    "bio": "German mathematician (1927-2010)",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Witting%202004.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Witting%202004.jpg",
+   "clues": [
+    "a suit and tie"
+   ]
   },
   {
    "id": 50,
@@ -208,7 +276,11 @@
    "p": 0.619,
    "bio": "French mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Emmanuel_Ullmo",
-   "source": "https://commons.wikimedia.org/wiki/File:Emmanuel%20Ullmo.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Emmanuel%20Ullmo.jpg",
+   "clues": [
+    "a blackboard",
+    "lab equipment"
+   ]
   },
   {
    "id": 95,
@@ -219,7 +291,11 @@
    "p": 0.355,
    "bio": "American physicist",
    "wiki": "https://en.wikipedia.org/wiki/Stephen_Shenker",
-   "source": "https://commons.wikimedia.org/wiki/File:SteveShenkerStanford2009.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:SteveShenkerStanford2009.jpg",
+   "clues": [
+    "a t-shirt",
+    "nerd energy"
+   ]
   },
   {
    "id": 58,
@@ -230,7 +306,11 @@
    "p": 0.548,
    "bio": "Russian mathematician, Dr.Sc., Professor, a professor at the Moscow State University.",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:%D0%A4%D0%BE%D0%BC%D0%B8%D1%87%D1%91%D0%B2%20%D0%92%D0%B0%D1%81%D0%B8%D0%BB%D0%B8%D0%B9%20%D0%92%D0%BB%D0%B0%D0%B4%D0%B8%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B8%D1%87.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:%D0%A4%D0%BE%D0%BC%D0%B8%D1%87%D1%91%D0%B2%20%D0%92%D0%B0%D1%81%D0%B8%D0%BB%D0%B8%D0%B9%20%D0%92%D0%BB%D0%B0%D0%B4%D0%B8%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B8%D1%87.jpg",
+   "clues": [
+    "a suit and tie",
+    "a studio headshot"
+   ]
   },
   {
    "id": 3,
@@ -241,7 +321,11 @@
    "p": 0.655,
    "bio": "Latvian mathematician",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:%D0%90%D1%80%D0%BA%D0%B0%D0%B4%D0%B8%D0%B9%20%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB%D0%B0%D0%B5%D0%B2%D0%B8%D1%87%20%D0%91%D0%BE%D1%80%D0%B8%D1%81%D0%BE%D0%B2.png"
+   "source": "https://commons.wikimedia.org/wiki/File:%D0%90%D1%80%D0%BA%D0%B0%D0%B4%D0%B8%D0%B9%20%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB%D0%B0%D0%B5%D0%B2%D0%B8%D1%87%20%D0%91%D0%BE%D1%80%D0%B8%D1%81%D0%BE%D0%B2.png",
+   "clues": [
+    "a suit and tie",
+    "a studio headshot"
+   ]
   },
   {
    "id": 155,
@@ -252,7 +336,11 @@
    "p": 0.39,
    "bio": "Polish physicist",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:J.%20A.%20Morkowski%2024.07.2018%20jpg..jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:J.%20A.%20Morkowski%2024.07.2018%20jpg..jpg",
+   "clues": [
+    "a candid snapshot",
+    "a t-shirt"
+   ]
   },
   {
    "id": 86,
@@ -263,7 +351,10 @@
    "p": 0.521,
    "bio": "Polish-British physicist",
    "wiki": "https://en.wikipedia.org/wiki/Andrzej_Karol_Jonscher",
-   "source": "https://commons.wikimedia.org/wiki/File:Andrew%20Jonscher.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Andrew%20Jonscher.jpg",
+   "clues": [
+    "an old black-and-white photo"
+   ]
   },
   {
    "id": 109,
@@ -274,7 +365,10 @@
    "p": 0.595,
    "bio": "American physicist",
    "wiki": "https://en.wikipedia.org/wiki/Marla_Dowell",
-   "source": "https://commons.wikimedia.org/wiki/File:Marla%20L.%20Dowell%20at%20NIST%20%28cropped%29.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Marla%20L.%20Dowell%20at%20NIST%20%28cropped%29.jpg",
+   "clues": [
+    "a studio headshot"
+   ]
   },
   {
    "id": 32,
@@ -285,7 +379,11 @@
    "p": 0.096,
    "bio": "mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Robert_Guralnick",
-   "source": "https://commons.wikimedia.org/wiki/File:Robert%20Guralnick.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Robert%20Guralnick.jpg",
+   "clues": [
+    "the great outdoors",
+    "a big smile"
+   ]
   },
   {
    "id": 6,
@@ -296,7 +394,11 @@
    "p": 0.646,
    "bio": "Russian mathematician",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Georgiy%20Malineckiy%20foto.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Georgiy%20Malineckiy%20foto.jpg",
+   "clues": [
+    "bookshelves",
+    "a suit and tie"
+   ]
   },
   {
    "id": 27,
@@ -307,7 +409,10 @@
    "p": 0.434,
    "bio": "German mathematician",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Klaus%20Habetha.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Klaus%20Habetha.jpg",
+   "clues": [
+    "nerd energy"
+   ]
   },
   {
    "id": 88,
@@ -318,7 +423,11 @@
    "p": 0.513,
    "bio": "researcher at Ecole Polytechnique F\u00e9d\u00e9rale de Lausanne",
    "wiki": "https://en.wikipedia.org/wiki/Ambrogio_Fasoli",
-   "source": "https://commons.wikimedia.org/wiki/File:EPFL%20Ambrogio%20Fasoli%202005.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:EPFL%20Ambrogio%20Fasoli%202005.jpg",
+   "clues": [
+    "a blackboard",
+    "lab equipment"
+   ]
   },
   {
    "id": 144,
@@ -329,7 +438,11 @@
    "p": 0.662,
    "bio": "physicist",
    "wiki": "https://en.wikipedia.org/wiki/Alexander_Kusenko",
-   "source": "https://commons.wikimedia.org/wiki/File:Alexander%20Kusenko.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Alexander%20Kusenko.jpg",
+   "clues": [
+    "a blackboard",
+    "lab equipment"
+   ]
   },
   {
    "id": 113,
@@ -340,7 +453,10 @@
    "p": 0.651,
    "bio": "French physicist",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Luc%20Blanchet.png"
+   "source": "https://commons.wikimedia.org/wiki/File:Luc%20Blanchet.png",
+   "clues": [
+    "a suit and tie"
+   ]
   },
   {
    "id": 74,
@@ -351,7 +467,11 @@
    "p": 0.347,
    "bio": "",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:P-amelkin-sa-8906.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:P-amelkin-sa-8906.jpg",
+   "clues": [
+    "hippie vibes",
+    "nerd energy"
+   ]
   },
   {
    "id": 119,
@@ -362,7 +482,11 @@
    "p": 0.416,
    "bio": "French physicist working on quantum gas at Laser Physics Laboratory of Universit\u00e9 Sorbonne Paris Nord and CNRS",
    "wiki": "https://en.wikipedia.org/wiki/H\u00e9l\u00e8ne_Perrin",
-   "source": "https://commons.wikimedia.org/wiki/File:H%C3%A9l%C3%A8ne%20Perrin%20Versailles.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:H%C3%A9l%C3%A8ne%20Perrin%20Versailles.jpg",
+   "clues": [
+    "hippie vibes",
+    "the great outdoors"
+   ]
   },
   {
    "id": 20,
@@ -373,7 +497,8 @@
    "p": 0.364,
    "bio": "Polish mathematician",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Edward%20Szpilewski%202.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Edward%20Szpilewski%202.jpg",
+   "clues": []
   },
   {
    "id": 127,
@@ -384,7 +509,11 @@
    "p": 0.563,
    "bio": "Portuguese scientist",
    "wiki": "https://en.wikipedia.org/wiki/Jos\u00e9_Mendes_(physicist)",
-   "source": "https://commons.wikimedia.org/wiki/File:JFFMendes.JPG"
+   "source": "https://commons.wikimedia.org/wiki/File:JFFMendes.JPG",
+   "clues": [
+    "bookshelves",
+    "lab equipment"
+   ]
   },
   {
    "id": 22,
@@ -395,7 +524,10 @@
    "p": 0.397,
    "bio": "Russian mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Gennady_Makanin",
-   "source": "https://commons.wikimedia.org/wiki/File:%D0%9C%D0%B0%D0%BA%D0%B0%D0%BD%D0%B8%D0%BD%20%D0%93.%D0%A1..jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:%D0%9C%D0%B0%D0%BA%D0%B0%D0%BD%D0%B8%D0%BD%20%D0%93.%D0%A1..jpg",
+   "clues": [
+    "a sweater"
+   ]
   },
   {
    "id": 101,
@@ -406,7 +538,11 @@
    "p": 0.883,
    "bio": "Soviet physicist (1939\u20132021)",
    "wiki": "https://en.wikipedia.org/wiki/Valentin_Gapontsev",
-   "source": "https://commons.wikimedia.org/wiki/File:Gapontsev.png"
+   "source": "https://commons.wikimedia.org/wiki/File:Gapontsev.png",
+   "clues": [
+    "a suit and tie",
+    "a lecture pose"
+   ]
   },
   {
    "id": 94,
@@ -417,7 +553,11 @@
    "p": 0.68,
    "bio": "",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:%D0%86%D0%BB%D1%8C%D1%87%D0%B5%D0%BD%D0%BA%D0%BE%20%D0%92%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%20%D0%92%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%D0%BE%D0%B2%D0%B8%D1%87.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:%D0%86%D0%BB%D1%8C%D1%87%D0%B5%D0%BD%D0%BA%D0%BE%20%D0%92%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%20%D0%92%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%D0%BE%D0%B2%D0%B8%D1%87.jpg",
+   "clues": [
+    "a suit and tie",
+    "a studio headshot"
+   ]
   },
   {
    "id": 47,
@@ -428,7 +568,10 @@
    "p": 0.543,
    "bio": "Australian mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Ian_Wanless",
-   "source": "https://commons.wikimedia.org/wiki/File:IanWanless.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:IanWanless.jpg",
+   "clues": [
+    "a studio headshot"
+   ]
   },
   {
    "id": 99,
@@ -439,7 +582,11 @@
    "p": 0.772,
    "bio": "Polish physicist",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Leszek%20%C5%81ukaszuk.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Leszek%20%C5%81ukaszuk.jpg",
+   "clues": [
+    "a suit and tie",
+    "a studio headshot"
+   ]
   },
   {
    "id": 76,
@@ -450,7 +597,11 @@
    "p": 0.58,
    "bio": "Math Instructor, Maritime Self-Defense Force, Ministry of Defense",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Sasakij.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Sasakij.jpg",
+   "clues": [
+    "a suit and tie",
+    "a lecture pose"
+   ]
   },
   {
    "id": 68,
@@ -461,7 +612,11 @@
    "p": 0.153,
    "bio": "French mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Rapha\u00ebl_Krikorian",
-   "source": "https://commons.wikimedia.org/wiki/File:Rapha%C3%ABl%20Krikorian%20MFO.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Rapha%C3%ABl%20Krikorian%20MFO.jpg",
+   "clues": [
+    "the great outdoors",
+    "a big smile"
+   ]
   },
   {
    "id": 133,
@@ -472,7 +627,11 @@
    "p": 0.492,
    "bio": "Polish physicist",
    "wiki": "https://en.wikipedia.org/wiki/Iwo_Bia\u0142ynicki-Birula",
-   "source": "https://commons.wikimedia.org/wiki/File:Iwo%20Bia%C5%82ynicki-Birula.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Iwo%20Bia%C5%82ynicki-Birula.jpg",
+   "clues": [
+    "a t-shirt",
+    "nerd energy"
+   ]
   },
   {
    "id": 106,
@@ -483,7 +642,11 @@
    "p": 0.635,
    "bio": "Finnish physicist",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Einar%20Stenij.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Einar%20Stenij.jpg",
+   "clues": [
+    "a suit and tie",
+    "an old black-and-white photo"
+   ]
   },
   {
    "id": 46,
@@ -494,7 +657,11 @@
    "p": 0.201,
    "bio": "French mathematician (1915\u20132006)",
    "wiki": "https://en.wikipedia.org/wiki/Gustave_Choquet",
-   "source": "https://commons.wikimedia.org/wiki/File:Gustave%20Choquet.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Gustave%20Choquet.jpg",
+   "clues": [
+    "hippie vibes",
+    "a big smile"
+   ]
   },
   {
    "id": 17,
@@ -505,7 +672,11 @@
    "p": 0.097,
    "bio": "German mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Hans_Peter_Schlickewei",
-   "source": "https://commons.wikimedia.org/wiki/File:Schlickewei.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Schlickewei.jpg",
+   "clues": [
+    "the great outdoors",
+    "hippie vibes"
+   ]
   },
   {
    "id": 118,
@@ -516,7 +687,10 @@
    "p": 0.613,
    "bio": "American physicist",
    "wiki": "https://en.wikipedia.org/wiki/Philip_H._Bucksbaum",
-   "source": "https://commons.wikimedia.org/wiki/File:PHBucksbaum.Feb07.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:PHBucksbaum.Feb07.jpg",
+   "clues": [
+    "bookshelves"
+   ]
   },
   {
    "id": 45,
@@ -527,7 +701,11 @@
    "p": 0.037,
    "bio": "mathematician",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Benjamin%20Gess%20Oberwolfach%202025.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Benjamin%20Gess%20Oberwolfach%202025.jpg",
+   "clues": [
+    "the great outdoors",
+    "hippie vibes"
+   ]
   },
   {
    "id": 131,
@@ -538,7 +716,11 @@
    "p": 0.753,
    "bio": "Austrian physicist",
    "wiki": "https://en.wikipedia.org/wiki/Ille_Gebeshuber",
-   "source": "https://commons.wikimedia.org/wiki/File:Ille%20C.%20Gebeshuber.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Ille%20C.%20Gebeshuber.jpg",
+   "clues": [
+    "a blackboard",
+    "bookshelves"
+   ]
   },
   {
    "id": 59,
@@ -549,7 +731,11 @@
    "p": 0.1,
    "bio": "French mathematician (born 1957)",
    "wiki": "https://en.wikipedia.org/wiki/Guy_David_(mathematician)",
-   "source": "https://commons.wikimedia.org/wiki/File:Guy%20David%20Berkeley%202014.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Guy%20David%20Berkeley%202014.jpg",
+   "clues": [
+    "hippie vibes",
+    "the great outdoors"
+   ]
   },
   {
    "id": 34,
@@ -560,7 +746,11 @@
    "p": 0.355,
    "bio": "American mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Morris_Hirsch",
-   "source": "https://commons.wikimedia.org/wiki/File:Hirsch%20morris.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Hirsch%20morris.jpg",
+   "clues": [
+    "hippie vibes",
+    "messy hair"
+   ]
   },
   {
    "id": 44,
@@ -571,7 +761,11 @@
    "p": 0.046,
    "bio": "D.Phil. University of Oxford 1979",
    "wiki": "https://en.wikipedia.org/wiki/Martin_Liebeck",
-   "source": "https://commons.wikimedia.org/wiki/File:Martin%20W.%20Liebeck%20Oberwolfach%202008.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Martin%20W.%20Liebeck%20Oberwolfach%202008.jpg",
+   "clues": [
+    "the great outdoors",
+    "a sweater"
+   ]
   },
   {
    "id": 60,
@@ -582,7 +776,11 @@
    "p": 0.455,
    "bio": "Israeli mathematician (1922\u20132025)",
    "wiki": "https://en.wikipedia.org/wiki/Shmuel_Agmon",
-   "source": "https://commons.wikimedia.org/wiki/File:Shmuel%20Agmon.jpeg"
+   "source": "https://commons.wikimedia.org/wiki/File:Shmuel%20Agmon.jpeg",
+   "clues": [
+    "hippie vibes",
+    "messy hair"
+   ]
   },
   {
    "id": 53,
@@ -593,7 +791,11 @@
    "p": 0.041,
    "bio": "German mathematician (1905\u20131988)",
    "wiki": "https://en.wikipedia.org/wiki/Werner_Fenchel",
-   "source": "https://commons.wikimedia.org/wiki/File:Werner%20Fenchel.jpeg"
+   "source": "https://commons.wikimedia.org/wiki/File:Werner%20Fenchel.jpeg",
+   "clues": [
+    "the great outdoors",
+    "nerd energy"
+   ]
   },
   {
    "id": 2,
@@ -604,7 +806,11 @@
    "p": 0.588,
    "bio": "Soviet mathematician",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Kulikov%20L%20Y-750-%D0%B4%D0%BB%D1%8F%20e-mail.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Kulikov%20L%20Y-750-%D0%B4%D0%BB%D1%8F%20e-mail.jpg",
+   "clues": [
+    "a suit and tie",
+    "a serious stare"
+   ]
   },
   {
    "id": 9,
@@ -615,7 +821,11 @@
    "p": 0.164,
    "bio": "Russian mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Victor_Goryunov",
-   "source": "https://commons.wikimedia.org/wiki/File:VictorGoryunov.JPG"
+   "source": "https://commons.wikimedia.org/wiki/File:VictorGoryunov.JPG",
+   "clues": [
+    "hippie vibes",
+    "nerd energy"
+   ]
   },
   {
    "id": 73,
@@ -626,7 +836,11 @@
    "p": 0.052,
    "bio": "German university teacher",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Borgwardt%20karl%20heinz.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Borgwardt%20karl%20heinz.jpg",
+   "clues": [
+    "hippie vibes",
+    "a t-shirt"
+   ]
   },
   {
    "id": 97,
@@ -637,7 +851,11 @@
    "p": 0.898,
    "bio": "iranian-American physicist and academic administrator",
    "wiki": "https://en.wikipedia.org/wiki/Parviz_Ansari",
-   "source": "https://commons.wikimedia.org/wiki/File:Parviz%20Ansari%20photo.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Parviz%20Ansari%20photo.jpg",
+   "clues": [
+    "a suit and tie",
+    "a studio headshot"
+   ]
   },
   {
    "id": 48,
@@ -648,7 +866,11 @@
    "p": 0.863,
    "bio": "German mathematician",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Hans%20J%C3%BCrgen%20Pr%C3%B6mel%202012.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Hans%20J%C3%BCrgen%20Pr%C3%B6mel%202012.jpg",
+   "clues": [
+    "a lecture pose",
+    "a suit and tie"
+   ]
   },
   {
    "id": 43,
@@ -659,7 +881,10 @@
    "p": 0.071,
    "bio": "Catalan mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Xavier_Tolsa",
-   "source": "https://commons.wikimedia.org/wiki/File:Xavier%20Tolsa%20Oberwolfach%202015.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Xavier%20Tolsa%20Oberwolfach%202015.jpg",
+   "clues": [
+    "the great outdoors"
+   ]
   },
   {
    "id": 5,
@@ -670,7 +895,10 @@
    "p": 0.547,
    "bio": "American mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Klaus_Schmitt",
-   "source": "https://commons.wikimedia.org/wiki/File:KlausSchmittPortrait.png"
+   "source": "https://commons.wikimedia.org/wiki/File:KlausSchmittPortrait.png",
+   "clues": [
+    "a serious stare"
+   ]
   },
   {
    "id": 139,
@@ -681,7 +909,11 @@
    "p": 0.4,
    "bio": "",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:%D0%A1%D1%83%D0%BA%D0%B0%D1%87%20%D0%93%D0%B5%D0%BE%D1%80%D0%B3%D1%96%D0%B9%20%D0%9E%D0%BB%D0%B5%D0%BA%D1%81%D1%96%D0%B9%D0%BE%D0%B2%D0%B8%D1%87.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:%D0%A1%D1%83%D0%BA%D0%B0%D1%87%20%D0%93%D0%B5%D0%BE%D1%80%D0%B3%D1%96%D0%B9%20%D0%9E%D0%BB%D0%B5%D0%BA%D1%81%D1%96%D0%B9%D0%BE%D0%B2%D0%B8%D1%87.jpg",
+   "clues": [
+    "long hair",
+    "confidence"
+   ]
   },
   {
    "id": 148,
@@ -692,7 +924,11 @@
    "p": 0.68,
    "bio": "Japanese physicist",
    "wiki": "https://en.wikipedia.org/wiki/Hirosi_Ooguri",
-   "source": "https://commons.wikimedia.org/wiki/File:Hirosi%20Ooguri.JPG"
+   "source": "https://commons.wikimedia.org/wiki/File:Hirosi%20Ooguri.JPG",
+   "clues": [
+    "a suit and tie",
+    "a studio headshot"
+   ]
   },
   {
    "id": 132,
@@ -703,7 +939,11 @@
    "p": 0.869,
    "bio": "New Zealand physicist at the University of Otago",
    "wiki": "https://en.wikipedia.org/wiki/Richard_Blaikie",
-   "source": "https://commons.wikimedia.org/wiki/File:Richard%20Blaikie%202023%20%28cropped%29.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Richard%20Blaikie%202023%20%28cropped%29.jpg",
+   "clues": [
+    "a suit and tie",
+    "a lecture pose"
+   ]
   },
   {
    "id": 4,
@@ -714,7 +954,10 @@
    "p": 0.519,
    "bio": "British mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Charles_Read_(mathematician)",
-   "source": "https://commons.wikimedia.org/wiki/File:Charles%20Read.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Charles%20Read.jpg",
+   "clues": [
+    "a serious stare"
+   ]
   },
   {
    "id": 67,
@@ -725,7 +968,11 @@
    "p": 0.15,
    "bio": "French mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Alain_Chenciner",
-   "source": "https://commons.wikimedia.org/wiki/File:Chenciner%20alain.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Chenciner%20alain.jpg",
+   "clues": [
+    "hippie vibes",
+    "the great outdoors"
+   ]
   },
   {
    "id": 96,
@@ -736,7 +983,11 @@
    "p": 0.452,
    "bio": "Argentinean astrophysicist and philosopher",
    "wiki": "https://en.wikipedia.org/wiki/Gustavo_E._Romero",
-   "source": "https://commons.wikimedia.org/wiki/File:Dr.%20Gustavo%20Romero.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Dr.%20Gustavo%20Romero.jpg",
+   "clues": [
+    "a candid snapshot",
+    "a big smile"
+   ]
   },
   {
    "id": 23,
@@ -747,7 +998,11 @@
    "p": 0.133,
    "bio": "mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Boris_M._Schein",
-   "source": "https://commons.wikimedia.org/wiki/File:Boris%20M.%20Schein.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Boris%20M.%20Schein.jpg",
+   "clues": [
+    "hippie vibes",
+    "nerd energy"
+   ]
   },
   {
    "id": 81,
@@ -758,7 +1013,11 @@
    "p": 0.807,
    "bio": "German physicist",
    "wiki": "https://en.wikipedia.org/wiki/Walter_Oelert",
-   "source": "https://commons.wikimedia.org/wiki/File:WalterOelert%20%28cropped%29.JPG"
+   "source": "https://commons.wikimedia.org/wiki/File:WalterOelert%20%28cropped%29.JPG",
+   "clues": [
+    "bookshelves",
+    "a lecture pose"
+   ]
   },
   {
    "id": 108,
@@ -769,7 +1028,8 @@
    "p": 0.422,
    "bio": "Mexican physicist",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Doctor%20Alejandro%20Frank.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Doctor%20Alejandro%20Frank.jpg",
+   "clues": []
   },
   {
    "id": 87,
@@ -780,7 +1040,11 @@
    "p": 0.404,
    "bio": "Swiss physicist",
    "wiki": "https://en.wikipedia.org/wiki/Robert_Brandenberger",
-   "source": "https://commons.wikimedia.org/wiki/File:RobertBrandenberger1987.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:RobertBrandenberger1987.jpg",
+   "clues": [
+    "hippie vibes",
+    "a t-shirt"
+   ]
   },
   {
    "id": 49,
@@ -791,7 +1055,11 @@
    "p": 0.164,
    "bio": "German mathematician (1912\u20131992)",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Wilhelm%20Maak.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Wilhelm%20Maak.jpg",
+   "clues": [
+    "the great outdoors",
+    "hippie vibes"
+   ]
   },
   {
    "id": 89,
@@ -802,7 +1070,11 @@
    "p": 0.588,
    "bio": "Polish physicist",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Teresa%20Rz%C4%85ca-Urban%20%281%29.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Teresa%20Rz%C4%85ca-Urban%20%281%29.jpg",
+   "clues": [
+    "a studio headshot",
+    "a serious stare"
+   ]
   },
   {
    "id": 126,
@@ -813,7 +1085,10 @@
    "p": 0.428,
    "bio": "Indian activist",
    "wiki": "https://en.wikipedia.org/wiki/Hosur_Narasimhaiah",
-   "source": "https://commons.wikimedia.org/wiki/File:H-Narasimhaiah.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:H-Narasimhaiah.jpg",
+   "clues": [
+    "a candid snapshot"
+   ]
   },
   {
    "id": 36,
@@ -824,7 +1099,11 @@
    "p": 0.269,
    "bio": "Argentinean mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Carlos_Kenig",
-   "source": "https://commons.wikimedia.org/wiki/File:Carlos%20Kenig.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Carlos%20Kenig.jpg",
+   "clues": [
+    "a t-shirt",
+    "hippie vibes"
+   ]
   },
   {
    "id": 138,
@@ -835,7 +1114,11 @@
    "p": 0.691,
    "bio": "Dutch physicist",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Jan%20de%20Boer.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Jan%20de%20Boer.jpg",
+   "clues": [
+    "an old black-and-white photo",
+    "a serious stare"
+   ]
   },
   {
    "id": 26,
@@ -846,7 +1129,11 @@
    "p": 0.684,
    "bio": "Israeli mathematician",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:%D7%90%D7%94%D7%A8%D7%95%D7%9F%20%D7%90%D7%A1%D7%A4%D7%99%D7%A1.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:%D7%90%D7%94%D7%A8%D7%95%D7%9F%20%D7%90%D7%A1%D7%A4%D7%99%D7%A1.jpg",
+   "clues": [
+    "a suit and tie",
+    "a studio headshot"
+   ]
   },
   {
    "id": 146,
@@ -857,7 +1144,11 @@
    "p": 0.734,
    "bio": "Italian physicist",
    "wiki": "https://en.wikipedia.org/wiki/Claudio_Pellegrini",
-   "source": "https://commons.wikimedia.org/wiki/File:Claudio-Pellegrini-2015.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Claudio-Pellegrini-2015.jpg",
+   "clues": [
+    "a suit and tie",
+    "a studio headshot"
+   ]
   },
   {
    "id": 102,
@@ -868,7 +1159,11 @@
    "p": 0.89,
    "bio": "Sammarinese physicist",
    "wiki": "https://en.wikipedia.org/wiki/Luciano_Maiani",
-   "source": "https://commons.wikimedia.org/wiki/File:Luciano%20Maiani%201996.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Luciano%20Maiani%201996.jpg",
+   "clues": [
+    "a suit and tie",
+    "lab equipment"
+   ]
   },
   {
    "id": 82,
@@ -879,7 +1174,11 @@
    "p": 0.486,
    "bio": "",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Domashevskaya%20EP.JPG"
+   "source": "https://commons.wikimedia.org/wiki/File:Domashevskaya%20EP.JPG",
+   "clues": [
+    "a big smile",
+    "a sweater"
+   ]
   },
   {
    "id": 15,
@@ -890,7 +1189,11 @@
    "p": 0.791,
    "bio": "Ukrainian mathematics educator",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:%D0%91%D0%B5%D0%B2%D0%B7%20%D0%93.%D0%9F.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:%D0%91%D0%B5%D0%B2%D0%B7%20%D0%93.%D0%9F.jpg",
+   "clues": [
+    "a lecture pose",
+    "a studio headshot"
+   ]
   },
   {
    "id": 137,
@@ -901,7 +1204,11 @@
    "p": 0.83,
    "bio": "Australian physicist (born 1932)",
    "wiki": "https://en.wikipedia.org/wiki/Rod_Boswell",
-   "source": "https://commons.wikimedia.org/wiki/File:Roderick%20William%20Boswell%20%28born%201932%29%20in%20the%20video%20%27Behind%20the%20mission%20to%20get%20a%20new%20satellite%20thruster%20to%20space%27.png"
+   "source": "https://commons.wikimedia.org/wiki/File:Roderick%20William%20Boswell%20%28born%201932%29%20in%20the%20video%20%27Behind%20the%20mission%20to%20get%20a%20new%20satellite%20thruster%20to%20space%27.png",
+   "clues": [
+    "lab equipment",
+    "a lecture pose"
+   ]
   },
   {
    "id": 116,
@@ -912,7 +1219,11 @@
    "p": 0.72,
    "bio": "Chinese physicist",
    "wiki": "https://en.wikipedia.org/wiki/Wang_Yening",
-   "source": "https://commons.wikimedia.org/wiki/File:Wang%20Yening.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Wang%20Yening.jpg",
+   "clues": [
+    "an old black-and-white photo",
+    "a blackboard"
+   ]
   },
   {
    "id": 38,
@@ -923,7 +1234,11 @@
    "p": 0.721,
    "bio": "German mathematics educator",
    "wiki": "https://en.wikipedia.org/wiki/Kristina_Reiss",
-   "source": "https://commons.wikimedia.org/wiki/File:Kristina%20Reiss.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Kristina%20Reiss.jpg",
+   "clues": [
+    "a studio headshot",
+    "a blackboard"
+   ]
   },
   {
    "id": 13,
@@ -934,7 +1249,11 @@
    "p": 0.205,
    "bio": "British mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Andrew_M._Stuart",
-   "source": "https://commons.wikimedia.org/wiki/File:Andrew%20M.%20Stuart.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Andrew%20M.%20Stuart.jpg",
+   "clues": [
+    "hippie vibes",
+    "a t-shirt"
+   ]
   },
   {
    "id": 62,
@@ -945,7 +1264,11 @@
    "p": 0.547,
    "bio": "mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Andreas_Blass",
-   "source": "https://commons.wikimedia.org/wiki/File:AndreasBlass.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:AndreasBlass.jpg",
+   "clues": [
+    "bookshelves",
+    "a studio headshot"
+   ]
   },
   {
    "id": 65,
@@ -956,7 +1279,11 @@
    "p": 0.035,
    "bio": "Greek-American mathematician",
    "wiki": "https://en.wikipedia.org/wiki/George_C._Papanicolaou",
-   "source": "https://commons.wikimedia.org/wiki/File:George%20Papanicolaou.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:George%20Papanicolaou.jpg",
+   "clues": [
+    "hippie vibes",
+    "the great outdoors"
+   ]
   },
   {
    "id": 40,
@@ -967,7 +1294,11 @@
    "p": 0.337,
    "bio": "American mathematician in geometry and topology",
    "wiki": "https://en.wikipedia.org/wiki/John_Pardon",
-   "source": "https://commons.wikimedia.org/wiki/File:John%20Pardon4%20c.Simons%20Foundation.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:John%20Pardon4%20c.Simons%20Foundation.jpg",
+   "clues": [
+    "a t-shirt",
+    "a big smile"
+   ]
   },
   {
    "id": 153,
@@ -978,7 +1309,10 @@
    "p": 0.452,
    "bio": "Italian physicist and professor",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Angelo%20Vulpiani-2019.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Angelo%20Vulpiani-2019.jpg",
+   "clues": [
+    "the great outdoors"
+   ]
   },
   {
    "id": 114,
@@ -989,7 +1323,10 @@
    "p": 0.281,
    "bio": "educationalist and nuclear physicist",
    "wiki": "https://en.wikipedia.org/wiki/Hiranmay_Sen_Gupta",
-   "source": "https://commons.wikimedia.org/wiki/File:H.M.%20SEN%20GUPTA.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:H.M.%20SEN%20GUPTA.jpg",
+   "clues": [
+    "the great outdoors"
+   ]
   },
   {
    "id": 57,
@@ -1000,7 +1337,11 @@
    "p": 0.24,
    "bio": "American mathematician & academic",
    "wiki": "https://en.wikipedia.org/wiki/Carol_Wood",
-   "source": "https://commons.wikimedia.org/wiki/File:Carol%20Wood%202017.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Carol%20Wood%202017.jpg",
+   "clues": [
+    "the great outdoors",
+    "a big smile"
+   ]
   },
   {
    "id": 69,
@@ -1011,7 +1352,10 @@
    "p": 0.41,
    "bio": "French mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Fran\u00e7ois_Ledrappier",
-   "source": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois%20Ledrappier%2C%20July%202018.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois%20Ledrappier%2C%20July%202018.jpg",
+   "clues": [
+    "a t-shirt"
+   ]
   },
   {
    "id": 134,
@@ -1022,7 +1366,10 @@
    "p": 0.493,
    "bio": "Polish physicist (1916-1975)",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Bogusz%20Wladyslaw.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Bogusz%20Wladyslaw.jpg",
+   "clues": [
+    "nerd energy"
+   ]
   },
   {
    "id": 30,
@@ -1033,7 +1380,10 @@
    "p": 0.455,
    "bio": "German mathematician",
    "wiki": "https://en.wikipedia.org/wiki/G\u00fcnter_Harder",
-   "source": "https://commons.wikimedia.org/wiki/File:Guenter%20Harder.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Guenter%20Harder.jpg",
+   "clues": [
+    "messy hair"
+   ]
   },
   {
    "id": 28,
@@ -1044,7 +1394,10 @@
    "p": 0.378,
    "bio": "mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Preda_Mih\u0103ilescu",
-   "source": "https://commons.wikimedia.org/wiki/File:Preda%20Mihailescu%20vor%20Tafel.png"
+   "source": "https://commons.wikimedia.org/wiki/File:Preda%20Mihailescu%20vor%20Tafel.png",
+   "clues": [
+    "nerd energy"
+   ]
   },
   {
    "id": 142,
@@ -1055,7 +1408,11 @@
    "p": 0.636,
    "bio": "Polish physicist",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Andrzej%20Bia%C5%82as%20w%202015%20cropped.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Andrzej%20Bia%C5%82as%20w%202015%20cropped.jpg",
+   "clues": [
+    "a suit and tie",
+    "a studio headshot"
+   ]
   },
   {
    "id": 140,
@@ -1066,7 +1423,11 @@
    "p": 0.684,
    "bio": "Soviet scientist in aerospace engineering (1923-1985)",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:%D0%93%D1%80%D0%BE%D0%B4%D0%B7%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9%20%D0%93%D0%B5%D1%80%D1%88%20%D0%9B%D0%B5%D0%B9%D0%B1%D0%BE%D0%B2%D0%B8%D1%87%2C%20%D0%BD%D0%B0%D1%87%D0%B0%D0%BB%D1%8C%D0%BD%D0%B8%D0%BA%20%D0%9D%D0%98%D0%9E-20%20%D0%A6%D0%90%D0%93%D0%98.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:%D0%93%D1%80%D0%BE%D0%B4%D0%B7%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9%20%D0%93%D0%B5%D1%80%D1%88%20%D0%9B%D0%B5%D0%B9%D0%B1%D0%BE%D0%B2%D0%B8%D1%87%2C%20%D0%BD%D0%B0%D1%87%D0%B0%D0%BB%D1%8C%D0%BD%D0%B8%D0%BA%20%D0%9D%D0%98%D0%9E-20%20%D0%A6%D0%90%D0%93%D0%98.jpg",
+   "clues": [
+    "a suit and tie",
+    "an old black-and-white photo"
+   ]
   },
   {
    "id": 8,
@@ -1077,7 +1438,11 @@
    "p": 0.186,
    "bio": "1923-1985, Professor of mathematics",
    "wiki": "https://en.wikipedia.org/wiki/H._J._Ryser",
-   "source": "https://commons.wikimedia.org/wiki/File:Herbert%20John%20Ryser.jpeg"
+   "source": "https://commons.wikimedia.org/wiki/File:Herbert%20John%20Ryser.jpeg",
+   "clues": [
+    "nerd energy",
+    "a candid snapshot"
+   ]
   },
   {
    "id": 147,
@@ -1088,7 +1453,11 @@
    "p": 0.819,
    "bio": "American physicist",
    "wiki": "https://en.wikipedia.org/wiki/Charles_V._Shank",
-   "source": "https://commons.wikimedia.org/wiki/File:Charles%20V.%20Shank%20%282015%29%20%28cropped%29.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Charles%20V.%20Shank%20%282015%29%20%28cropped%29.jpg",
+   "clues": [
+    "a suit and tie",
+    "a studio headshot"
+   ]
   },
   {
    "id": 41,
@@ -1099,7 +1468,11 @@
    "p": 0.078,
    "bio": "American mathematician (1935\u20132018)",
    "wiki": "https://en.wikipedia.org/wiki/Richard_M._Pollack",
-   "source": "https://commons.wikimedia.org/wiki/File:Richard%20M.%20Pollack.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Richard%20M.%20Pollack.jpg",
+   "clues": [
+    "a sweater",
+    "hippie vibes"
+   ]
   },
   {
    "id": 93,
@@ -1110,7 +1483,11 @@
    "p": 0.777,
    "bio": "American physicist",
    "wiki": "https://en.wikipedia.org/wiki/Paul_H._Carr_(physicist)",
-   "source": "https://commons.wikimedia.org/wiki/File:Paul%20H.%20Carr%20Photo.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Paul%20H.%20Carr%20Photo.jpg",
+   "clues": [
+    "a suit and tie",
+    "a studio headshot"
+   ]
   },
   {
    "id": 31,
@@ -1121,7 +1498,11 @@
    "p": 0.45,
    "bio": "Indian-born American mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Renu_C._Laskar",
-   "source": "https://commons.wikimedia.org/wiki/File:Renu-2048x1512.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Renu-2048x1512.jpg",
+   "clues": [
+    "a candid snapshot",
+    "a big smile"
+   ]
   },
   {
    "id": 42,
@@ -1132,7 +1513,11 @@
    "p": 0.587,
    "bio": "Spanish mathematician (1912\u20131967)",
    "wiki": "https://en.wikipedia.org/wiki/Ferran_Sunyer_i_Balaguer",
-   "source": "https://commons.wikimedia.org/wiki/File:Ferran%20Sunyer%20Balaguer.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Ferran%20Sunyer%20Balaguer.jpg",
+   "clues": [
+    "an old black-and-white photo",
+    "a lecture pose"
+   ]
   },
   {
    "id": 63,
@@ -1143,7 +1528,11 @@
    "p": 0.432,
    "bio": "French mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Guy_Henniart",
-   "source": "https://commons.wikimedia.org/wiki/File:Guy%20Henniart%20%282006%29.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Guy%20Henniart%20%282006%29.jpg",
+   "clues": [
+    "a big smile",
+    "messy hair"
+   ]
   },
   {
    "id": 78,
@@ -1154,7 +1543,11 @@
    "p": 0.739,
    "bio": "Indian physicist",
    "wiki": "https://en.wikipedia.org/wiki/Sushanta_Kumar_Dattagupta",
-   "source": "https://commons.wikimedia.org/wiki/File:Professor%20Sushanta%20Dattagupta%20in%202016.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Professor%20Sushanta%20Dattagupta%20in%202016.jpg",
+   "clues": [
+    "a studio headshot",
+    "bookshelves"
+   ]
   },
   {
    "id": 0,
@@ -1165,7 +1558,11 @@
    "p": 0.311,
    "bio": "American mathematician (1955-2014)",
    "wiki": "https://en.wikipedia.org/wiki/Tim_Cochran",
-   "source": "https://commons.wikimedia.org/wiki/File:Tim%20Cochran%201986%20%28enlarged%20headshot%29.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Tim%20Cochran%201986%20%28enlarged%20headshot%29.jpg",
+   "clues": [
+    "a big smile",
+    "messy hair"
+   ]
   },
   {
    "id": 128,
@@ -1176,7 +1573,11 @@
    "p": 0.614,
    "bio": "Bulgarian physicist",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Nikola-Sabotinov-20101110.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Nikola-Sabotinov-20101110.jpg",
+   "clues": [
+    "a lecture pose",
+    "a suit and tie"
+   ]
   },
   {
    "id": 85,
@@ -1187,7 +1588,11 @@
    "p": 0.869,
    "bio": "Swedish physicist",
    "wiki": "https://en.wikipedia.org/wiki/Inger-Lena_Hultberg",
-   "source": "https://commons.wikimedia.org/wiki/File:Inger-lena-hultberg.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Inger-lena-hultberg.jpg",
+   "clues": [
+    "lab equipment",
+    "an old black-and-white photo"
+   ]
   },
   {
    "id": 100,
@@ -1198,7 +1603,11 @@
    "p": 0.291,
    "bio": "German physicist",
    "wiki": "https://en.wikipedia.org/wiki/Lutz_Feld",
-   "source": "https://commons.wikimedia.org/wiki/File:Lutz%20Feld.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Lutz%20Feld.jpg",
+   "clues": [
+    "the great outdoors",
+    "a big smile"
+   ]
   },
   {
    "id": 105,
@@ -1209,7 +1618,11 @@
    "p": 0.857,
    "bio": "German physicist",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Karsten%20Danzmann%20Wissenschaftspreis%202016%20Halbprofil.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Karsten%20Danzmann%20Wissenschaftspreis%202016%20Halbprofil.jpg",
+   "clues": [
+    "a suit and tie",
+    "a studio headshot"
+   ]
   },
   {
    "id": 151,
@@ -1220,7 +1633,8 @@
    "p": 0.571,
    "bio": "",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Michael%20Komorek%20%282017%29.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Michael%20Komorek%20%282017%29.jpg",
+   "clues": []
   },
   {
    "id": 51,
@@ -1231,7 +1645,10 @@
    "p": 0.429,
    "bio": "Polish mathematician",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Andrzej%20Wieczorek.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Andrzej%20Wieczorek.jpg",
+   "clues": [
+    "a sweater"
+   ]
   },
   {
    "id": 154,
@@ -1242,7 +1659,11 @@
    "p": 0.577,
    "bio": "American physicist (1923\u20132006)",
    "wiki": "https://en.wikipedia.org/wiki/Kenneth_Case",
-   "source": "https://commons.wikimedia.org/wiki/File:Kenneth%20Myron%20Case%2C%20December%201965.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Kenneth%20Myron%20Case%2C%20December%201965.jpg",
+   "clues": [
+    "a studio headshot",
+    "a suit and tie"
+   ]
   },
   {
    "id": 92,
@@ -1253,7 +1674,10 @@
    "p": 0.788,
    "bio": "American physicist (1918\u20132011)",
    "wiki": "https://en.wikipedia.org/wiki/Lawrence_H._Johnston",
-   "source": "https://commons.wikimedia.org/wiki/File:Lawrence%20Johnston%20on%20Tinian%20%28cropped%29.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Lawrence%20Johnston%20on%20Tinian%20%28cropped%29.jpg",
+   "clues": [
+    "an old black-and-white photo"
+   ]
   },
   {
    "id": 11,
@@ -1264,7 +1688,11 @@
    "p": 0.423,
    "bio": "Russian mathematician",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:%D0%9F%D0%B8%D0%BD%D1%83%D1%81%20%D0%90%D0%93.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:%D0%9F%D0%B8%D0%BD%D1%83%D1%81%20%D0%90%D0%93.jpg",
+   "clues": [
+    "hippie vibes",
+    "a sweater"
+   ]
   },
   {
    "id": 1,
@@ -1275,7 +1703,11 @@
    "p": 0.073,
    "bio": "English mathematician (1934\u20132006)",
    "wiki": "https://en.wikipedia.org/wiki/Bill_Parry_(mathematician)",
-   "source": "https://commons.wikimedia.org/wiki/File:Parry%20william%20oberwolfach.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Parry%20william%20oberwolfach.jpg",
+   "clues": [
+    "the great outdoors",
+    "hippie vibes"
+   ]
   },
   {
    "id": 125,
@@ -1286,7 +1718,11 @@
    "p": 0.936,
    "bio": "American physicist",
    "wiki": "https://en.wikipedia.org/wiki/Chih-Kung_Jen",
-   "source": "https://commons.wikimedia.org/wiki/File:Photograph%20of%20Chih-Kung%20Jen%20from%20the%20Press%20Communications%20Office%20of%20the%20Applied%20Physics%20Laboratory%2C%20February%201962%20%28JScholarship%29.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Photograph%20of%20Chih-Kung%20Jen%20from%20the%20Press%20Communications%20Office%20of%20the%20Applied%20Physics%20Laboratory%2C%20February%201962%20%28JScholarship%29.jpg",
+   "clues": [
+    "lab equipment",
+    "an old black-and-white photo"
+   ]
   },
   {
    "id": 117,
@@ -1297,7 +1733,11 @@
    "p": 0.41,
    "bio": "Belgian theoretical physicist",
    "wiki": "https://en.wikipedia.org/wiki/Marc_Henneaux",
-   "source": "https://commons.wikimedia.org/wiki/File:Henneaux11.jpeg"
+   "source": "https://commons.wikimedia.org/wiki/File:Henneaux11.jpeg",
+   "clues": [
+    "a sweater",
+    "confidence"
+   ]
   },
   {
    "id": 149,
@@ -1308,7 +1748,11 @@
    "p": 0.18,
    "bio": "Italian mathematical physicist",
    "wiki": "https://en.wikipedia.org/wiki/Sergio_Doplicher",
-   "source": "https://commons.wikimedia.org/wiki/File:Doplicher%20sergio.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Doplicher%20sergio.jpg",
+   "clues": [
+    "the great outdoors",
+    "a big smile"
+   ]
   },
   {
    "id": 7,
@@ -1319,7 +1763,11 @@
    "p": 0.712,
    "bio": "Slovene mathematician",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Niko%20Prijatelj.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Niko%20Prijatelj.jpg",
+   "clues": [
+    "a lecture pose",
+    "a suit and tie"
+   ]
   },
   {
    "id": 33,
@@ -1330,7 +1778,10 @@
    "p": 0.401,
    "bio": "Chinese-American mathematician and poet (1911-2004)",
    "wiki": "https://en.wikipedia.org/wiki/Shiing-Shen_Chern",
-   "source": "https://commons.wikimedia.org/wiki/File:Shiing-shen%20Chern%201988%20%28re-scanned%29%20%28cropped-1%29.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Shiing-shen%20Chern%201988%20%28re-scanned%29%20%28cropped-1%29.jpg",
+   "clues": [
+    "the great outdoors"
+   ]
   },
   {
    "id": 152,
@@ -1341,7 +1792,11 @@
    "p": 0.479,
    "bio": "British physicist",
    "wiki": "https://en.wikipedia.org/wiki/Jenny_Nelson",
-   "source": "https://commons.wikimedia.org/wiki/File:Professor%20Jenny%20Nelson%20FRS.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Professor%20Jenny%20Nelson%20FRS.jpg",
+   "clues": [
+    "a big smile",
+    "messy hair"
+   ]
   },
   {
    "id": 110,
@@ -1352,7 +1807,11 @@
    "p": 0.736,
    "bio": "physicist",
    "wiki": "https://en.wikipedia.org/wiki/A._R._Frank_Wazzan",
-   "source": "https://commons.wikimedia.org/wiki/File:Frank%20Wazzan%2C%20Ph.D..jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Frank%20Wazzan%2C%20Ph.D..jpg",
+   "clues": [
+    "a suit and tie",
+    "a studio headshot"
+   ]
   },
   {
    "id": 56,
@@ -1363,7 +1822,11 @@
    "p": 0.146,
    "bio": "Russian mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Alexander_Givental",
-   "source": "https://commons.wikimedia.org/wiki/File:Alexander%20Givental.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Alexander%20Givental.jpg",
+   "clues": [
+    "hippie vibes",
+    "a big smile"
+   ]
   },
   {
    "id": 61,
@@ -1374,7 +1837,10 @@
    "p": 0.437,
    "bio": "French mathematician",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Charles-Albert%20Lehalle.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Charles-Albert%20Lehalle.jpg",
+   "clues": [
+    "confidence"
+   ]
   },
   {
    "id": 70,
@@ -1385,7 +1851,11 @@
    "p": 0.034,
    "bio": "Italian mathematician (born 1965)",
    "wiki": "https://en.wikipedia.org/wiki/Giovanni_Alberti_(mathematician)",
-   "source": "https://commons.wikimedia.org/wiki/File:Giovanni%20Alberti.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Giovanni%20Alberti.jpg",
+   "clues": [
+    "the great outdoors",
+    "a t-shirt"
+   ]
   },
   {
    "id": 123,
@@ -1396,7 +1866,11 @@
    "p": 0.824,
    "bio": "Spanish physicist (1950-2024)",
    "wiki": "https://en.wikipedia.org/wiki/Emilio_Lora-Tamayo",
-   "source": "https://commons.wikimedia.org/wiki/File:Emilio%20Lora-Tamayo%202014%20%28cropped%29.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Emilio%20Lora-Tamayo%202014%20%28cropped%29.jpg",
+   "clues": [
+    "a suit and tie",
+    "a lecture pose"
+   ]
   },
   {
    "id": 52,
@@ -1407,7 +1881,11 @@
    "p": 0.128,
    "bio": "Russian-American mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Michael_Kapovich",
-   "source": "https://commons.wikimedia.org/wiki/File:Kapovich%20misha.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Kapovich%20misha.jpg",
+   "clues": [
+    "the great outdoors",
+    "nerd energy"
+   ]
   },
   {
    "id": 80,
@@ -1418,7 +1896,11 @@
    "p": 0.635,
    "bio": "German physicist",
    "wiki": "https://en.wikipedia.org/wiki/Christine_Silberhorn",
-   "source": "https://commons.wikimedia.org/wiki/File:2025-11-24%20Gesellschaft%20von%20Freunden%20der%20TU%20Berlin%20Technologieforum%202025%20Quantentechnologie%20Christine%20Silberhorn%20Diskussion.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:2025-11-24%20Gesellschaft%20von%20Freunden%20der%20TU%20Berlin%20Technologieforum%202025%20Quantentechnologie%20Christine%20Silberhorn%20Diskussion.jpg",
+   "clues": [
+    "a lecture pose",
+    "a blackboard"
+   ]
   },
   {
    "id": 111,
@@ -1429,7 +1911,11 @@
    "p": 0.813,
    "bio": "Japanese physicist",
    "wiki": "https://en.wikipedia.org/wiki/Yasunobu_Nakamura",
-   "source": "https://commons.wikimedia.org/wiki/File:Yasunobu%20Nakamura%20cropped%20Yasunobu%20Nakamura%20202303.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Yasunobu%20Nakamura%20cropped%20Yasunobu%20Nakamura%20202303.jpg",
+   "clues": [
+    "a suit and tie",
+    "a studio headshot"
+   ]
   },
   {
    "id": 90,
@@ -1440,7 +1926,11 @@
    "p": 0.642,
    "bio": "Brazilian physicist",
    "wiki": "https://en.wikipedia.org/wiki/Constantino_Tsallis",
-   "source": "https://commons.wikimedia.org/wiki/File:Constantino%20Tsallis%20February%202010.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Constantino%20Tsallis%20February%202010.jpg",
+   "clues": [
+    "a studio headshot",
+    "a serious stare"
+   ]
   },
   {
    "id": 135,
@@ -1451,7 +1941,11 @@
    "p": 0.475,
    "bio": "theoretical physicist",
    "wiki": "https://en.wikipedia.org/wiki/Stefan_Karol_Estreicher",
-   "source": "https://commons.wikimedia.org/wiki/File:Stefan%20Karol%20Estreicher.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Stefan%20Karol%20Estreicher.jpg",
+   "clues": [
+    "the great outdoors",
+    "a t-shirt"
+   ]
   },
   {
    "id": 120,
@@ -1462,7 +1956,11 @@
    "p": 0.655,
    "bio": "Turkish-American physicist (born 1967)",
    "wiki": "https://en.wikipedia.org/wiki/Taner_Edis",
-   "source": "https://commons.wikimedia.org/wiki/File:Taner%20Edis%20at%20TAM13%207-17-15.JPG"
+   "source": "https://commons.wikimedia.org/wiki/File:Taner%20Edis%20at%20TAM13%207-17-15.JPG",
+   "clues": [
+    "a lecture pose",
+    "a blackboard"
+   ]
   },
   {
    "id": 84,
@@ -1473,7 +1971,11 @@
    "p": 0.307,
    "bio": "Soviet and Russian scientists",
    "wiki": "https://en.wikipedia.org/wiki/Vladimir_Petviashvili",
-   "source": "https://commons.wikimedia.org/wiki/File:Vladimir%20Petviashvili.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Vladimir%20Petviashvili.jpg",
+   "clues": [
+    "a t-shirt",
+    "messy hair"
+   ]
   },
   {
    "id": 18,
@@ -1484,7 +1986,10 @@
    "p": 0.585,
    "bio": "American mathematician (1907\u20131989)",
    "wiki": "https://en.wikipedia.org/wiki/Hassler_Whitney",
-   "source": "https://commons.wikimedia.org/wiki/File:HasslerWhitney-April1973.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:HasslerWhitney-April1973.jpg",
+   "clues": [
+    "an old black-and-white photo"
+   ]
   },
   {
    "id": 25,
@@ -1495,7 +2000,10 @@
    "p": 0.769,
    "bio": "mathematician (1933-2014)",
    "wiki": "https://en.wikipedia.org/wiki/Samuel_Gitler_Hammer",
-   "source": "https://commons.wikimedia.org/wiki/File:Samuel%20Gitler.png"
+   "source": "https://commons.wikimedia.org/wiki/File:Samuel%20Gitler.png",
+   "clues": [
+    "a lecture pose"
+   ]
   },
   {
    "id": 79,
@@ -1506,7 +2014,11 @@
    "p": 0.586,
    "bio": "Ph.D. Universiteit van Amsterdam 2002",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Publieke%20Domeindag%202026%20%28187%29%20%2855143346136%29.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Publieke%20Domeindag%202026%20%28187%29%20%2855143346136%29.jpg",
+   "clues": [
+    "a lecture pose",
+    "a blackboard"
+   ]
   },
   {
    "id": 37,
@@ -1517,7 +2029,10 @@
    "p": 0.05,
    "bio": "American mathematician (1936\u20132014)",
    "wiki": "https://en.wikipedia.org/wiki/Thomas_W._Hungerford",
-   "source": "https://commons.wikimedia.org/wiki/File:Thomas%20Hungerford.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Thomas%20Hungerford.jpg",
+   "clues": [
+    "nerd energy"
+   ]
   },
   {
    "id": 136,
@@ -1528,7 +2043,11 @@
    "p": 0.864,
    "bio": "German physicist (1925-2021)",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:201607bonn%20nr%2009.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:201607bonn%20nr%2009.jpg",
+   "clues": [
+    "lab equipment",
+    "a lecture pose"
+   ]
   },
   {
    "id": 64,
@@ -1539,7 +2058,11 @@
    "p": 0.105,
    "bio": "American mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Ray_Kunze",
-   "source": "https://commons.wikimedia.org/wiki/File:Kunze%20ray.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Kunze%20ray.jpg",
+   "clues": [
+    "the great outdoors",
+    "hippie vibes"
+   ]
   },
   {
    "id": 24,
@@ -1550,7 +2073,11 @@
    "p": 0.125,
    "bio": "German mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Harald_Garcke",
-   "source": "https://commons.wikimedia.org/wiki/File:Garcke.jpeg"
+   "source": "https://commons.wikimedia.org/wiki/File:Garcke.jpeg",
+   "clues": [
+    "the great outdoors",
+    "a big smile"
+   ]
   },
   {
    "id": 143,
@@ -1561,7 +2088,11 @@
    "p": 0.371,
    "bio": "Danish physicist",
    "wiki": "https://en.wikipedia.org/wiki/Lene_Hau",
-   "source": "https://commons.wikimedia.org/wiki/File:Professor%20Lene%20Hau%20%28cropped%29.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Professor%20Lene%20Hau%20%28cropped%29.jpg",
+   "clues": [
+    "hippie vibes",
+    "a big smile"
+   ]
   },
   {
    "id": 72,
@@ -1572,7 +2103,10 @@
    "p": 0.802,
    "bio": "Czech mathematician and WWII resistance fighter",
    "wiki": "https://en.wikipedia.org/wiki/Anton\u00edn_Kollert",
-   "source": "https://commons.wikimedia.org/wiki/File:Csm%200098784001.094468a%207026c36f57.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Csm%200098784001.094468a%207026c36f57.jpg",
+   "clues": [
+    "a serious stare"
+   ]
   },
   {
    "id": 35,
@@ -1583,7 +2117,11 @@
    "p": 0.074,
    "bio": "German mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Christof_Gei\u00df",
-   "source": "https://commons.wikimedia.org/wiki/File:Geiss%20christof.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Geiss%20christof.jpg",
+   "clues": [
+    "the great outdoors",
+    "hippie vibes"
+   ]
   },
   {
    "id": 129,
@@ -1594,7 +2132,11 @@
    "p": 0.794,
    "bio": "Soviet physicist",
    "wiki": "https://en.wikipedia.org/wiki/Feodor_Ivanovich_Vilesov",
-   "source": "https://commons.wikimedia.org/wiki/File:Vilesov%20in%201977.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Vilesov%20in%201977.jpg",
+   "clues": [
+    "a suit and tie",
+    "an old black-and-white photo"
+   ]
   },
   {
    "id": 55,
@@ -1605,7 +2147,11 @@
    "p": 0.377,
    "bio": "Russian-american mathematician",
    "wiki": "https://en.wikipedia.org/wiki/Efim_Zelmanov",
-   "source": "https://commons.wikimedia.org/wiki/File:EfimIZelmanov.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:EfimIZelmanov.jpg",
+   "clues": [
+    "hippie vibes",
+    "a big smile"
+   ]
   },
   {
    "id": 91,
@@ -1616,7 +2162,11 @@
    "p": 0.289,
    "bio": "American physicist",
    "wiki": "https://en.wikipedia.org/wiki/J._Virginia_Lincoln",
-   "source": "https://commons.wikimedia.org/wiki/File:JVirginiaLincoln1976.png"
+   "source": "https://commons.wikimedia.org/wiki/File:JVirginiaLincoln1976.png",
+   "clues": [
+    "hippie vibes",
+    "messy hair"
+   ]
   },
   {
    "id": 122,
@@ -1627,7 +2177,11 @@
    "p": 0.204,
    "bio": "South Korean physicist",
    "wiki": "https://en.wikipedia.org/wiki/Kim_Sun-kee",
-   "source": "https://commons.wikimedia.org/wiki/File:Sun%20Kee%20Kim.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Sun%20Kee%20Kim.jpg",
+   "clues": [
+    "the great outdoors",
+    "a big smile"
+   ]
   },
   {
    "id": 77,
@@ -1638,7 +2192,8 @@
    "p": 0.527,
    "bio": "Italian physicist (born 1973)",
    "wiki": "",
-   "source": "https://commons.wikimedia.org/wiki/File:Photo%20Ciuti%20MPQ%20Seine.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Photo%20Ciuti%20MPQ%20Seine.jpg",
+   "clues": []
   },
   {
    "id": 103,
@@ -1649,7 +2204,11 @@
    "p": 0.833,
    "bio": "British physicist (1910\u20131980)",
    "wiki": "https://en.wikipedia.org/wiki/James_L._Tuck",
-   "source": "https://commons.wikimedia.org/wiki/File:James%20Leslie%20Tuck%2C%20Los%20Alamos%20Laboratory%20ID%20badge.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:James%20Leslie%20Tuck%2C%20Los%20Alamos%20Laboratory%20ID%20badge.jpg",
+   "clues": [
+    "a suit and tie",
+    "an old black-and-white photo"
+   ]
   },
   {
    "id": 124,
@@ -1660,7 +2219,11 @@
    "p": 0.6,
    "bio": "American astrophysicist (1935\u20132024)",
    "wiki": "https://en.wikipedia.org/wiki/Donald_D._Clayton",
-   "source": "https://commons.wikimedia.org/wiki/File:Donald%20D%20Clayton.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Donald%20D%20Clayton.jpg",
+   "clues": [
+    "a studio headshot",
+    "a suit and tie"
+   ]
   },
   {
    "id": 130,
@@ -1671,7 +2234,10 @@
    "p": 0.437,
    "bio": "Argentine physicist (1924\u20131983)",
    "wiki": "https://en.wikipedia.org/wiki/Jorge_Sabato",
-   "source": "https://commons.wikimedia.org/wiki/File:Jorge%20alberto%20sabato.JPG"
+   "source": "https://commons.wikimedia.org/wiki/File:Jorge%20alberto%20sabato.JPG",
+   "clues": [
+    "nerd energy"
+   ]
   },
   {
    "id": 66,
@@ -1682,7 +2248,11 @@
    "p": 0.631,
    "bio": "English mathematician",
    "wiki": "https://en.wikipedia.org/wiki/David_B._A._Epstein",
-   "source": "https://commons.wikimedia.org/wiki/File:David%20Epstein%202009.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:David%20Epstein%202009.jpg",
+   "clues": [
+    "a lecture pose",
+    "bookshelves"
+   ]
   },
   {
    "id": 10,
@@ -1693,7 +2263,11 @@
    "p": 0.153,
    "bio": "American mathematician (1916\u20131999)",
    "wiki": "https://en.wikipedia.org/wiki/John_L._Kelley",
-   "source": "https://commons.wikimedia.org/wiki/File:John%20L.%20Kelley%201968.jpeg"
+   "source": "https://commons.wikimedia.org/wiki/File:John%20L.%20Kelley%201968.jpeg",
+   "clues": [
+    "hippie vibes",
+    "the great outdoors"
+   ]
   },
   {
    "id": 107,
@@ -1704,7 +2278,8 @@
    "p": 0.551,
    "bio": "German theoretical physicist",
    "wiki": "https://en.wikipedia.org/wiki/Eckart_Marsch",
-   "source": "https://commons.wikimedia.org/wiki/File:Eckart%20Marsch%20Friedrichstadt%20Juli%202018.tif"
+   "source": "https://commons.wikimedia.org/wiki/File:Eckart%20Marsch%20Friedrichstadt%20Juli%202018.tif",
+   "clues": []
   },
   {
    "id": 98,
@@ -1715,7 +2290,10 @@
    "p": 0.476,
    "bio": "French physicist",
    "wiki": "https://en.wikipedia.org/wiki/Mathias_Fink",
-   "source": "https://commons.wikimedia.org/wiki/File:Villeneuve-d%27Ascq%20-%20IEMN%20-%20Mathias%20Fink%20-%202.jpg"
+   "source": "https://commons.wikimedia.org/wiki/File:Villeneuve-d%27Ascq%20-%20IEMN%20-%20Mathias%20Fink%20-%202.jpg",
+   "clues": [
+    "a sweater"
+   ]
   }
  ]
 }

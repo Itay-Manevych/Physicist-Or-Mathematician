@@ -1,79 +1,75 @@
-// GET  /api/leaderboard          -> { top: [...], stats: {...} }
-// POST /api/leaderboard {name, guesses:[{id, g}]}  -> { rank, total, entry, top, stats }
+// Leaderboards for "vs machine" games: all-time, and one per daily challenge.
 //
-// Scores are recomputed on the server from the guesses and the game's answer key, so a submitted score
-// always matches real fighters. (It's a game among friends; this is a sanity check, not anti-cheat.)
-const redis = require("./_redis");
-const DATA = require("../game/data.json");
+// GET  /api/leaderboard                  -> { top, stats, daily: { day, number, top, count } }
+// GET  /api/leaderboard?day=YYYY-MM-DD   -> same, with that day's daily board
+// POST /api/leaderboard {name, guesses:[{id, g}], daily?: "YYYY-MM-DD"}
+//      -> { rank, total, entry, ...board }
+//
+// Scores are recomputed from the guesses and the answer key. Daily entries must use that day's fighters.
+const G = require("./_game");
 
-const ROUNDS = 10;
-const FIGHTERS = new Map(DATA.people.map((p) => [p.id, p]));
-const K = { board: "pom:lb", entries: "pom:entries", stats: "pom:stats" };
+const K = { board: "pom:lb", entries: "pom:entries", stats: "pom:stats",
+  daily: (day) => `pom:daily:${day}`, dailyEntries: (day) => `pom:daily:${day}:entries` };
+const DAILY_TTL = 60 * 60 * 24 * 8;
+const isDay = (d) => typeof d === "string" && /^\d{4}-\d{2}-\d{2}$/.test(d) && !isNaN(Date.parse(d));
 
-function cleanName(name) {
-  return String(name || "").normalize("NFKC").replace(/[^\p{L}\p{N} ._-]/gu, "").replace(/\s+/g, " ").trim().slice(0, 12);
+async function topOf(boardKey, entriesKey, n = 10) {
+  const [ids, count] = await G.redis.pipeline([["ZREVRANGE", boardKey, 0, n - 1], ["ZCARD", boardKey]]);
+  const rows = ids.length ? (await G.redis.pipeline([["HMGET", entriesKey, ...ids]]))[0] : [];
+  return { top: rows.filter(Boolean).map((r) => JSON.parse(r)), count };
 }
 
-async function top(n = 10) {
-  const [ids, stats] = await redis.pipeline([["ZREVRANGE", K.board, 0, n - 1], ["HGETALL", K.stats]]);
-  const rows = ids.length ? (await redis.pipeline([["HMGET", K.entries, ...ids]]))[0] : [];
+async function boards(day) {
+  const [all, daily, [stats]] = await Promise.all([
+    topOf(K.board, K.entries), topOf(K.daily(day), K.dailyEntries(day)), G.redis.pipeline([["HGETALL", K.stats]])]);
   const s = {};
   for (let i = 0; i < (stats || []).length; i += 2) s[stats[i]] = Number(stats[i + 1]);
   return {
-    top: rows.filter(Boolean).map((r) => JSON.parse(r)),
+    top: all.top,
     stats: { games: s.games || 0, rounds: s.rounds || 0, human: s.human || 0, ai: s.ai || 0 },
+    daily: { day, number: G.Daily.number(day), top: daily.top, count: daily.count },
   };
 }
 
-async function submit(body, ip) {
-  const name = cleanName(body.name);
-  const guesses = Array.isArray(body.guesses) ? body.guesses : [];
-  const ids = new Set(guesses.map((x) => x && x.id));
+async function submit(req) {
+  const b = G.body(req);
+  const name = G.cleanName(b.name);
+  const guesses = G.parseGuesses(b.guesses);
   if (!name) return [400, { error: "name required" }];
-  if (guesses.length !== ROUNDS || ids.size !== ROUNDS || ![...ids].every((id) => FIGHTERS.has(id))
-      || !guesses.every((x) => x.g === "phys" || x.g === "math")) return [400, { error: "invalid game" }];
-
-  const [count] = await redis.pipeline([["INCR", `pom:rl:${ip}`], ["EXPIRE", `pom:rl:${ip}`, 60]]);
-  if (count > 10) return [429, { error: "slow down" }];
-
-  let you = 0, ai = 0;
-  for (const { id, g } of guesses) {
-    const p = FIGHTERS.get(id);
-    you += g === p.answer;
-    ai += (p.p >= 0.5 ? "phys" : "math") === p.answer;
+  if (!guesses) return [400, { error: "invalid game" }];
+  const day = b.daily;
+  if (day !== undefined) {
+    // only today's (UTC) daily, allowing a day either side for time zones
+    const ok = [-1, 0, 1].map((d) => G.Daily.today(Date.now() + d * 86400000)).includes(day);
+    const expected = isDay(day) && G.Daily.fighters(day, G.IDS, G.ROUNDS);
+    if (!ok || !expected || expected.some((id, i) => guesses[i].id !== id)) return [400, { error: "not today's daily" }];
   }
+  if (await G.rateLimited(req, "lb")) return [429, { error: "slow down" }];
+
+  const { you, ai } = G.score(guesses);
   const t = Date.now();
-  const id = `${t.toString(36)}${Math.random().toString(36).slice(2, 6)}`;
-  const entry = { id, name, you, ai, t };
-  // rank by hits, then by margin over the machine, then earlier games first
-  const score = you * 1000 + (you - ai + ROUNDS) * 10 + (1 - t / 1e13);
-  const [, , , , , , rank, total] = await redis.pipeline([
-    ["ZADD", K.board, score, id],
-    ["HSET", K.entries, id, JSON.stringify(entry)],
+  const entry = { id: G.newId(t), name, you, ai, t };
+  const [boardKey, entriesKey] = day ? [K.daily(day), K.dailyEntries(day)] : [K.board, K.entries];
+  const cmds = [
+    ["ZADD", boardKey, G.rankScore(you, ai, t), entry.id],
+    ["HSET", entriesKey, entry.id, JSON.stringify(entry)],
     ["HINCRBY", K.stats, "games", 1],
-    ["HINCRBY", K.stats, "rounds", ROUNDS],
+    ["HINCRBY", K.stats, "rounds", G.ROUNDS],
     ["HINCRBY", K.stats, "human", you],
     ["HINCRBY", K.stats, "ai", ai],
-    ["ZREVRANK", K.board, id],
-    ["ZCARD", K.board],
-  ]);
-  return [200, { rank: rank + 1, total, entry, ...(await top()) }];
+    ["ZREVRANK", boardKey, entry.id],
+    ["ZCARD", boardKey],
+  ];
+  if (day) cmds.push(["EXPIRE", boardKey, DAILY_TTL], ["EXPIRE", entriesKey, DAILY_TTL]);
+  const out = await G.redis.pipeline(cmds);
+  return [200, { rank: out[6] + 1, total: out[7], entry, ...(await boards(day || G.Daily.today())) }];
 }
 
-module.exports = async (req, res) => {
-  res.setHeader("Cache-Control", "no-store");
-  if (!redis.configured()) return res.status(503).json({ error: "leaderboard not configured" });
-  try {
-    if (req.method === "GET") return res.status(200).json(await top());
-    if (req.method === "POST") {
-      const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
-      const ip = String(req.headers["x-forwarded-for"] || "local").split(",")[0].trim();
-      const [status, payload] = await submit(body, ip);
-      return res.status(status).json(payload);
-    }
-    return res.status(405).json({ error: "method not allowed" });
-  } catch (e) {
-    console.error(e);
-    return res.status(500).json({ error: "server error" });
+module.exports = G.handler(async (req) => {
+  if (req.method === "GET") {
+    const day = G.query(req).get("day");
+    return [200, await boards(isDay(day) ? day : G.Daily.today())];
   }
-};
+  if (req.method === "POST") return submit(req);
+  return [405, { error: "method not allowed" }];
+});
