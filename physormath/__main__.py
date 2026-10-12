@@ -17,7 +17,8 @@ Guess the department (separate mode)
   dept {fetch,train,game}     7 departments: data/dept/, outputs/dept/, game/dept/
 Research
   experiment {classifiers,features,backbones,extract,ensembles}   model experiments -> outputs/experiments.csv
-  finetune <backbone> <face|full>                 LP-FT a vision transformer + blend with the probes
+  finetune <backbone> <face|full>                 LP-FT a vision transformer + blend with the probes (local GPU)
+  kaggle {pack,blend}                             fine-tune MetaCLIP-2 on a free Kaggle GPU (see kaggle/)
 """
 import argparse
 import os
@@ -39,6 +40,7 @@ def main():
     sub.add_parser("clean").add_argument("--apply", action="store_true")
     sub.add_parser("predict").add_argument("photos", nargs="+")
     sub.add_parser("dept").add_argument("stage", choices=["fetch", "train", "game"])
+    sub.add_parser("kaggle").add_argument("stage", choices=["pack", "blend"])
     ft = sub.add_parser("finetune")
     ft.add_argument("backbone")
     ft.add_argument("view", choices=["face", "full"])
@@ -82,6 +84,9 @@ def main():
     elif a.cmd == "game":
         from .game import build
         build()
+    elif a.cmd == "kaggle":
+        from . import kaggle
+        getattr(kaggle, a.stage)()
     elif a.cmd == "dept":
         from . import departments
         getattr(departments, a.stage)()
