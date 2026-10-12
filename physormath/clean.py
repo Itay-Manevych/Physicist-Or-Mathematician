@@ -64,8 +64,26 @@ def classify(feats, prompts):
 
 
 def photo_kind(tag=""):
-    """'photo' or the non-photo category, from the whole image and (as a second opinion) the face crop."""
+    """'photo' or the non-photo category, from the whole image and (as a second opinion) the face crop.
+
+    Cached in data/photo_kind<tag>.npy (recomputed when the number of photos changes)."""
+    cache = DATA / f"photo_kind{tag}.npy"
+    n = np.load(DATA / f"feats_clipH_full{tag}.npy", mmap_mode="r").shape[0]
+    if cache.exists():
+        kind = np.load(cache, allow_pickle=True)
+        if len(kind) == n:
+            return kind
+    kind = _photo_kind(tag)
+    np.save(cache, kind)
+    return kind
+
+
+def _photo_kind(tag):
     full = classify(np.load(DATA / f"feats_clipH_full{tag}.npy"), PROMPTS)
+    if not (DATA / f"feats_clipH{tag}.npy").exists():  # no face-crop CLIP-H for this source: whole-image check only
+        kind = full.idxmax(1).values.copy()
+        kind[full["photo"].values > 0.4] = "photo"
+        return kind
     face = classify(np.load(DATA / f"feats_clipH{tag}.npy"), FACE_PROMPTS)
     kind = full.idxmax(1).values.copy()
     kind[full["photo"].values > 0.4] = "photo"

@@ -4,6 +4,7 @@ Data
   fetch                       Wikidata physicists/mathematicians -> data/people.csv, data/images/
   fetch-subfields             people listed only under a sub-field -> data/new/
   fetch-extra                 more Commons photos per clean person -> data/extra/
+  fetch-depicts               photos tagged "depicts <person>" on Commons -> data/depicts/
   scrape {discover,probe,crawl,simons}   university / Simons headshots -> data/uni/
 Processing
   process <images.csv> [tag]  face crops + all embeddings -> data/faces<tag>.csv, data/feats_*<tag>.npy
@@ -14,6 +15,9 @@ Model
   game                        build the game's data from held-out test people -> game/
 Guess the department (separate mode)
   dept {fetch,train,game}     7 departments: data/dept/, outputs/dept/, game/dept/
+Research
+  experiment {classifiers,features,backbones,extract,ensembles}   model experiments -> outputs/experiments.csv
+  finetune <backbone> <face|full>                 LP-FT a vision transformer + blend with the probes
 """
 import argparse
 import os
@@ -26,7 +30,7 @@ def main():
     ap = argparse.ArgumentParser(prog="python -m physormath", description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
-    for name in ["fetch", "fetch-subfields", "fetch-extra", "train", "game"]:
+    for name in ["fetch", "fetch-subfields", "fetch-extra", "fetch-depicts", "fetch-more", "fetch-older", "train", "game"]:
         sub.add_parser(name)
     sub.add_parser("scrape").add_argument("stage", choices=["discover", "probe", "crawl", "simons"])
     p = sub.add_parser("process")
@@ -35,6 +39,10 @@ def main():
     sub.add_parser("clean").add_argument("--apply", action="store_true")
     sub.add_parser("predict").add_argument("photos", nargs="+")
     sub.add_parser("dept").add_argument("stage", choices=["fetch", "train", "game"])
+    ft = sub.add_parser("finetune")
+    ft.add_argument("backbone")
+    ft.add_argument("view", choices=["face", "full"])
+    sub.add_parser("experiment").add_argument("suite", choices=["classifiers", "features", "backbones", "extract", "ensembles"])
     a = ap.parse_args()
 
     if a.cmd == "fetch":
@@ -46,6 +54,15 @@ def main():
     elif a.cmd == "fetch-extra":
         from .wikidata import fetch_extra
         fetch_extra()
+    elif a.cmd == "fetch-older":
+        from .wikidata import fetch_older
+        fetch_older()
+    elif a.cmd == "fetch-more":
+        from .wikidata import fetch_more_photos
+        fetch_more_photos()
+    elif a.cmd == "fetch-depicts":
+        from .wikidata import fetch_depicts
+        fetch_depicts()
     elif a.cmd == "scrape":
         from . import scrape
         getattr(scrape, a.stage)()
@@ -68,6 +85,12 @@ def main():
     elif a.cmd == "dept":
         from . import departments
         getattr(departments, a.stage)()
+    elif a.cmd == "finetune":
+        from .finetune import finetune
+        finetune(a.backbone, a.view)
+    elif a.cmd == "experiment":
+        from . import experiments
+        getattr(experiments, a.suite)()
     elif a.cmd == "predict":
         from .predict import judge
         judge(a.photos)

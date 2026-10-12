@@ -6,6 +6,8 @@ Whole photo and upper body: CLIP-H averaged over original / grayscale.
 
 Writes data/feats_<name><tag>.npy, row-aligned with the input CSV.
 """
+from pathlib import Path
+
 import numpy as np
 import open_clip
 import pandas as pd
@@ -14,7 +16,7 @@ from facenet_pytorch import InceptionResnetV1
 from PIL import Image, ImageOps
 from tqdm import tqdm
 
-from .config import BACKBONES, DATA, DEVICE
+from .config import BACKBONES, DATA, DEVICE, TIMM_BACKBONES
 from .faces import detector, open_image, pad_square, tight, upper_body
 
 
@@ -35,10 +37,17 @@ def load_backbone(name):
         def transform(im):
             return (torch.from_numpy(np.asarray(tight(im), dtype=np.float32)).permute(2, 0, 1) - 127.5) / 128.0
         return net, transform
+    if name in TIMM_BACKBONES:
+        import timm
+        net = timm.create_model(TIMM_BACKBONES[name], pretrained=True, num_classes=0, img_size=224).eval().half().to(DEVICE)
+        cfg = {**timm.data.resolve_data_config({}, model=net), "input_size": (3, 224, 224), "crop_pct": 1.0}
+        return (lambda x: net(x.half())), timm.data.create_transform(**cfg)
     arch, pretrained = BACKBONES[name]
-    model, _, preprocess = open_clip.create_model_and_transforms(arch, pretrained=pretrained, device=DEVICE)
-    model = model.half().eval()
-    return (lambda x: model.encode_image(x.half())), preprocess
+    # load on the CPU and move only the image tower to the GPU (the text tower isn't needed; saves memory)
+    model, _, preprocess = open_clip.create_model_and_transforms(arch, pretrained=pretrained, device="cpu", precision="fp16")
+    visual = model.visual.eval().to(DEVICE)
+    del model
+    return (lambda x: visual(x.half())), preprocess
 
 
 def embed_images(encode, transform, images, views):
@@ -52,8 +61,42 @@ def embed_images(encode, transform, images, views):
     return (e / e.norm(dim=-1, keepdim=True)).cpu().numpy()
 
 
+_moved = None
+
+
+def resolve(path):
+    """Path of an image, also when `clean --apply` moved it to data/excluded/<reason>/ (embeddings stay row-aligned)."""
+    global _moved
+    if Path(path).exists():
+        return path
+    if _moved is None:
+        _moved = {f"{q.parent.name}/{q.name}": str(q) for q in (DATA / "excluded").glob("*/*/*")}
+    p = Path(path)
+    return _moved.get(f"{p.parent.name}/{p.name}", path)
+
+
 def _done(path, n):
     return path.exists() and np.load(path, mmap_mode="r").shape[0] == n
+
+
+BATCH = {"bigG": 4, "mc2bigG": 4, "mc2H378": 8}  # images per batch (x4 augmented views); the largest model needs smaller batches on 6 GB
+
+
+def embed_full(csv, tag="", backbones=("clipH",), bs=16):
+    """Whole photo (padded to square), original + grayscale views -> data/feats_<name>_full<tag>.npy."""
+    files = pd.read_csv(csv).file.tolist()
+    for name in backbones:
+        out = DATA / f"feats_{name}_full{tag}.npy"
+        if _done(out, len(files)):
+            print("already embedded:", out.name)
+            continue
+        encode, transform = load_backbone(name)
+        b = BATCH.get(name, bs)
+        feats = [embed_images(encode, transform, [pad_square(open_image(resolve(f))) for f in files[i:i + b]], color_views)
+                 for i in tqdm(range(0, len(files), b), desc=f"{name} whole photo")]
+        np.save(out, np.concatenate(feats))
+        del encode
+        torch.cuda.empty_cache()
 
 
 def embed_faces(csv, tag="", backbones=("facenet", "clipL", "clipH", "siglip2"), bs=16):
@@ -64,8 +107,9 @@ def embed_faces(csv, tag="", backbones=("facenet", "clipL", "clipH", "siglip2"),
             print("already embedded:", out.name)
             continue
         encode, transform = load_backbone(name)
-        feats = [embed_images(encode, transform, [Image.open(f).convert("RGB") for f in files[i:i + bs]], face_views)
-                 for i in tqdm(range(0, len(files), bs), desc=name)]
+        b = BATCH.get(name, bs)
+        feats = [embed_images(encode, transform, [Image.open(resolve(f)).convert("RGB") for f in files[i:i + b]], face_views)
+                 for i in tqdm(range(0, len(files), b), desc=name)]
         np.save(out, np.concatenate(feats))
         del encode
         torch.cuda.empty_cache()

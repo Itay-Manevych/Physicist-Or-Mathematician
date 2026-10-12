@@ -87,13 +87,13 @@ def download_all(s, df, desc="downloading"):
         return list(tqdm(ex.map(lambda a: download(s, *a), zip(df.thumb, df.file)), total=len(df), desc=desc))
 
 
-def people_query(occ_qids):
+def people_query(occ_qids, born_from=MIN_BIRTH_YEAR, born_before=9999):
     values = " ".join(f"wd:{q}" for q in occ_qids)
     return f"""
     SELECT ?p ?pLabel (SAMPLE(?img) AS ?image) (SAMPLE(?birth) AS ?b) (SAMPLE(?genderLabel) AS ?g) WHERE {{
       VALUES ?o {{ {values} }}
       ?p wdt:P31 wd:Q5; wdt:P106 ?o; wdt:P18 ?img; wdt:P569 ?birth.
-      FILTER(YEAR(?birth) >= {MIN_BIRTH_YEAR})
+      FILTER(YEAR(?birth) >= {born_from} && YEAR(?birth) < {born_before})
       OPTIONAL {{ ?p wdt:P21 ?gender. ?gender rdfs:label ?genderLabel. FILTER(LANG(?genderLabel) = "en") }}
       OPTIONAL {{ ?p rdfs:label ?pLabel. FILTER(LANG(?pLabel) = "en") }}
     }} GROUP BY ?p ?pLabel"""
@@ -189,3 +189,88 @@ def fetch_extra(max_per_person=4):
     jobs["downloaded"] = download_all(s, jobs)
     jobs.to_csv(DATA / "extra.csv", index=False)
     print(len(jobs), "extra photos for", jobs.qid.nunique(), "people")
+
+
+def fetch_depicts(max_per_person=8):
+    """More photos per clean person: Commons files whose structured data says they depict that person (P180).
+    Skips the main portrait and photos already in data/extra.csv -> data/depicts.csv, data/depicts/."""
+    (DATA / "depicts").mkdir(parents=True, exist_ok=True)
+    clean = pd.read_csv(DATA / "clean.csv")
+    have = set(pd.read_csv(DATA / "extra.csv").title) if (DATA / "extra.csv").exists() else set()
+    s, jobs = session(), []
+    for row in tqdm(clean.itertuples(), total=len(clean), desc="searching depicts"):
+        own = "File:" + urllib.parse.unquote(row.img.rsplit("/", 1)[1]).replace("_", " ")
+        try:
+            pages = s.get(COMMONS_API, params={
+                "action": "query", "format": "json", "generator": "search", "gsrsearch": f"haswbstatement:P180={row.qid}",
+                "gsrnamespace": 6, "gsrlimit": 20, "prop": "imageinfo", "iiprop": "url|mime", "iiurlwidth": 500},
+                timeout=60).json()
+        except (requests.RequestException, ValueError):
+            continue
+        files = []
+        for p in pages.get("query", {}).get("pages", {}).values():
+            info = (p.get("imageinfo") or [{}])[0]
+            if (info.get("mime") in ("image/jpeg", "image/png") and info.get("thumburl")
+                    and p["title"] != own and p["title"] not in have):
+                files.append((p.get("index", 99), p["title"], info["thumburl"]))
+        for _, title, url in sorted(files)[:max_per_person]:
+            jobs.append({"qid": row.qid, "label": row.label, "title": title, "thumb": url,
+                         "file": image_path(title, "data/depicts")})
+        time.sleep(0.1)
+    jobs = pd.DataFrame(jobs).drop_duplicates("file")
+    jobs["downloaded"] = download_all(s, jobs)
+    jobs.to_csv(DATA / "depicts.csv", index=False)
+    print(len(jobs), "depicts photos for", jobs.qid.nunique(), "people")
+
+
+def fetch_more_photos(max_per_person=8):
+    """Deeper pass over each clean person's Commons category: up to `max_per_person` photos beyond the ones in
+    data/extra.csv and data/depicts.csv -> data/more.csv, data/more/ (identity is verified later with FaceNet)."""
+    (DATA / "more").mkdir(parents=True, exist_ok=True)
+    clean = pd.read_csv(DATA / "clean.csv")
+    clean = clean[clean.commons_category.fillna("") != ""]
+    have = set()
+    for f in ["extra.csv", "depicts.csv"]:
+        if (DATA / f).exists():
+            have |= set(pd.read_csv(DATA / f).title)
+    s, jobs = session(), []
+    for row in tqdm(clean.itertuples(), total=len(clean), desc="listing categories (deep)"):
+        own = "File:" + urllib.parse.unquote(row.img.rsplit("/", 1)[1]).replace("_", " ")
+        try:
+            pages = s.get(COMMONS_API, params={
+                "action": "query", "format": "json", "generator": "categorymembers",
+                "gcmtitle": f"Category:{row.commons_category}", "gcmtype": "file", "gcmlimit": 60,
+                "prop": "imageinfo", "iiprop": "url|mime", "iiurlwidth": 500}, timeout=60).json()
+        except (requests.RequestException, ValueError):
+            continue
+        files = []
+        for p in pages.get("query", {}).get("pages", {}).values():
+            info = (p.get("imageinfo") or [{}])[0]
+            if (info.get("mime") in ("image/jpeg", "image/png") and info.get("thumburl")
+                    and p["title"] != own and p["title"] not in have):
+                files.append((p["title"], info["thumburl"]))
+        for title, url in sorted(files)[:max_per_person]:
+            jobs.append({"qid": row.qid, "label": row.label, "title": title, "thumb": url,
+                         "file": image_path(title, "data/more")})
+        time.sleep(0.1)
+    jobs = pd.DataFrame(jobs).drop_duplicates("file")
+    jobs["downloaded"] = download_all(s, jobs)
+    jobs.to_csv(DATA / "more.csv", index=False)
+    print(len(jobs), "more photos for", jobs.qid.nunique(), "people")
+
+
+def fetch_older(born_from=1850, born_before=MIN_BIRTH_YEAR):
+    """Physicists/mathematicians born 1850-1899 (training-only extra data) -> data/older/people.csv, data/older/images/."""
+    (DATA / "older" / "images").mkdir(parents=True, exist_ok=True)
+    frames = {label: parse_people(sparql(people_query([q], born_from, born_before))) for label, q in OCCUPATION.items()}
+    both = set(frames["physicist"].qid) & set(frames["mathematician"].qid)
+    df = pd.concat([f.assign(label=label) for label, f in frames.items()])
+    df = df[~df.qid.isin(both)].drop_duplicates("qid")
+    df = df.merge(occupations(df.qid.tolist()), on="qid")
+    df["strict"] = df.occupations.map(is_strict)
+    df["file"] = df.img.map(lambda u: image_path(u, "data/older/images"))
+    s = session()
+    df["thumb"] = df.img.map(resolve_thumbs(s, df.img.unique()))
+    df["downloaded"] = download_all(s, df)
+    df.to_csv(DATA / "older" / "people.csv", index=False)
+    print("older people downloaded:", df[df.downloaded].label.value_counts().to_dict(), "| strict:", int(df.strict.sum()))

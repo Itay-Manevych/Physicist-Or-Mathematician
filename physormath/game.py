@@ -116,7 +116,9 @@ def build():
             portrait(img, box).save(GAME / img_path, quality=88)
         people.append({
             "id": k, "qid": row.qid, "img": img_path, "name": row.name, "born": int(row.birth_year),
-            "answer": "phys" if row.label == "physicist" else "math", "p": round(float(row.p), 3),
+            "answer": "phys" if row.label == "physicist" else "math",
+            # the machine judges from every verified photo of the person when it has more than one
+            "p": round(float(row.p_multi if "p_multi" in test and pd.notna(row.p_multi) else row.p), 3),
             "bio": info.get(row.qid, {}).get("bio", ""), "wiki": info.get(row.qid, {}).get("wiki", ""),
             "source": row.source_url,
         })
