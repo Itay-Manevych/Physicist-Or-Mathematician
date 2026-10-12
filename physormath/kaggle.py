@@ -104,3 +104,30 @@ def blend():
     for k, (auc, acc) in report.items():
         print(f"{k:24s} AUC {auc:.3f}  acc {acc:.1%}")
     json.dump({"blend_weight": w, **{k: list(v) for k, v in report.items()}}, open(OUTPUTS / "kaggle_blend.json", "w"), indent=2)
+
+
+# notebook model name -> feature name used here (face crop: <name>, whole photo: <name>_full)
+CLOUD = {"pe_bigG": "peG", "mc2bigG378": "mcG", "siglip2_gopt": "sgG"}
+SOURCE_TAGS = {"wiki": "", "loose": "", "new": "_new", "older": "_older", "extra": "_extra", "depicts": "_depicts",
+               "more": "_more", "articles": "_articles"}
+
+
+def import_embeddings(src=PACK / "out"):
+    """Frozen embeddings computed on the cloud GPU (data/kaggle/out/emb_<model>_<view>.npy, one row per row_id of
+    rows_local.csv) -> data/feats_<name>[_full]<tag>.npy, row-aligned with each source's faces CSV.
+    Rows the cloud never saw (photos not used in training or testing) are NaN, so using them by mistake fails loudly."""
+    rows = pd.read_csv(PACK / "rows_local.csv")
+    for model, name in CLOUD.items():
+        for view, suffix in [("face", ""), ("image", "_full")]:
+            path = src / f"emb_{model}_{view}.npy"
+            if not path.exists():
+                continue
+            E = np.load(path, allow_pickle=False).astype(np.float32)
+            by_file = dict(zip(rows.file, E[rows.row_id.values]))
+            for tag in sorted(set(SOURCE_TAGS.values())):
+                files = pd.read_csv(DATA / f"faces{tag}.csv").file
+                out = np.full((len(files), E.shape[1]), np.nan, np.float32)
+                hit = files.map(lambda f: f in by_file).values
+                out[hit] = np.stack([by_file[f] for f in files[hit]])
+                np.save(DATA / f"feats_{name}{suffix}{tag}.npy", out)
+                print(f"feats_{name}{suffix}{tag}.npy: {hit.sum()} of {len(files)} rows")

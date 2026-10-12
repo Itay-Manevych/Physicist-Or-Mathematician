@@ -19,7 +19,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.model_selection import StratifiedGroupKFold, cross_val_predict
 
-from .config import DATA, MODEL_FEATURES, OUTPUTS, ROOT
+from .config import DATA, DEPT_FEATURES, OUTPUTS, ROOT
 
 DEPT = DATA / "dept"
 OUT = OUTPUTS / "dept"
@@ -82,10 +82,10 @@ def load():
     main = pd.read_csv(DATA / "clean.csv")
     main_split = pd.read_csv(OUTPUTS / "split.csv").set_index("group").test
     pm = main.assign(dept=np.where(main.label == "physicist", "physics", "math"), test=main.qid.map(main_split).fillna(False))
-    X_pm = features("", pm.row.values)
+    X_pm = features("", pm.row.values, DEPT_FEATURES)
     new = pd.read_csv(DATA / "faces_dept.csv")
     ok = photo_kind("_dept") == "photo"
-    new, X_new = new[ok].reset_index(drop=True), features("_dept")[ok]
+    new, X_new = new[ok].reset_index(drop=True), features("_dept", names=DEPT_FEATURES)[ok]
     new = new.assign(dept=new.label)
     split_path = OUT / "split.csv"
     if split_path.exists():
@@ -136,7 +136,7 @@ def train():
     print("per department (test):", rep["per_department_test_acc"])
     cm = pd.DataFrame(rep["confusion_test"], index=[f"true {k}" for k in KEYS], columns=KEYS)
     print(cm.to_string())
-    joblib.dump({"features": MODEL_FEATURES, "clf": model, "classes": KEYS}, OUT / "model.joblib")
+    joblib.dump({"features": DEPT_FEATURES, "clf": model, "classes": KEYS}, OUT / "model.joblib")
     df.assign(**{f"p_{k}": P[:, i] for i, k in enumerate(KEYS)})[test].to_csv(OUT / "test_predictions.csv", index=False)
     json.dump(rep, open(OUT / "report.json", "w"), indent=2)
 

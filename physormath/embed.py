@@ -79,7 +79,7 @@ def _done(path, n):
     return path.exists() and np.load(path, mmap_mode="r").shape[0] == n
 
 
-BATCH = {"bigG": 4, "mc2bigG": 4, "mc2H378": 8}  # images per batch (x4 augmented views); the largest model needs smaller batches on 6 GB
+BATCH = {"bigG": 4, "mc2bigG": 4, "peG": 4, "mcG": 4, "mc2H378": 8}  # images per batch (x4 augmented views); the largest model needs smaller batches on 6 GB
 
 
 def embed_full(csv, tag="", backbones=("clipH",), bs=16):

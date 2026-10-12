@@ -36,8 +36,8 @@ def has_features(tag):
     return ok
 
 
-def features(tag, rows=None):
-    X = np.hstack([np.load(DATA / f"feats_{p}{tag}.npy") for p in MODEL_FEATURES])
+def features(tag, rows=None, names=None):
+    X = np.hstack([np.load(DATA / f"feats_{p}{tag}.npy") for p in names or MODEL_FEATURES])
     return X if rows is None else X[rows]
 
 

@@ -26,7 +26,13 @@ BACKBONES = {
     "bigG": ("ViT-bigG-14", "laion2b_s39b_b160k"),
     "mc2H378": ("ViT-H-14-worldwide-378", "metaclip2_worldwide"),
     "mc2bigG": ("ViT-bigG-14-worldwide", "metaclip2_worldwide"),
+    # too big to embed thousands of photos on this PC: embedded once on a free cloud GPU (kaggle/, `kaggle import`)
+    "peG": ("PE-Core-bigG-14-448", "meta"),
+    "mcG": ("ViT-bigG-14-worldwide-378", "metaclip2_worldwide"),
 }
+CLOUD_BACKBONES = ("peG", "mcG")  # one view per photo (no test-time augmentation), as computed on the cloud
 TIMM_BACKBONES = {"dinov2L": "vit_large_patch14_dinov2.lvd142m"}  # non-CLIP vision transformers
-# what the final model sees: MetaCLIP-2 Worldwide face + whole photo, CLIP-H whole photo (chosen by repeated CV)
-MODEL_FEATURES = ["mc2H378", "mc2H378_full", "clipH_full"]
+# what the final model sees: face + whole photo through PE-Core bigG and MetaCLIP-2 Worldwide bigG
+# (chosen by grouped CV on train; test AUC 0.813 -> 0.83 over MetaCLIP-2 H + CLIP-H)
+MODEL_FEATURES = ["peG", "peG_full", "mcG", "mcG_full"]
+DEPT_FEATURES = ["mc2H378", "mc2H378_full", "clipH_full"]  # Guess the department: its photos were never cloud-embedded

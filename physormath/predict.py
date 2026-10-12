@@ -3,7 +3,7 @@ import joblib
 import numpy as np
 import torch
 
-from .config import OUTPUTS
+from .config import CLOUD_BACKBONES, OUTPUTS
 from .embed import color_views, embed_images, face_views, load_backbone
 from .faces import detector, face_crop, main_face, open_image, pad_square
 
@@ -36,10 +36,11 @@ def judge(paths):
     feats = {}
     for name in sorted({f.replace("_full", "") for f in bundle["features"]}):
         encode, transform = load_backbone(name)
+        single = (lambda im: [im]) if name in CLOUD_BACKBONES else None  # match how the training photos were embedded
         if name in bundle["features"]:
-            feats[name] = embed_images(encode, transform, faces, face_views)
+            feats[name] = embed_images(encode, transform, faces, single or face_views)
         if f"{name}_full" in bundle["features"]:
-            feats[f"{name}_full"] = embed_images(encode, transform, wholes, color_views)
+            feats[f"{name}_full"] = embed_images(encode, transform, wholes, single or color_views)
         del encode
         torch.cuda.empty_cache()
     X = np.hstack([feats[f] for f in bundle["features"]])

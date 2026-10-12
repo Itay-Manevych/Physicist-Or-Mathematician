@@ -8,12 +8,13 @@ Held-out **test set** of 1,092 people the model never saw during training:
 
 | | AUC | Accuracy |
 |---|---|---|
-| All test people (one photo each) | 0.813 | 74.5% |
-| Its most confident 25% | — | 97% |
+| All test people (one photo each) | 0.833 | 74.3% |
+| Its most confident 50% | — | 89% |
+| Its most confident 25% | — | 98% |
 | Its most confident 10% | — | 100% |
-| Using every verified photo of the person | 0.816 | 74.5% |
+| Using every verified photo of the person | 0.839 | 74.6% |
 
-Train accuracy is 73.2% and cross-validated AUC on the training set is 0.795, so there is no overfitting.
+Train accuracy is 75.4% and cross-validated AUC on the training set is 0.818, so there is no overfitting.
 What the model picks up is mostly presentation (clothes, hair, expression, photo setting), not face shape:
 a face-recognition embedding alone scores only 0.61. Details and every experiment: [docs/RESULTS.md](docs/RESULTS.md).
 
@@ -26,19 +27,19 @@ removed with a CLIP zero-shot check. That leaves 5,208 people. Training also use
 non-strict physicists/mathematicians, people born 1850–1899, and extra photos of training people that passed a strict
 same-person and no-duplicate check (`verify`, see [docs/DATA.md](docs/DATA.md)).
 
-**Embeddings.** No network is trained from scratch. Each photo goes through frozen pretrained vision transformers:
+**Embeddings.** No network is trained from scratch. Each photo goes through two frozen pretrained vision
+transformers, each seeing the face crop (MTCNN, 1.6× the face box) and the whole photo padded to a square:
 
-| View | Model | Size |
-|---|---|---|
-| Face crop (MTCNN, 1.6× the face box) | MetaCLIP-2 Worldwide ViT-H/14, 378 px | 1024 |
-| Whole photo, padded to a square | MetaCLIP-2 Worldwide ViT-H/14, 378 px | 1024 |
-| Whole photo, padded to a square | CLIP ViT-H/14 (DFN-5B) | 1024 |
+| Model | Params | Input | Size |
+|---|---|---|---|
+| PE-Core bigG/14 (Meta Perception Encoder) | ~2B | 448 px | 1280 |
+| MetaCLIP-2 Worldwide ViT-bigG/14 | ~2B | 378 px | 1280 |
 
-Embeddings are averaged over test-time views (face: original, mirrored, grayscale, grayscale mirrored; whole photo:
-colour and grayscale), so old black-and-white photos don't stand out by colour alone. Chosen by benchmark over CLIP-L, SigLIP2, EVA-02, DINOv2,
-ViT-bigG and combinations: adding more backbones didn't help.
+They are too big for this PC's 6 GB GPU, so all photos were embedded once on a free Kaggle GPU (`kaggle/`). Chosen by
+grouped CV over CLIP-L/H, SigLIP2 (incl. the 1B giant), EVA-02, DINOv2 and MetaCLIP-2 H: the two bigG models together
+lifted test AUC from 0.813 to 0.833 (paired bootstrap 95% CI +0.007 to +0.032).
 
-**Classifier.** Logistic regression on the 3,072 concatenated features. Regularisation strength and the decision
+**Classifier.** Logistic regression on the 5,120 concatenated features. Regularisation strength and the decision
 threshold come from 5-fold cross-validation on the training set, grouped by person so no one is in two folds.
 A person with several photos is judged by the mean of their per-photo scores.
 

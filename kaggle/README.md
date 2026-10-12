@@ -19,10 +19,23 @@ The notebook benchmarks four large vision transformers on our data, then fine-tu
 4. In the notebook: **Add Input** → your `pom-data` dataset; **Settings → Accelerator: GPU T4 x2**;
    **Settings → Internet: On** (needs a phone-verified Kaggle account, to download the model weights).
 5. **Save Version → Save & Run All (Commit)**. It runs in the background (~4–6 h); you can close the browser.
-6. When it finishes, open the version's **Output** and download `predictions.csv` (and `benchmark.json`).
-   Put them in `data/kaggle/`.
-7. `python -m physormath kaggle blend` → blends the fine-tuned model with the production model
-   (blend weight chosen on the val people) and reports the test score.
+6. When it finishes, download the outputs (needs `~/.kaggle/kaggle.json` from kaggle.com → Settings → API):
+   `kaggle kernels output <user>/<notebook> -p data/kaggle/out`
+7. `python -m physormath kaggle import` → turns `emb_<model>_<view>.npy` into `data/feats_*.npy` for every source, so
+   `train` can use them (`MODEL_FEATURES` in `physormath/config.py`). If the fine-tune stage also produced
+   `predictions.csv`, `python -m physormath kaggle blend` scores it against the production model.
+
+## Results (October 2026, val people, frozen embeddings + logistic regression)
+
+| Model | Face | Whole photo | Face + photo | Minutes on a T4 |
+|---|---|---|---|---|
+| MetaCLIP-2 Worldwide H-378 (previous production) | 0.769 | 0.809 | 0.803 | 36 |
+| SigLIP2 giant 384 | 0.760 | 0.790 | 0.790 | 45 |
+| MetaCLIP-2 Worldwide bigG-378 | 0.782 | 0.824 | 0.818 | 97 |
+| PE-Core bigG-448 | 0.795 | 0.831 | 0.825 | 141 |
+
+PE-Core bigG + MetaCLIP-2 bigG together are now the production features (test AUC 0.813 → 0.833). The fine-tune stage
+did not finish on a T4: a 2B-parameter model is too big to fine-tune there.
 
 ## Google Colab instead (no phone verification needed)
 
