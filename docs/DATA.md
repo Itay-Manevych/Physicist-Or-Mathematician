@@ -36,17 +36,17 @@ An extra photo is used only if every check passes (`physormath/identity.py`):
 
 | Check | Rejected (of 3,759) |
 |---|---|
-| copy of a photo we already have (re-upload, crop, recolouring: FaceNet ≥ 0.97, CLIP image ≥ 0.95 or perceptual hash) | 892 |
+| copy of a photo we already have (re-upload, crop, recolouring: FaceNet ≥ 0.97, CLIP image ≥ 0.95 or perceptual hash), or another frame of the same photo shoot (FaceNet ≥ 0.90 and CLIP image ≥ 0.87) | 1,087 |
 | someone else of similar size in the picture, so it is unclear who it shows | 721 |
 | FaceNet similarity to the main portrait below 0.62 | 568 |
-| 0.62–0.70 without a second confirmation from another strongly matching photo of them | 123 |
+| 0.62–0.70 without a second confirmation from another strongly matching photo of them | 124 |
 | not a photograph | 69 |
 | another person's portrait is clearly more similar (lookalike) | 60 |
-| looked at by eye and not certain (big age gap, tiny crop, stylised image) | 49 |
+| looked at by eye: not certain (big age gap, tiny crop, stylised image, a scanned document) or looks the same | 56 |
 | man/woman contradicts the main portrait | 6 |
 
-Kept: **1,271 photos of 722 people**. Different people pass the 0.70 FaceNet bar in 0.03% of pairs; every accepted
-match below 0.78 was also checked by eye (contact sheets in `outputs/identity/`; rejects in `data/identity_reject.txt`).
+Kept: **1,068 photos of 641 people**. Different people pass the 0.70 FaceNet bar in 0.03% of pairs; every accepted
+match below 0.78, and every photo the game shows, was also checked by eye (contact sheets in `outputs/identity/`; rejects in `data/identity_reject.txt`).
 
 ## Scraping policy
 

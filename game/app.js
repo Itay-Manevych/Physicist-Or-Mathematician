@@ -67,10 +67,27 @@ function renderList(el, rows, highlightId, empty = "NO SCORES YET. BE THE FIRST!
       <span>${r.you}/${ROUNDS}${r.ai !== undefined ? ` <span style="opacity:.6">vs ${r.ai}</span>` : ""}</span></li>`).join("");
 }
 
+/* ---------- photos: the main portrait plus up to two extra photos verified to be the same person ---------- */
+const photosOf = (p) => [p.img, ...(p.more || []).map((m) => m.img)];
+function renderStrip(strip, main, p, onPick = () => {}) {
+  const photos = photosOf(p);
+  main.src = photos[0];
+  strip.hidden = photos.length < 2;
+  strip.innerHTML = photos.length < 2 ? "" : photos.map((src, k) =>
+    `<button type="button" class="${k ? "" : "on"}" aria-label="Photo ${k + 1} of ${photos.length}"><img class="photo" src="${src}" alt=""></button>`).join("");
+  strip.querySelectorAll("button").forEach((b, k) => {
+    b.onclick = () => {
+      main.src = photos[k];
+      strip.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
+      onPick(k);
+    };
+  });
+}
+
 /* ---------- game state ---------- */
 function newGame(mode, fighters, opp, extra = {}) {
   game = { mode, fighters, opp, i: 0, log: [], savedId: null, ...extra };
-  fighters.forEach((p) => { new Image().src = p.img; });
+  fighters.forEach((p) => photosOf(p).forEach((src) => { new Image().src = src; }));
 }
 function totals() {
   const done = game.log.filter(Boolean);
@@ -171,13 +188,13 @@ function hudLabels() {
 
 function showFighter(p, i) {
   $("roundNo").textContent = `${i + 1}/${ROUNDS}`;
-  $("fPhoto").src = p.img;
+  renderStrip($("fStrip"), $("fPhoto"), p);
   const dept = game.mode === "dept";
   $("fClass").textContent = dept ? "DEPT: ???" : "CLASS: ???";
   $("fClass").style.background = "var(--white)";
   $("fMeta").textContent = `FIGHTER ${String(i + 1).padStart(2, "0")} · BORN ${p.born} · ${dept ? "DEPT" : "CLASS"}: CLASSIFIED`;
   $("fName").textContent = "MYSTERY SCIENTIST";
-  $("fBio").textContent = dept ? "Which department do they work in? Seven doors, one face." : "Study the face. Chalkboard or particle accelerator?";
+  $("fBio").textContent = dept ? "Which department do they work in? Seven doors, one face." : `${p.more ? `${photosOf(p).length} photos. ` : "Study the face. "}Chalkboard or particle accelerator?`;
   $("abChoices").hidden = dept;
   $("deptChoices").hidden = !dept;
   for (const b of $("deptChoices").querySelectorAll("button")) { b.disabled = false; b.classList.remove("picked"); }
@@ -779,7 +796,9 @@ function startCountdown() {
 function openModal(p) {
   $("mClass").textContent = LABEL[p.answer];
   $("mHead").style.background = COLOR[p.answer];
-  $("mPhoto").src = p.img; $("mPhoto").alt = `Photo of ${p.name}`;
+  const sources = [p.source, ...(p.more || []).map((m) => m.source)];
+  renderStrip($("mStrip"), $("mPhoto"), p, (k) => { $("mSource").href = sources[k]; });
+  $("mPhoto").alt = `Photo of ${p.name}`;
   $("mName").textContent = p.name.toUpperCase();
   $("mMeta").textContent = `Born ${p.born}${p.bio ? " · " + capital(p.bio) : ""}`;
   $("mWiki").hidden = !p.wiki; $("mWiki").href = p.wiki || "#";

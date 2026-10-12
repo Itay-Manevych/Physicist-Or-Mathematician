@@ -88,6 +88,12 @@ footer .links { display: flex; gap: 24px; flex-wrap: wrap; }
 .fighter { display: flex; flex-wrap: wrap; gap: 40px; align-items: center; padding: 28px; }
 .portrait-col { flex: 0 0 auto; width: 220px; max-width: 100%; display: flex; flex-direction: column; gap: 10px; }
 .portrait { aspect-ratio: 1 / 1; border: 4px solid var(--ink); background: var(--lav); overflow: hidden; }
+.strip { display: flex; gap: 8px; }
+.strip button { flex: 1 1 0; min-width: 0; aspect-ratio: 1 / 1; padding: 0; border: 3px solid var(--ink); background: var(--lav); opacity: 0.5; cursor: pointer; overflow: hidden; }
+.strip button.on { opacity: 1; border-color: var(--yellow); }
+.strip button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+.ph-photo-col { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.ph-photo-no { color: var(--yellow); font-size: 14px; }
 .bio-col { flex: 999 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
 .meta { margin: 0; font-family: var(--pixel); font-size: 11px; color: var(--muted); line-height: 1.6; }
 .name { margin: 0; font-family: var(--pixel); font-weight: 400; font-size: clamp(20px, 3.4vw, 40px); line-height: 1.3; color: var(--purple); overflow-wrap: anywhere; }

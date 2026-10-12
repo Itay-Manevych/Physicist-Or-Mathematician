@@ -8,7 +8,8 @@ used when every check passes:
            them that passed with STRONG (two independent confirmations)
   unique   no other person's main portrait is clearly more similar (lookalike margin)
   gender   CLIP's man/woman call does not contradict the main portrait
-  new      not a copy of a photo we already have (re-upload, crop, recolouring)
+  new      not a copy of a photo we already have (re-upload, crop, recolouring), nor another frame of the
+           same photo shoot (looks the same)
   manual   not listed in data/identity_reject.txt (rejected by eye)
 -> data/verified.csv; contact sheets of the closest calls -> outputs/identity/.
 """
@@ -26,6 +27,7 @@ SOURCES = ["extra", "depicts", "more", "wiki"]
 STRONG, WEAK = 0.70, 0.62  # FaceNet cosine; different people exceed them in 0.03% / 0.13% of pairs
 MARGIN = 0.05              # reject when another person's portrait is this much more similar
 COPY_FACE, COPY_FULL, COPY_HASH = 0.97, 0.95, 6  # near-identical face / whole image / perceptual-hash bits
+SHOOT_FACE, SHOOT_FULL = 0.90, 0.87  # both this close: another frame from the same photo shoot, looks the same
 GENDER = {"man": ["a photo of a man", "a portrait photo of a man", "an old man", "a young man"],
           "woman": ["a photo of a woman", "a portrait photo of a woman", "an old woman", "a young woman"]}
 
@@ -146,8 +148,13 @@ def verify():
                 c.loc[i, "reason"] = "unconfirmed"
     # copies: keep the best-matching version, drop anything identical to the main portrait or a kept photo;
     # a copy of a photo rejected by eye is rejected too
+    def looks_same(f1, g1, h1, f2, g2, h2):
+        face, full = f1 @ f2, g1 @ g2
+        return (face >= COPY_FACE or full >= COPY_FULL or _bits(h1, h2) <= COPY_HASH
+                or (face >= SHOOT_FACE and full >= SHOOT_FULL))
+
     def same_image(i, js):
-        return any(F[j] @ F[i] >= COPY_FACE or G[j] @ G[i] >= COPY_FULL or _bits(H[j], H[i]) <= COPY_HASH for j in js)
+        return any(looks_same(F[j], G[j], H[j], F[i], G[i], H[i]) for j in js)
     for q, g in c[c.reason == ""].sort_values("sim", ascending=False).groupby("qid", sort=False):
         m = main[q]
         bad = c.index[(c.qid == q) & (c.reason == "manual")]
@@ -155,8 +162,7 @@ def verify():
         for i in g.index:
             if same_image(i, bad):
                 c.loc[i, "reason"] = "manual"
-            elif (R[m] @ F[i] >= COPY_FACE or main_full[m] @ G[i] >= COPY_FULL
-                  or _bits(main_hash[m], H[i]) <= COPY_HASH or same_image(i, kept)):
+            elif looks_same(R[m], main_full[m], main_hash[m], F[i], G[i], H[i]) or same_image(i, kept):
                 c.loc[i, "reason"] = "copy"
             else:
                 kept.append(i)

@@ -1,6 +1,7 @@
 """Collect labelled portraits from Wikidata / Wikimedia Commons (freely licensed)."""
 import hashlib
 import os
+import re
 import time
 import urllib.parse
 from concurrent.futures import ThreadPoolExecutor
@@ -257,6 +258,108 @@ def fetch_more_photos(max_per_person=8):
     jobs["downloaded"] = download_all(s, jobs)
     jobs.to_csv(DATA / "more.csv", index=False)
     print(len(jobs), "more photos for", jobs.qid.nunique(), "people")
+
+
+SKIP_FILE = re.compile(r"signature|unterschrift|autograph|logo|flag|coat.of.arms|wappen|diagram|equation|formula|symbol|"
+                       r"medal|stamp|coin|banknote|grave|tomb|plaque|statue|building|campus|institut|universit|crater|"
+                       r"asteroid|street|cover|\b(map|karte|graph|plot|icon|bust|book|house)\b|\.(svg|gif|tiff?)$", re.I)
+
+
+def fetch_wikipedia_photos(max_per_person=6):
+    """Photos shown in each clean person's articles on every language Wikipedia (Commons files only, so freely
+    licensed), beyond the ones we already have -> data/wiki.csv, data/wiki/. Identity is checked later (`verify`)."""
+    (DATA / "wiki").mkdir(parents=True, exist_ok=True)
+    clean = pd.read_csv(DATA / "clean.csv")
+    have = {"File:" + urllib.parse.unquote(u.rsplit("/", 1)[1]).replace("_", " ") for u in clean.img}
+    for f in ["extra.csv", "depicts.csv", "more.csv"]:
+        if (DATA / f).exists():
+            have |= set(pd.read_csv(DATA / f).title)
+    s = session()
+    cache = DATA / "wiki_used.csv"  # steps 1-2 take ~20 minutes: keep their result
+    if cache.exists():
+        used = pd.read_csv(cache)
+    else:
+        used = _article_images(s, clean.qid.tolist())
+        used.to_csv(cache, index=False)
+    # local wikis name the namespace in their own language ("Datei:", "Fichier:"); Commons wants "File:"
+    used["title"] = "File:" + used.local.str.split(":", n=1).str[1].str.replace("_", " ")
+    used = used[~used.title.str.contains(SKIP_FILE) & ~used.title.isin(have)]
+    used = used.groupby(["qid", "title"]).size().rename("n_wikis").reset_index()
+    # 3. keep files that live on Commons, and are photos (jpeg/png)
+    titles, info = used.title.unique().tolist(), {}
+    for i in tqdm(range(0, len(titles), 50), desc="commons files"):
+        q = _post(s, COMMONS_API, {"action": "query", "format": "json", "prop": "imageinfo", "iiprop": "url|mime",
+                                   "iiurlwidth": 500, "titles": "|".join(titles[i:i + 50])}).get("query", {})
+        norm = {n["to"]: n["from"] for n in q.get("normalized", [])}
+        for p in q.get("pages", {}).values():
+            ii = (p.get("imageinfo") or [{}])[0]
+            if "missing" not in p and ii.get("mime") in ("image/jpeg", "image/png") and ii.get("thumburl"):
+                info[norm.get(p["title"], p["title"])] = ii["thumburl"]
+        time.sleep(0.2)
+    used = used[used.title.isin(info)]
+    # most widely used first: a photo shown in many languages' articles is most likely of the person
+    used = used.sort_values(["qid", "n_wikis", "title"], ascending=[True, False, True]).groupby("qid").head(max_per_person)
+    jobs = used.merge(clean[["qid", "label"]], on="qid")
+    jobs["thumb"] = jobs.title.map(info)
+    jobs["file"] = jobs.title.map(lambda t: image_path(t, "data/wiki"))
+    jobs = jobs[~jobs.file.duplicated(keep=False)]  # one photo on several people's pages: unclear who it shows
+    jobs["downloaded"] = download_all(s, jobs)
+    jobs.to_csv(DATA / "wiki.csv", index=False)
+    print(len(jobs), "Wikipedia photos for", jobs.qid.nunique(), "people")
+
+
+def _post(s, url, data):
+    """API call by POST (long title lists), with retries; {} if it keeps failing."""
+    for attempt in range(4):
+        try:
+            r = s.post(url, data=data, timeout=60)
+            if r.ok:
+                return r.json()
+        except (requests.RequestException, ValueError):
+            pass
+        time.sleep(5 * (attempt + 1))
+    return {}
+
+
+def _article_images(s, qids):
+    """(qid, local file title) for every image shown in any language Wikipedia's article about each person."""
+    # 1. every Wikipedia article about each person (Wikidata sitelinks)
+    articles = []  # (qid, wiki, title)
+    for i in tqdm(range(0, len(qids), 50), desc="sitelinks"):
+        r = _post(s, "https://www.wikidata.org/w/api.php", {
+            "action": "wbgetentities", "format": "json", "ids": "|".join(qids[i:i + 50]), "props": "sitelinks"})
+        for q, e in r.get("entities", {}).items():
+            for site, link in e.get("sitelinks", {}).items():
+                if re.fullmatch(r"[a-z_]+wiki", site) and site not in ("commonswiki", "specieswiki", "metawiki",
+                                                                         "wikidatawiki", "mediawikiwiki", "sourceswiki"):
+                    articles.append((q, site[:-4].replace("_", "-"), link["title"]))
+        time.sleep(0.2)
+    articles = pd.DataFrame(articles, columns=["qid", "lang", "article"])
+    print(len(articles), "articles in", articles.lang.nunique(), "languages")
+    # 2. the images each article shows (50 articles per call)
+    used = []  # (qid, file title)
+    for lang, g in tqdm(articles.groupby("lang"), desc="article images"):
+        by_title = dict(zip(g.article, g.qid))
+        titles = list(by_title)
+        for i in range(0, len(titles), 50):
+            params = {"action": "query", "format": "json", "prop": "images", "imlimit": "max", "redirects": 1,
+                      "titles": "|".join(titles[i:i + 50])}
+            while True:
+                r = _post(s, f"https://{lang}.wikipedia.org/w/api.php", params)
+                q = r.get("query", {})
+                back = {n["to"]: n["from"] for k in ("normalized", "redirects") for n in q.get(k, [])}
+                for p in q.get("pages", {}).values():
+                    t = p.get("title", "")
+                    qid = by_title.get(t) or by_title.get(back.get(t, "")) or by_title.get(back.get(back.get(t, ""), ""))
+                    for im in p.get("images", []):
+                        if qid:
+                            used.append((qid, im["title"]))
+                if "continue" not in r:
+                    break
+                params.update(r["continue"])
+                time.sleep(0.1)
+            time.sleep(0.1)
+    return pd.DataFrame(used, columns=["qid", "local"])
 
 
 def fetch_older(born_from=1850, born_before=MIN_BIRTH_YEAR):

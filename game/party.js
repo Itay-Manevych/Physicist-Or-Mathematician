@@ -2,12 +2,12 @@
  * Scoring: a right answer is worth 100 + up to 50 for speed. The machine plays too (100 per right answer). */
 const PARTY_REVEAL_MS = 8000;
 const party = { role: null, code: null, hostToken: null, token: null, playerId: null, state: null, offset: 0,
-  poll: null, tick: null, timer: null, game: -1, shown: {}, requested: {}, qrFor: null };
+  poll: null, tick: null, timer: null, cycle: null, game: -1, shown: {}, requested: {}, qrFor: null };
 const partyNow = () => Date.now() + party.offset;
 const partyLink = (code) => `${SITE}?party=${code}`;
 
 function stopParty() {
-  clearInterval(party.poll); clearInterval(party.tick); clearTimeout(party.timer);
+  clearInterval(party.poll); clearInterval(party.tick); clearTimeout(party.timer); clearInterval(party.cycle);
   Object.assign(party, { role: null, code: null, hostToken: null, token: null, playerId: null, state: null,
     poll: null, tick: null, timer: null, game: -1, shown: {}, requested: {} });
   $("phIntro").hidden = true;
@@ -126,10 +126,10 @@ function hostRender() {
     if (party.shown.round !== r) { // new round: put the photo up
       party.shown.round = r;
       hostView("phRound");
-      $("phPhoto").src = f.img;
+      showPhotos(f);
       $("phRoundNo").textContent = `ROUND ${r + 1}/${ROUNDS}`;
       const next = byId.get(s.fighters[r + 1]);
-      if (next) new Image().src = next.img;
+      if (next) photosOf(next).forEach((src) => { new Image().src = src; });
     }
     const locked = new Set(rd.answered);
     $("phChips").innerHTML = s.players.map((p) => `<span class="chip${locked.has(p.id) ? " locked" : ""}">${locked.has(p.id) ? "✓ " : ""}${esc(p.name)}</span>`).join("")
@@ -169,7 +169,22 @@ function hostRender() {
   }, PARTY_REVEAL_MS);
 }
 
+// the TV cycles through a fighter's photos while everyone answers
+function showPhotos(f) {
+  clearInterval(party.cycle);
+  const photos = photosOf(f);
+  let k = 0;
+  const show = () => {
+    $("phPhoto").src = photos[k];
+    $("phPhotoNo").textContent = `PHOTO ${k + 1}/${photos.length}`;
+  };
+  show();
+  $("phPhotoNo").hidden = photos.length < 2;
+  if (photos.length > 1) party.cycle = setInterval(() => { k = (k + 1) % photos.length; show(); }, 2500);
+}
+
 function hostReveal(s, r, f) {
+  clearInterval(party.cycle);
   hostView("phReveal");
   $("phIntro").hidden = true;
   const sc = partyScores(s), rd = s.rounds[r], gains = sc.rounds[r].gains;

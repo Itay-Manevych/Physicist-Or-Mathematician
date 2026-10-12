@@ -7,7 +7,7 @@ AUC: 0.5 = coin flip, 1.0 = perfect.
 
 Logistic regression on MetaCLIP-2 Worldwide ViT-H/14 (378 px) embeddings of the face and the whole photo, plus a
 CLIP ViT-H/14 whole-photo embedding. Training also uses photos the test never sees: non-strict physicists/mathematicians
-("loose", 3,859 photos), people born 1850–1899 (1,804) and strictly verified extra photos of training people (579).
+("loose", 3,859 photos), people born 1850–1899 (1,804) and strictly verified extra photos of training people.
 
 **Evaluation protocol.** 20% of people are held out as a fixed test set (`outputs/split.csv`), split by person:
 none of a test person's photos are used in training. Regularisation and the decision threshold are chosen by 5-fold
@@ -16,20 +16,22 @@ The test set is scored once.
 
 | | AUC | Accuracy | n |
 |---|---|---|---|
-| Train | 0.821 | 73.1% | 4,366 |
-| CV on train | 0.793 | | |
-| **Test** | **0.813** | **72.3%** | 1,092 |
-| Test, judging from every verified photo of the person | 0.816 | 72.4% | 1,092 |
+| Train | 0.822 | 73.2% | 4,366 |
+| CV on train | 0.794 | | |
+| **Test** | **0.813** | **74.7%** | 1,092 |
+| Test, judging from every verified photo of the person | 0.816 | 74.8% | 1,092 |
 
-**Overfitting.** None: a 0.8-point train-test accuracy gap, and CV agrees with the test score.
+Accuracy moves by ±1.5 points with the CV-chosen decision threshold between retrains (72–75%); AUC is stable.
 
-**Confidence.** Accuracy on the test people the model is most sure about: top 50% → 87%, top 25% → 97%, top 10% → 100%.
+**Overfitting.** None: train and test accuracy are within 1.5 points, and CV agrees with the test score.
+
+**Confidence.** Accuracy on the test people the model is most sure about: top 50% → 86%, top 25% → 97%, top 10% → 100%.
 `predict` says "can't tell" below the median confidence.
 
-**Several photos of one person.** For the 98 test people with verified extra photos, averaging over all their photos
-lifts accuracy from 78.6% to 81.6% (AUC 0.85 → 0.90).
+**Several photos of one person.** For the 82 test people with verified extra photos, averaging over all their photos
+lifts AUC from 0.81 to 0.88 (accuracy 76.8% either way).
 
-**More data.** Test AUC with 10% / 25% / 50% / 100% of the training data: 0.762 / 0.791 / 0.803 / 0.813.
+**More data.** Test AUC with 10% / 25% / 50% / 100% of the training data: 0.761 / 0.791 / 0.802 / 0.813.
 
 ## What the model looks at
 
@@ -59,7 +61,7 @@ Face shape barely beats chance; most of the signal is presentation and context. 
 | MetaCLIP-2 Worldwide ViT-H/14 instead of the CLIP/SigLIP2 trio | +0.015 (0.788 → 0.803) |
 | Training on non-strict ("loose") physicists/mathematicians too, scored only on strict ones | +0.003 |
 | 378 px MetaCLIP-2, people born 1850–1899, CV-tuned decision threshold | +0.007 (→ 0.813, 73.1%) |
-| Dropping unverifiable / duplicate extra photos (`verify`) | none (0.813; 72.3% vs. 73.1% is threshold noise) |
+| Dropping unverifiable / duplicate extra photos (`verify`) | none (0.813 before and after) |
 | DINOv2, EVA-02, ViT-bigG next to MetaCLIP-2; SVM, MLP, stacking, standardisation | none |
 | Fine-tuning CLIP ViT-L/14 or MetaCLIP-2 locally (LP-FT) | none to tiny (val 0.775 → 0.781 after 5.5 h) |
 

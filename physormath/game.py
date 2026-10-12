@@ -1,17 +1,21 @@
 """Build the game's data: held-out test people only (the model never trained on them).
 
-Writes game/data.json and game/img/*.jpg (small square portraits around the face).
+Writes game/data.json and game/img/*.jpg (small square portraits around the face; extra verified photos of a
+fighter as img/<id>_<hash>.jpg).
 """
+import hashlib
 import json
 
 import pandas as pd
 import requests
 
 from .config import DATA, OUTPUTS, ROOT, USER_AGENT
+from .embed import resolve
 from .faces import detector, main_face, open_image
 
 GAME = ROOT / "game"
 IMG_SIZE = 144  # shown at 2x with pixelated rendering
+MAX_EXTRA = 2   # extra photos shown per fighter (only ones that passed `verify`)
 
 
 def portrait(img, box, size=IMG_SIZE):
@@ -22,6 +26,34 @@ def portrait(img, box, size=IMG_SIZE):
     left = min(max(cx - s / 2, 0), img.size[0] - s)
     top = min(max(cy - s / 2, 0), img.size[1] - s)
     return img.crop((int(left), int(top), int(left + s), int(top + s))).resize((size, size))
+
+
+def verified_extras():
+    """qid -> [(image file, Commons title)] of photos that passed every identity check, best match first."""
+    if not (DATA / "verified.csv").exists():
+        return {}
+    v = pd.read_csv(DATA / "verified.csv")
+    v = v[v.ok].sort_values("sim", ascending=False)
+    return {q: list(zip(g.file, g.title)) for q, g in v.groupby("qid")}
+
+
+def extra_portraits(k, photos, mtcnn):
+    out = []
+    for f, title in photos:
+        if len(out) == MAX_EXTRA:
+            break
+        path = f"img/{k:03d}_{hashlib.md5(title.encode()).hexdigest()[:6]}.jpg"
+        if not (GAME / path).exists():
+            try:
+                img = open_image(resolve(f))
+                box = main_face(mtcnn, img, min_prob=0.9)
+            except Exception:
+                box = None
+            if box is None:
+                continue
+            portrait(img, box).save(GAME / path, quality=88)
+        out.append({"img": path, "source": "https://commons.wikimedia.org/wiki/" + title.replace(" ", "_")})
+    return out
 
 
 def descriptions(qids):
@@ -98,6 +130,7 @@ def build():
     (GAME / "img").mkdir(parents=True, exist_ok=True)
     info = descriptions(test.qid.tolist())
     mtcnn, people, next_id = detector(), [], max([p["id"] for p in old], default=-1) + 1
+    extras = verified_extras()
     for row in test.sort_values("qid").itertuples():
         kept = by_source.get(row.source_url)
         if kept:
@@ -122,6 +155,9 @@ def build():
             "bio": info.get(row.qid, {}).get("bio", ""), "wiki": info.get(row.qid, {}).get("wiki", ""),
             "source": row.source_url,
         })
+        more = extra_portraits(k, extras.get(row.qid, []), mtcnn)
+        if more:
+            people[-1]["more"] = more
     # "the machine noticed ..." clues, with concept directions learned on training people only
     clean_all = pd.read_csv(DATA / "clean.csv")
     split = pd.read_csv(OUTPUTS / "split.csv").set_index("group").test
@@ -137,5 +173,11 @@ def build():
                "Portraits are cropped from freely licensed images on Wikimedia Commons.",
                "Author and license for each photo are on its Commons page.", ""]
     credits += [f"- `{p['img']}` {p['name']}: {p['source']}" for p in people]
+    credits += [f"- `{m['img']}` {p['name']}: {m['source']}" for p in people for m in p.get("more", [])]
+    shown = {m["img"] for p in people for m in p.get("more", [])}
+    for f in (GAME / "img").glob("*_*.jpg"):  # extra photos that no longer pass the checks
+        if f"img/{f.name}" not in shown:
+            f.unlink()
     (GAME / "CREDITS.md").write_text("\n".join(credits) + "\n", encoding="utf-8")
-    print(f"{len(people)} fighters ({len(people) - len(old)} new) -> game/data.json  (model accuracy on them: {acc:.0%})")
+    print(f"{len(people)} fighters ({len(people) - len(old)} new) -> game/data.json  (model accuracy on them: {acc:.0%}); "
+          f"{sum('more' in p for p in people)} with extra photos")

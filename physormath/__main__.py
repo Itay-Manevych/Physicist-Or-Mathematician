@@ -5,6 +5,7 @@ Data
   fetch-subfields             people listed only under a sub-field -> data/new/
   fetch-extra                 more Commons photos per clean person -> data/extra/
   fetch-depicts               photos tagged "depicts <person>" on Commons -> data/depicts/
+  fetch-wiki                  photos in each person's articles on every language Wikipedia -> data/wiki/
   scrape {discover,probe,crawl,simons}   university / Simons headshots -> data/uni/
 Processing
   process <images.csv> [tag]  face crops + all embeddings -> data/faces<tag>.csv, data/feats_*<tag>.npy
@@ -32,7 +33,7 @@ def main():
     ap = argparse.ArgumentParser(prog="python -m physormath", description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
-    for name in ["fetch", "fetch-subfields", "fetch-extra", "fetch-depicts", "fetch-more", "fetch-older", "verify", "train", "game"]:
+    for name in ["fetch", "fetch-subfields", "fetch-extra", "fetch-depicts", "fetch-wiki", "fetch-more", "fetch-older", "verify", "train", "game"]:
         sub.add_parser(name)
     sub.add_parser("scrape").add_argument("stage", choices=["discover", "probe", "crawl", "simons"])
     p = sub.add_parser("process")
@@ -63,6 +64,9 @@ def main():
     elif a.cmd == "fetch-more":
         from .wikidata import fetch_more_photos
         fetch_more_photos()
+    elif a.cmd == "fetch-wiki":
+        from .wikidata import fetch_wikipedia_photos
+        fetch_wikipedia_photos()
     elif a.cmd == "fetch-depicts":
         from .wikidata import fetch_depicts
         fetch_depicts()

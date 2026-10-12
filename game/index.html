@@ -134,6 +134,7 @@
     <section class="panel fighter">
       <div class="portrait-col">
         <div class="portrait"><img class="photo" id="fPhoto" alt="Portrait of the mystery scientist"></div>
+        <div class="strip" id="fStrip" hidden></div>
         <span class="tag" id="fClass">CLASS: ???</span>
       </div>
       <div class="bio-col">
@@ -203,7 +204,10 @@
       <span class="px" id="phAnswered">0/0 LOCKED IN</span>
     </div>
     <div class="ph-stage">
-      <div class="portrait ph-portrait"><img class="photo" id="phPhoto" alt="Mystery scientist"></div>
+      <div class="ph-photo-col">
+        <div class="portrait ph-portrait"><img class="photo" id="phPhoto" alt="Mystery scientist"></div>
+        <span class="px ph-photo-no" id="phPhotoNo" hidden></span>
+      </div>
       <div class="ph-question">
         <span class="px" style="color: var(--phys)">PHYSICIST</span>
         <span class="px" style="color: var(--yellow); font-size: 0.5em">— OR —</span>
@@ -360,6 +364,7 @@
   <div class="panel">
     <div class="modal-head" id="mHead"><span id="mClass"></span><button type="button" class="xbtn" id="mClose" aria-label="Close photo">X</button></div>
     <div class="portrait" style="margin: 20px 20px 0"><img class="photo" id="mPhoto" alt=""></div>
+    <div class="strip" id="mStrip" style="margin: 10px 20px 0" hidden></div>
     <div class="modal-body">
       <span class="px" style="font-size: 18px; line-height: 1.4; color: var(--purple)" id="mName"></span>
       <span style="font-size: 26px; color: var(--text-3)" id="mMeta"></span>
