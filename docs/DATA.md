@@ -10,6 +10,7 @@ No photos are stored in this repository.
 | Wikidata sub-fields | `fetch-subfields` | people listed only as e.g. theoretical physicist, topologist, logician | same |
 | Commons categories | `fetch-extra`, `fetch-more` | more photos per person from their Commons category | same |
 | Commons "depicts" | `fetch-depicts` | files whose structured data says they show the person | same |
+| Wikipedia, all languages | `fetch-wiki` | photos shown in each person's articles (30,777 articles in 193 languages; Commons files only) | same |
 | University departments | `scrape discover/probe/crawl` | staff photos from maths and physics department pages | used for local training only |
 | Simons Investigators | `scrape simons` | maths and physics awardees, uniform headshots | used for local training only |
 
@@ -28,24 +29,24 @@ Starting from 10,346 Wikidata people:
 Old black-and-white photographs are kept. Excluded files are moved to `data/excluded/<reason>/`, never deleted;
 add paths to `data/manual_exclude.txt` to remove more by hand. Contact sheets for review go to `data/review/`.
 
-Result: **5,209 people** (2,688 mathematicians, 2,521 physicists).
+Result: **5,208 people** (2,688 mathematicians, 2,520 physicists).
 
 ## Extra photos of a person (`verify`)
 
 An extra photo is used only if every check passes (`physormath/identity.py`):
 
-| Check | Rejected (of 3,759) |
+| Check | Rejected (of 4,082) |
 |---|---|
-| copy of a photo we already have (re-upload, crop, recolouring: FaceNet ≥ 0.97, CLIP image ≥ 0.95 or perceptual hash), or another frame of the same photo shoot (FaceNet ≥ 0.90 and CLIP image ≥ 0.87) | 1,087 |
-| someone else of similar size in the picture, so it is unclear who it shows | 721 |
-| FaceNet similarity to the main portrait below 0.62 | 568 |
-| 0.62–0.70 without a second confirmation from another strongly matching photo of them | 124 |
-| not a photograph | 69 |
-| another person's portrait is clearly more similar (lookalike) | 60 |
-| looked at by eye: not certain (big age gap, tiny crop, stylised image, a scanned document) or looks the same | 56 |
+| copy of a photo we already have (re-upload, crop, recolouring: FaceNet ≥ 0.97, CLIP image ≥ 0.95 or perceptual hash), or another frame of the same photo shoot (FaceNet ≥ 0.90 and CLIP image ≥ 0.87) | 1,161 |
+| someone else of similar size in the picture, so it is unclear who it shows | 755 |
+| FaceNet similarity to the main portrait below 0.62 | 659 |
+| 0.62–0.70 without a second confirmation from another strongly matching photo of them | 135 |
+| not a photograph | 92 |
+| another person's portrait is clearly more similar (lookalike) | 63 |
+| looked at by eye: not certain (big age gap, tiny crop, stylised image, a scanned document) or looks the same | 63 |
 | man/woman contradicts the main portrait | 6 |
 
-Kept: **1,068 photos of 641 people**. Different people pass the 0.70 FaceNet bar in 0.03% of pairs; every accepted
+Kept: **1,148 photos of 702 people**. Different people pass the 0.70 FaceNet bar in 0.03% of pairs; every accepted
 match below 0.78, and every photo the game shows, was also checked by eye (contact sheets in `outputs/identity/`; rejects in `data/identity_reject.txt`).
 
 ## Scraping policy

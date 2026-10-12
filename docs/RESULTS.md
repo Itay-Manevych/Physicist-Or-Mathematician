@@ -16,10 +16,10 @@ The test set is scored once.
 
 | | AUC | Accuracy | n |
 |---|---|---|---|
-| Train | 0.822 | 73.2% | 4,366 |
-| CV on train | 0.794 | | |
-| **Test** | **0.813** | **74.7%** | 1,092 |
-| Test, judging from every verified photo of the person | 0.816 | 74.8% | 1,092 |
+| Train | 0.822 | 73.2% | 4,365 |
+| CV on train | 0.795 | | |
+| **Test** | **0.813** | **74.5%** | 1,092 |
+| Test, judging from every verified photo of the person | 0.816 | 74.5% | 1,092 |
 
 Accuracy moves by ±1.5 points with the CV-chosen decision threshold between retrains (72–75%); AUC is stable.
 

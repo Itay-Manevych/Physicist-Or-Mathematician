@@ -1027,6 +1027,7 @@ Author and license for each photo are on its Commons page.
 - `img/1021.jpg` Bruno Schoeneberg: https://commons.wikimedia.org/wiki/File:Bruno%20Schoeneberg.jpg
 - `img/001_768d08.jpg` Bill Parry: https://commons.wikimedia.org/wiki/File:Bill_Parry_at_Oberwolfach.jpg
 - `img/006_85f6d4.jpg` Georgiy Malineckiy: https://commons.wikimedia.org/wiki/File:ADR2909.jpg
+- `img/013_74e256.jpg` Andrew M. Stuart: https://commons.wikimedia.org/wiki/File:2022-04-03-Andrew_-Stuart.jpg
 - `img/014_57e2b9.jpg` Po-Shen Loh: https://commons.wikimedia.org/wiki/File:2016_Wikimedia_DC_Annual_Membership_Meeting_30.jpg
 - `img/016_4d422f.jpg` Martin Bridson: https://commons.wikimedia.org/wiki/File:Professor_Martin_Bridson_FRS_(cropped).jpg
 - `img/033_32ebb3.jpg` Shiing-Shen Chern: https://commons.wikimedia.org/wiki/File:Shiing-shen_Chern_1977_(border-less).jpg
@@ -1048,6 +1049,7 @@ Author and license for each photo are on its Commons page.
 - `img/104_57e57f.jpg` Stuart Parkin: https://commons.wikimedia.org/wiki/File:Stuart_Parkin_2023_1.jpg
 - `img/104_8161ac.jpg` Stuart Parkin: https://commons.wikimedia.org/wiki/File:Stuart_Parkin_2023_3.jpg
 - `img/105_cb5fda.jpg` Karsten Danzmann: https://commons.wikimedia.org/wiki/File:Nobelpreis_für_Physik_Livestream_im_AEI_Hannover_Karsten_Danzmann_Portrait.jpg
+- `img/110_686bec.jpg` A. R. Frank Wazzan: https://commons.wikimedia.org/wiki/File:A._R._Frank_Wazzan,_Ph.D..jpg
 - `img/112_579e31.jpg` Ulrich Hofmann: https://commons.wikimedia.org/wiki/File:Hofmann,_Ulrich_Vizepräsident_1980_(2).jpg
 - `img/125_947d95.jpg` Chih-Kung Jen: https://commons.wikimedia.org/wiki/File:Photograph_of_Chih-Kung_Jen_from_the_Press_Communications_Office_of_the_Applied_Physics_Laboratory,_February_1962_(Smithsonian_Institution_Archives).jpg
 - `img/125_cf5227.jpg` Chih-Kung Jen: https://commons.wikimedia.org/wiki/File:C.K._Jen.jpg
@@ -1092,6 +1094,7 @@ Author and license for each photo are on its Commons page.
 - `img/414_5988c9.jpg` Ian Agol: https://commons.wikimedia.org/wiki/File:Ian_Agol_2013_San_Diego.jpg
 - `img/429_d7fb63.jpg` Q16832200: https://commons.wikimedia.org/wiki/File:Janos_kirz_in_2025_01.jpg
 - `img/440_dce533.jpg` Johannes Orphal: https://commons.wikimedia.org/wiki/File:Johannes_Orphal.jpg
+- `img/440_e89ba1.jpg` Johannes Orphal: https://commons.wikimedia.org/wiki/File:Orphal_2024.jpg
 - `img/441_a64537.jpg` John Lott: https://commons.wikimedia.org/wiki/File:John_Lott_2015.JPG
 - `img/448_86bc54.jpg` Russel E. Caflisch: https://commons.wikimedia.org/wiki/File:Russ_Caflisch_waterfall.JPG
 - `img/457_f8c293.jpg` Michael R. Douglas: https://commons.wikimedia.org/wiki/File:Michael-Douglas-at-Rutgers.JPG
@@ -1117,6 +1120,8 @@ Author and license for each photo are on its Commons page.
 - `img/539_84e868.jpg` Roberto Battiston: https://commons.wikimedia.org/wiki/File:Roberto_Battiston_2015.jpg
 - `img/539_096066.jpg` Roberto Battiston: https://commons.wikimedia.org/wiki/File:Roberto_Battiston.jpg
 - `img/542_e67e6a.jpg` Shoucheng Zhang: https://commons.wikimedia.org/wiki/File:ShouchengZhangNobelMuseum2017.png
+- `img/553_30c352.jpg` Bulat Xäbibullin: https://commons.wikimedia.org/wiki/File:KhBN2021.jpg
+- `img/556_55ce1e.jpg` Geordie Williamson: https://commons.wikimedia.org/wiki/File:Williamson_geordie.jpg
 - `img/563_5d182e.jpg` Ulrich Trottenberg: https://commons.wikimedia.org/wiki/File:Ulrich_Trottenberg_(cropped).jpg
 - `img/566_ea82fe.jpg` Pablo Augusto Ferrari: https://commons.wikimedia.org/wiki/File:Random_Structures_in_the_Brain_056.jpg
 - `img/566_5e2f03.jpg` Pablo Augusto Ferrari: https://commons.wikimedia.org/wiki/File:Pablo_Augusto_Ferrari.jpg
@@ -1124,6 +1129,7 @@ Author and license for each photo are on its Commons page.
 - `img/568_5f5e14.jpg` Volkmar Denner: https://commons.wikimedia.org/wiki/File:Volkmar_Denner_2.JPG
 - `img/573_b4dab4.jpg` Wolfgang M. Heckl: https://commons.wikimedia.org/wiki/File:Wolfgang_M._Heckl_1.jpg
 - `img/573_6e13ff.jpg` Wolfgang M. Heckl: https://commons.wikimedia.org/wiki/File:Wolfgang_M._Heckl_4.jpg
+- `img/579_14aa1d.jpg` Alfio Quarteroni: https://commons.wikimedia.org/wiki/File:Alfio_quarteroni.jpg
 - `img/581_ae1358.jpg` Tomasz Szemberg: https://commons.wikimedia.org/wiki/File:Sz2014.jpg
 - `img/581_45471b.jpg` Tomasz Szemberg: https://commons.wikimedia.org/wiki/File:Sz2013.jpg
 - `img/603_e327fb.jpg` Aram Papoyan: https://commons.wikimedia.org/wiki/File:Aram_Papoyan,_IPR_LP2018,_18.09.2018,_02.jpg
@@ -1150,12 +1156,16 @@ Author and license for each photo are on its Commons page.
 - `img/699_d0d7b2.jpg` Vladimir Yerofeyev: https://commons.wikimedia.org/wiki/File:Erofeev_V._I.jpg
 - `img/702_55025c.jpg` Alexander Szameit: https://commons.wikimedia.org/wiki/File:Alexander_Szameit_(2021).jpg
 - `img/710_75bd2f.jpg` Sergey Surzhikov: https://commons.wikimedia.org/wiki/File:Суржиков.png
+- `img/715_bb2791.jpg` Raman Parimala: https://commons.wikimedia.org/wiki/File:Parimala.jpg
 - `img/716_26ce5a.jpg` Krystyna Kuperberg: https://commons.wikimedia.org/wiki/File:K_Kuperberg.jpg
 - `img/720_8f0ea2.jpg` Nicolai Reshetikhin: https://commons.wikimedia.org/wiki/File:Nicolaj_Resjetikhin.jpg
 - `img/724_1187e1.jpg` Bruno Pontecorvo: https://commons.wikimedia.org/wiki/File:Carlo_Franzinetti_e_Bruno_Pontecorvo.jpg
 - `img/728_a793b2.jpg` Ashesh Prosad Mitra: https://commons.wikimedia.org/wiki/File:Ashes_Prasad_Mitra_-_Kolkata_2005-07-23_01882.jpg
 - `img/730_8d9479.jpg` François Loeser: https://commons.wikimedia.org/wiki/File:Loeser_mfo_2013.jpg
+- `img/734_70c93d.jpg` Alexey Andreevich Anselm: https://commons.wikimedia.org/wiki/File:Anselm_A_A.jpg
+- `img/739_6713b6.jpg` Amitava Raychaudhuri: https://commons.wikimedia.org/wiki/File:Amitava_Raychaudhuri_2.jpg
 - `img/740_188aa8.jpg` Richard Nickl: https://commons.wikimedia.org/wiki/File:RichardNickl2022.jpg
+- `img/742_7f626e.jpg` Mei-Yin Chou: https://commons.wikimedia.org/wiki/File:周美吟副院長.jpg
 - `img/760_53966a.jpg` Adriana Cristina Serquis: https://commons.wikimedia.org/wiki/File:Rafael_Mariano_Grossi_meeting_Dr._Adriana_Cristina_Serquis_(0111120051)_(52394488959)_(cropped).jpg
 - `img/763_550bb2.jpg` Jonathan Mboyo Esole: https://commons.wikimedia.org/wiki/File:Jonathan_Esole,_mon_premier_résultat_scientifique.jpg
 - `img/763_8b1463.jpg` Jonathan Mboyo Esole: https://commons.wikimedia.org/wiki/File:Jonathan_Mboyo_Esole_in_February_2017.jpg
@@ -1164,14 +1174,17 @@ Author and license for each photo are on its Commons page.
 - `img/791_37e51f.jpg` Robert Mills: https://commons.wikimedia.org/wiki/File:Robert_Laurence_Mills.jpg
 - `img/810_0544e2.jpg` Alessandro De Angelis: https://commons.wikimedia.org/wiki/File:AlessandroDeAngelis.jpg
 - `img/810_6c2324.jpg` Alessandro De Angelis: https://commons.wikimedia.org/wiki/File:Image_of_Alessandro_De_Angelis,_physicist_and_astrophysicist.png
+- `img/824_da25fd.jpg` Andrea Saltelli: https://commons.wikimedia.org/wiki/File:Photo_of_Andrea_Saltelli.jpg
 - `img/834_a70dbe.jpg` Hui Cao: https://commons.wikimedia.org/wiki/File:Hui_Cao_for_IFISC.jpg
 - `img/849_100428.jpg` Tatiana Roque: https://commons.wikimedia.org/wiki/File:Presidência_do_Senado_(23769953478)_(cropped).jpg
 - `img/849_edbce7.jpg` Tatiana Roque: https://commons.wikimedia.org/wiki/File:Tatiana_Roque_em_2024.jpg
 - `img/856_2c57e2.jpg` María Teresa Dova: https://commons.wikimedia.org/wiki/File:María_Teresa_Dova_8_(6030620562).jpg
 - `img/856_bd9529.jpg` María Teresa Dova: https://commons.wikimedia.org/wiki/File:María_Teresa_Dova_3_(6030622792).jpg
+- `img/863_08e947.jpg` Jonathan M. Dorfan: https://commons.wikimedia.org/wiki/File:Jonathan_Dorfan_(26772816747).jpg
 - `img/888_5a0e4e.jpg` Tsvi Piran: https://commons.wikimedia.org/wiki/File:Tsvi_Piran_DSC_1071_(10478730825).jpg
 - `img/888_805755.jpg` Tsvi Piran: https://commons.wikimedia.org/wiki/File:Tsvi_Piran_DSC_1069_(10478751164).jpg
 - `img/894_9c4a82.jpg` Rudolf Herrmann: https://commons.wikimedia.org/wiki/File:FOTO_SCHATZ_146.jpg
+- `img/900_eb8a5b.jpg` Mehdi Behzad: https://commons.wikimedia.org/wiki/File:Mbehzad2015.jpg
 - `img/911_266f9e.jpg` Patrick D. Gallagher: https://commons.wikimedia.org/wiki/File:Department_of_Commerce_2013_Presidential_Inauguration_Open_House_(8423410773).jpg
 - `img/911_140c39.jpg` Patrick D. Gallagher: https://commons.wikimedia.org/wiki/File:Opening_Ceremony_of_NOVA_Southeastern_University’s_(NSU)_Center_of_Excellence_for_Coral_Reef_Ecosystem_Research_(8205726657).jpg
 - `img/915_695079.jpg` Igle Gledhill: https://commons.wikimedia.org/wiki/File:Igle_Gledhill_at_ICTP_Trieste_01.jpg
