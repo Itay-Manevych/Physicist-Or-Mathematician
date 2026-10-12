@@ -9,6 +9,7 @@ Data
 Processing
   process <images.csv> [tag]  face crops + all embeddings -> data/faces<tag>.csv, data/feats_*<tag>.npy
   clean [--apply]             strict, photos-only Wikidata set -> data/clean.csv
+  verify                      strict same-person / not-a-copy checks on extra photos -> data/verified.csv
 Model
   train                       fixed train/test split, CV on train, report -> outputs/
   predict <photo> [...]       judge one person from one or more photos
@@ -31,7 +32,7 @@ def main():
     ap = argparse.ArgumentParser(prog="python -m physormath", description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
-    for name in ["fetch", "fetch-subfields", "fetch-extra", "fetch-depicts", "fetch-more", "fetch-older", "train", "game"]:
+    for name in ["fetch", "fetch-subfields", "fetch-extra", "fetch-depicts", "fetch-more", "fetch-older", "verify", "train", "game"]:
         sub.add_parser(name)
     sub.add_parser("scrape").add_argument("stage", choices=["discover", "probe", "crawl", "simons"])
     p = sub.add_parser("process")
@@ -78,6 +79,9 @@ def main():
     elif a.cmd == "clean":
         from .clean import clean
         clean(a.apply)
+    elif a.cmd == "verify":
+        from .identity import verify
+        verify()
     elif a.cmd == "train":
         from .train import main as train
         train()

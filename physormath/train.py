@@ -21,9 +21,9 @@ from sklearn.model_selection import StratifiedGroupKFold, cross_val_predict
 
 from .clean import photo_kind
 from .config import DATA, MODEL_FEATURES, OUTPUTS
+from .identity import verified
 from .labels import is_strict
 
-SAME_PERSON = 0.55  # FaceNet cosine similarity for "same person"
 CS = [0.03, 0.1, 0.3, 1, 3]
 CV_TOLERANCE = 0.005  # prefer the simplest model within this much CV AUC of the best
 
@@ -70,9 +70,7 @@ def load_sources():
 
     if (DATA / "faces_extra.csv").exists() and has_features("_extra"):
         e = pd.read_csv(DATA / "faces_extra.csv")
-        ref = dict(zip(w.qid, np.load(DATA / "feats_facenet.npy")[w.row.values]))
-        sim = np.array([ref[q] @ f if q in ref else -1 for q, f in zip(e.qid, np.load(DATA / "feats_facenet_extra.npy"))])
-        ok = (sim > SAME_PERSON) & (photo_kind("_extra") == "photo")
+        ok = verified("extra")  # same person for sure, real photo, not a copy (physormath/identity.py)
         parts.append((e[ok].assign(source="extra", group=e.qid[ok]), features("_extra")[ok]))
 
     if (DATA / "faces_uni.csv").exists() and has_features("_uni"):
@@ -127,25 +125,21 @@ def metrics(y, p):
     return {"auc": round(roc_auc_score(y, p), 3), "acc": round(accuracy_score(y, p > 0.5), 3), "n": int(len(y))}
 
 
-def extra_photos(source, w):
+def extra_photos(source):
     """Identity-verified, real, non-duplicate photos from data/faces_<source>.csv (if embedded) -> (rows, X)."""
     csv = DATA / f"faces_{source}.csv"
     if not csv.exists() or not has_features(f"_{source}") or not (DATA / f"feats_facenet_{source}.npy").exists():
         return None
-    d = pd.read_csv(csv)
-    ref = dict(zip(w.qid, np.load(DATA / "feats_facenet.npy")[w.row.values]))
-    sim = np.array([ref[q] @ f if q in ref else -1 for q, f in zip(d.qid, np.load(DATA / f"feats_facenet_{source}.npy"))])
-    ok = (sim > SAME_PERSON) & (sim < 0.97) & (photo_kind(f"_{source}") == "photo")  # same person, not a near-copy
-    return d[ok], features(f"_{source}")[ok]
+    ok = verified(source)
+    return pd.read_csv(csv)[ok], features(f"_{source}")[ok]
 
 
 def multi_photo(model, df, test):
     """Per test person: probability from the mean logit over all their photos (main + extra + depicts + more)."""
     z = pd.Series(model.decision_function(features_of(df, test)), index=df.group[test].values)
-    w = pd.read_csv(DATA / "clean.csv")
     parts = [z]
     for source in ["depicts", "more"]:
-        got = extra_photos(source, w)
+        got = extra_photos(source)
         if got is not None:
             d, X = got
             keep = d.qid.isin(set(df.group[test])).values

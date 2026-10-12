@@ -5,29 +5,31 @@ AUC: 0.5 = coin flip, 1.0 = perfect.
 
 ## Current model
 
-Logistic regression on face embeddings (CLIP ViT-L/14, CLIP ViT-H/14, SigLIP2) + a whole-photo embedding (CLIP ViT-H/14).
+Logistic regression on MetaCLIP-2 Worldwide ViT-H/14 (378 px) embeddings of the face and the whole photo, plus a
+CLIP ViT-H/14 whole-photo embedding. Training also uses photos the test never sees: non-strict physicists/mathematicians
+("loose", 3,859 photos), people born 1850–1899 (1,804) and strictly verified extra photos of training people (579).
 
 **Evaluation protocol.** 20% of people are held out as a fixed test set (`outputs/split.csv`), split by person:
-none of a test person's photos are used in training. Regularisation is chosen by 5-fold grouped cross-validation
-on the training set only, preferring the simplest model within 0.005 CV AUC of the best. The test set is scored once.
+none of a test person's photos are used in training. Regularisation and the decision threshold are chosen by 5-fold
+grouped cross-validation on the training set only, preferring the simplest model within 0.005 CV AUC of the best.
+The test set is scored once.
 
 | | AUC | Accuracy | n |
 |---|---|---|---|
-| Train | 0.826 | 73.8% | 4,366 |
-| CV on train | 0.794 | | |
-| **Test** | **0.788** | **70.1%** | 1,092 |
+| Train | 0.821 | 73.1% | 4,366 |
+| CV on train | 0.793 | | |
+| **Test** | **0.813** | **72.3%** | 1,092 |
+| Test, judging from every verified photo of the person | 0.816 | 72.4% | 1,092 |
 
-**Overfitting.** Mild: a 3.7-point train-test accuracy gap, and CV agrees with the test score. With weaker
-regularisation the training accuracy rises to 77% but test accuracy stays at 70% — extra capacity only memorises.
+**Overfitting.** None: a 0.8-point train-test accuracy gap, and CV agrees with the test score.
 
-**Confidence.** Accuracy on the test people the model is most sure about: top 50% → 84%, top 25% → 94%, top 10% → 99%.
+**Confidence.** Accuracy on the test people the model is most sure about: top 50% → 87%, top 25% → 97%, top 10% → 100%.
 `predict` says "can't tell" below the median confidence.
 
-**Several photos of one person.** For 192 test people with extra Commons photos, averaging the prediction over all
-their photos lifts AUC from 0.86 to 0.89 (these people score higher than average to begin with).
+**Several photos of one person.** For the 98 test people with verified extra photos, averaging over all their photos
+lifts accuracy from 78.6% to 81.6% (AUC 0.85 → 0.90).
 
-**More data.** Test AUC with 10% / 25% / 50% / 100% of the training data: 0.749 / 0.773 / 0.777 / 0.788.
-Mostly flat — more people help little.
+**More data.** Test AUC with 10% / 25% / 50% / 100% of the training data: 0.762 / 0.791 / 0.803 / 0.813.
 
 ## What the model looks at
 
@@ -54,8 +56,12 @@ Face shape barely beats chance; most of the signal is presentation and context. 
 | Averaging several photos of the person | +0.03 |
 | Removing paintings, drawings, statues, stamps | small, but they are not photos |
 | Bigger backbones (CLIP-L → CLIP-H → SigLIP2 → all three) | +0.01 |
-| Fine-tuning the last 6 blocks of CLIP ViT-L/14 | none (0.735 vs. 0.732 for a linear probe; overfits after 2 epochs) |
-| More people / more photos per person in training | none |
+| MetaCLIP-2 Worldwide ViT-H/14 instead of the CLIP/SigLIP2 trio | +0.015 (0.788 → 0.803) |
+| Training on non-strict ("loose") physicists/mathematicians too, scored only on strict ones | +0.003 |
+| 378 px MetaCLIP-2, people born 1850–1899, CV-tuned decision threshold | +0.007 (→ 0.813, 73.1%) |
+| Dropping unverifiable / duplicate extra photos (`verify`) | none (0.813; 72.3% vs. 73.1% is threshold noise) |
+| DINOv2, EVA-02, ViT-bigG next to MetaCLIP-2; SVM, MLP, stacking, standardisation | none |
+| Fine-tuning CLIP ViT-L/14 or MetaCLIP-2 locally (LP-FT) | none to tiny (val 0.775 → 0.781 after 5.5 h) |
 
 ## University staff photos: the model doesn't transfer
 
@@ -79,7 +85,7 @@ On department headshots the model is at chance: right at some universities, reve
 department's photographer, not the person, decides suit vs. casual, studio vs. candid, so the style cues the model learned
 from Wikidata point the wrong way where the maths page happens to look "formal". Training on the other universities does
 not help (leave-one-university-out mean 0.45). Adding the university photos to training moved the Wikidata test only from
-AUC 0.788 / 70.1% to 0.790 / 71.2% (within noise; overfitting gap 3.7 → 1.7 points).
+AUC 0.788 / 70.1% to 0.790 / 71.2% with the earlier model (within noise), so they are not used.
 
 This is the strongest evidence that the model reads photo presentation, not faces.
 

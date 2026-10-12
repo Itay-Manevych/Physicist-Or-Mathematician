@@ -29,10 +29,9 @@ def _rows():
     df, _ = load_sources()
     test = split(df)
     rows = df.assign(test=test)[["file", "face", "group", "label", "source", "test"]].copy()
-    w = pd.read_csv(DATA / "clean.csv")
     test_groups = set(rows.group[rows.test])
     for source in ["depicts", "more"]:  # identity-verified extra photos
-        got = extra_photos(source, w)
+        got = extra_photos(source)
         if got is not None:
             d = got[0]
             rows = pd.concat([rows, pd.DataFrame({"file": d.file.values, "face": d.face.values, "group": d.qid.values, "label": d.label.values,

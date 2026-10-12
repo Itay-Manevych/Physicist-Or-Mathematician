@@ -37,7 +37,7 @@ def _feat(name, tag, rows=None):
 def load(feature_names, with_extra=True):
     """wiki (+ new + verified extra photos) with the requested feature views; None if a view is missing."""
     from .clean import photo_kind
-    from .train import SAME_PERSON
+    from .identity import verified
     parts = []
     w = pd.read_csv(DATA / "clean.csv")
     w = w[w.occupations.map(is_strict)]
@@ -52,9 +52,7 @@ def load(feature_names, with_extra=True):
         parts.append((n[ok].assign(source="new", group=n.qid[ok]), np.hstack(Xs)[ok]))
     if with_extra:
         e = pd.read_csv(DATA / "faces_extra.csv")
-        ref = dict(zip(w.qid, np.load(DATA / "feats_facenet.npy")[w.row.values]))
-        sim = np.array([ref[q] @ f if q in ref else -1 for q, f in zip(e.qid, np.load(DATA / "feats_facenet_extra.npy"))])
-        ok = (sim > SAME_PERSON) & (photo_kind("_extra") == "photo")
+        ok = verified("extra")
         Xs = [_feat(f, "_extra") for f in feature_names]
         if all(x is not None for x in Xs):
             parts.append((e[ok].assign(source="extra", group=e.qid[ok]), np.hstack(Xs)[ok]))
@@ -220,22 +218,17 @@ def ensembles(names=None):
 
 def multiphoto(names=None, C=1.0):
     """Single photo vs. averaging over all of a test person's verified photos (main + extra [+ depicts])."""
-    from .clean import photo_kind
-    from .train import SAME_PERSON
+    from .identity import verified
     names = names or BASE
     df, X = load(names)
     y, train = df.y.values, ~df.test.values
     m = LogisticRegression(max_iter=5000, C=C).fit(X[train], y[train])
     logit = m.decision_function(X)
     rows = pd.DataFrame({"group": df.group, "y": y, "test": df.test, "src": df.source, "z": logit})
-    # depicts photos, identity-verified against the main portrait, if their features exist
+    # identity-verified depicts photos, if their features exist
     if all((DATA / f"feats_{n}_depicts.npy").exists() for n in names + ["facenet"]):
-        w = pd.read_csv(DATA / "clean.csv")
         dep = pd.read_csv(DATA / "faces_depicts.csv")
-        ref = dict(zip(w.qid, np.load(DATA / "feats_facenet.npy")[w.row.values]))
-        fn = np.load(DATA / "feats_facenet_depicts.npy")
-        sim = np.array([ref[q] @ f if q in ref else -1 for q, f in zip(dep.qid, fn)])
-        ok = (sim > SAME_PERSON) & (sim < 0.97) & (photo_kind("_depicts") == "photo")  # same person, not a near-copy
+        ok = verified("depicts")
         Xd = np.hstack([np.load(DATA / f"feats_{n}_depicts.npy") for n in names])[ok]
         split = pd.read_csv(OUTPUTS / "split.csv").set_index("group").test
         d = dep[ok]

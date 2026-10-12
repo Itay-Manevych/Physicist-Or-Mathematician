@@ -8,7 +8,8 @@ No photos are stored in this repository.
 |---|---|---|---|
 | Wikidata + Commons | `fetch` | humans with occupation physicist (Q169470) or mathematician (Q170790), born ≥ 1900, with a portrait | free licenses; attribution per file on Commons |
 | Wikidata sub-fields | `fetch-subfields` | people listed only as e.g. theoretical physicist, topologist, logician | same |
-| Commons categories | `fetch-extra` | up to 4 more photos per person; kept only if FaceNet confirms it is the same person | same |
+| Commons categories | `fetch-extra`, `fetch-more` | more photos per person from their Commons category | same |
+| Commons "depicts" | `fetch-depicts` | files whose structured data says they show the person | same |
 | University departments | `scrape discover/probe/crawl` | staff photos from maths and physics department pages | used for local training only |
 | Simons Investigators | `scrape simons` | maths and physics awardees, uniform headshots | used for local training only |
 
@@ -28,6 +29,24 @@ Old black-and-white photographs are kept. Excluded files are moved to `data/excl
 add paths to `data/manual_exclude.txt` to remove more by hand. Contact sheets for review go to `data/review/`.
 
 Result: **5,209 people** (2,688 mathematicians, 2,521 physicists).
+
+## Extra photos of a person (`verify`)
+
+An extra photo is used only if every check passes (`physormath/identity.py`):
+
+| Check | Rejected (of 3,759) |
+|---|---|
+| copy of a photo we already have (re-upload, crop, recolouring: FaceNet ≥ 0.97, CLIP image ≥ 0.95 or perceptual hash) | 892 |
+| someone else of similar size in the picture, so it is unclear who it shows | 721 |
+| FaceNet similarity to the main portrait below 0.62 | 568 |
+| 0.62–0.70 without a second confirmation from another strongly matching photo of them | 123 |
+| not a photograph | 69 |
+| another person's portrait is clearly more similar (lookalike) | 60 |
+| looked at by eye and not certain (big age gap, tiny crop, stylised image) | 49 |
+| man/woman contradicts the main portrait | 6 |
+
+Kept: **1,271 photos of 722 people**. Different people pass the 0.70 FaceNet bar in 0.03% of pairs; every accepted
+match below 0.78 was also checked by eye (contact sheets in `outputs/identity/`; rejects in `data/identity_reject.txt`).
 
 ## Scraping policy
 
