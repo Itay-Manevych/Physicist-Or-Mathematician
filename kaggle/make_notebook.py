@@ -1,7 +1,13 @@
-"""Generates kaggle/finetune_metaclip2.ipynb (kept as a script so the notebook is reviewable in git)."""
+"""Generates the fine-tuning notebooks (kept as a script so they are reviewable in git):
+
+  python kaggle/make_notebook.py kaggle   -> kaggle/finetune_metaclip2.ipynb  (Kaggle: dataset input, background run)
+  python kaggle/make_notebook.py colab    -> kaggle/finetune_colab.ipynb      (Colab: data + results on Google Drive)
+"""
 import json
+import sys
 from pathlib import Path
 
+PLATFORM = sys.argv[1] if len(sys.argv) > 1 else "kaggle"
 cells = []
 
 
@@ -13,15 +19,45 @@ def code(s):
     cells.append({"cell_type": "code", "metadata": {}, "execution_count": None, "outputs": [], "source": s})
 
 
-md("""# Physicist or Mathematician? — big-model benchmark + fine-tune
+if PLATFORM == "kaggle":
+    md("""# Physicist or Mathematician? — big-model benchmark + fine-tune (Kaggle)
 
 **Before running:** Settings → Accelerator **GPU T4 x2**, **Internet on**, and add the `pom-data` dataset as input.
 Then *Save Version → Save & Run All* (runs in the background, ~4–6 h). Outputs (in /kaggle/working):
 `benchmark.json`, `emb_<model>_<view>.npy`, `finetune.json` and `predictions.csv` (fine-tuned model, val + test rows).
 
 Models and views are compared on the **val** people (15% of the training people); test labels are never used for choices.""")
+    PIP = "!pip install -q open_clip_torch==3.3.0 timm"
+    PATHS = """os.environ["HF_HUB_CACHE"] = "/tmp/hf"
+DATA = os.path.dirname(glob.glob("/kaggle/input/**/meta.csv", recursive=True)[0])
+OUT, DEV = "/kaggle/working", "cuda\""""
+    REFERENCE = """    "mc2H378": ("ViT-H-14-worldwide-378", "metaclip2_worldwide"),       # current best (reference)
+"""
+else:
+    md("""# Physicist or Mathematician? — big-model benchmark + fine-tune (Google Colab)
 
-code("""!pip install -q open_clip_torch==3.3.0 timm
+1. Upload `pom-data.zip` to the top level of your **Google Drive** (My Drive).
+2. **Runtime → Change runtime type → T4 GPU**.
+3. **Runtime → Run all**, allow Google Drive access when asked, and **keep this tab open** (~4–5 h).
+
+Results are saved to **My Drive / pom-results** as they are produced. If Colab disconnects, just **Run all** again:
+finished models are skipped. When done, download `predictions.csv` and `benchmark.json` from that folder.
+
+Models and views are compared on the **val** people (15% of the training people); test labels are never used for choices.
+(The current production model is scored locally on the same val people, so it isn't re-run here.)""")
+    PIP = "!pip install -q open_clip_torch==3.3.0"
+    PATHS = """from google.colab import drive
+drive.mount("/content/drive")
+DATA = "/content/pom-data"
+if not os.path.exists(f"{DATA}/meta.csv"):  # unzip to the fast local disk once per session
+    import zipfile
+    zipfile.ZipFile("/content/drive/MyDrive/pom-data.zip").extractall(DATA)
+os.environ["HF_HUB_CACHE"] = "/content/hf"
+OUT, DEV = "/content/drive/MyDrive/pom-results", "cuda"
+os.makedirs(OUT, exist_ok=True)"""
+    REFERENCE = ""
+
+code(PIP + """
 import os, glob, json, time, shutil, numpy as np, pandas as pd, torch, torch.nn as nn, open_clip
 from PIL import Image
 from torch.utils.data import Dataset, DataLoader
@@ -29,9 +65,7 @@ from torchvision import transforms as T
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score
 from tqdm.auto import tqdm
-os.environ["HF_HUB_CACHE"] = "/tmp/hf"
-DATA = os.path.dirname(glob.glob("/kaggle/input/**/meta.csv", recursive=True)[0])
-OUT, DEV = "/kaggle/working", "cuda"
+""" + PATHS + """
 meta = pd.read_csv(f"{DATA}/meta.csv")
 y = meta.y.values
 TR, VA = (meta.role == "train").values, ((meta.role == "val") & meta.main).values
@@ -39,8 +73,7 @@ print(meta.role.value_counts().to_dict(), torch.cuda.get_device_name(0))""")
 
 code("""STAGE = "both"        # "benchmark", "finetune", or "both"
 CANDIDATES = {        # name -> (open_clip architecture, pretrained tag)
-    "mc2H378": ("ViT-H-14-worldwide-378", "metaclip2_worldwide"),       # current best (reference)
-    "siglip2_gopt": ("ViT-gopt-16-SigLIP2-384", "webli"),
+""" + REFERENCE + """    "siglip2_gopt": ("ViT-gopt-16-SigLIP2-384", "webli"),
     "mc2bigG378": ("ViT-bigG-14-worldwide-378", "metaclip2_worldwide"),
     "pe_bigG": ("PE-Core-bigG-14-448", "meta"),
 }
@@ -113,7 +146,7 @@ if STAGE in ("benchmark", "both"):
             continue
         finally:
             torch.cuda.empty_cache()
-            shutil.rmtree("/tmp/hf", ignore_errors=True)
+            shutil.rmtree(os.environ["HF_HUB_CACHE"], ignore_errors=True)  # free disk between models
         for v, X in E.items():
             np.save(f"{OUT}/emb_{name}_{v}.npy", X)
         bench[name] = {"face": val_auc(E["face"]), "image": val_auc(E["image"]),
@@ -248,5 +281,6 @@ if STAGE in ("finetune", "both"):
 
 nb = {"cells": cells, "metadata": {"kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
                                    "language_info": {"name": "python"}}, "nbformat": 4, "nbformat_minor": 5}
-Path(__file__).with_name("finetune_metaclip2.ipynb").write_text(json.dumps(nb, indent=1), encoding="utf-8")
-print("notebook written:", len(cells), "cells")
+name = "finetune_metaclip2.ipynb" if PLATFORM == "kaggle" else "finetune_colab.ipynb"
+Path(__file__).with_name(name).write_text(json.dumps(nb, indent=1), encoding="utf-8")
+print(name, "written:", len(cells), "cells")

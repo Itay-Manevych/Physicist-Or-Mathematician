@@ -1,4 +1,4 @@
-# Fine-tuning on a free Kaggle GPU
+# Fine-tuning on a free cloud GPU (Kaggle or Google Colab)
 
 This PC's 6 GB GPU is too small to fine-tune the big image models well, so this runs on Kaggle (free, ~30 GPU h/week).
 The notebook benchmarks four large vision transformers on our data, then fine-tunes the best one.
@@ -23,6 +23,18 @@ The notebook benchmarks four large vision transformers on our data, then fine-tu
    Put them in `data/kaggle/`.
 7. `python -m physormath kaggle blend` → blends the fine-tuned model with the production model
    (blend weight chosen on the val people) and reports the test score.
+
+## Google Colab instead (no phone verification needed)
+
+1. Upload `data/kaggle/pom-data.zip` to the top level of your Google Drive (My Drive).
+2. Open https://colab.research.google.com → **File → Upload notebook** → `kaggle/finetune_colab.ipynb`.
+3. **Runtime → Change runtime type → T4 GPU**, then **Runtime → Run all**; allow Drive access; keep the tab open (~4–5 h).
+4. Results land in **My Drive / pom-results** as they are produced. If Colab disconnects, **Run all** again
+   (finished models are skipped). Download `predictions.csv` and `benchmark.json` into `data/kaggle/`.
+5. `python -m physormath kaggle blend`.
+
+The Colab version skips the reference model (MetaCLIP-2 H-378): the blend step scores the production model on the
+same val people locally.
 
 ## Rules
 
