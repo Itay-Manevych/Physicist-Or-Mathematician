@@ -5,7 +5,7 @@ Data
   fetch-subfields             people listed only under a sub-field -> data/new/
   fetch-extra                 more Commons photos per clean person -> data/extra/
   fetch-depicts               photos tagged "depicts <person>" on Commons -> data/depicts/
-  fetch-wiki                  photos in each person's articles on every language Wikipedia -> data/wiki/
+  fetch-wiki                  photos in each person's articles on every language Wikipedia -> data/articles/
   scrape {discover,probe,crawl,simons}   university / Simons headshots -> data/uni/
 Processing
   process <images.csv> [tag]  face crops + all embeddings -> data/faces<tag>.csv, data/feats_*<tag>.npy

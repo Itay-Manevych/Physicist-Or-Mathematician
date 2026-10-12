@@ -135,10 +135,10 @@ def extra_photos(source):
 
 
 def multi_photo(model, df, test):
-    """Per test person: probability from the mean logit over all their photos (main + extra + depicts + more + wiki)."""
+    """Per test person: probability from the mean logit over all their photos (main + extra + depicts + more + articles)."""
     z = pd.Series(model.decision_function(features_of(df, test)), index=df.group[test].values)
     parts = [z]
-    for source in ["depicts", "more", "wiki"]:
+    for source in ["depicts", "more", "articles"]:
         got = extra_photos(source)
         if got is not None:
             d, X = got

@@ -267,15 +267,15 @@ SKIP_FILE = re.compile(r"signature|unterschrift|autograph|logo|flag|coat.of.arms
 
 def fetch_wikipedia_photos(max_per_person=6):
     """Photos shown in each clean person's articles on every language Wikipedia (Commons files only, so freely
-    licensed), beyond the ones we already have -> data/wiki.csv, data/wiki/. Identity is checked later (`verify`)."""
-    (DATA / "wiki").mkdir(parents=True, exist_ok=True)
+    licensed), beyond the ones we already have -> data/articles.csv, data/articles/. Identity is checked later (`verify`)."""
+    (DATA / "articles").mkdir(parents=True, exist_ok=True)
     clean = pd.read_csv(DATA / "clean.csv")
     have = {"File:" + urllib.parse.unquote(u.rsplit("/", 1)[1]).replace("_", " ") for u in clean.img}
     for f in ["extra.csv", "depicts.csv", "more.csv"]:
         if (DATA / f).exists():
             have |= set(pd.read_csv(DATA / f).title)
     s = session()
-    cache = DATA / "wiki_used.csv"  # steps 1-2 take ~20 minutes: keep their result
+    cache = DATA / "articles_used.csv"  # steps 1-2 take ~20 minutes: keep their result
     if cache.exists():
         used = pd.read_csv(cache)
     else:
@@ -301,10 +301,10 @@ def fetch_wikipedia_photos(max_per_person=6):
     used = used.sort_values(["qid", "n_wikis", "title"], ascending=[True, False, True]).groupby("qid").head(max_per_person)
     jobs = used.merge(clean[["qid", "label"]], on="qid")
     jobs["thumb"] = jobs.title.map(info)
-    jobs["file"] = jobs.title.map(lambda t: image_path(t, "data/wiki"))
+    jobs["file"] = jobs.title.map(lambda t: image_path(t, "data/articles"))
     jobs = jobs[~jobs.file.duplicated(keep=False)]  # one photo on several people's pages: unclear who it shows
     jobs["downloaded"] = download_all(s, jobs)
-    jobs.to_csv(DATA / "wiki.csv", index=False)
+    jobs.to_csv(DATA / "articles.csv", index=False)
     print(len(jobs), "Wikipedia photos for", jobs.qid.nunique(), "people")
 
 

@@ -30,7 +30,7 @@ def _rows():
     test = split(df)
     rows = df.assign(test=test)[["file", "face", "group", "label", "source", "test"]].copy()
     test_groups = set(rows.group[rows.test])
-    for source in ["depicts", "more", "wiki"]:  # identity-verified extra photos
+    for source in ["depicts", "more", "articles"]:  # identity-verified extra photos
         got = extra_photos(source)
         if got is not None:
             d = got[0]

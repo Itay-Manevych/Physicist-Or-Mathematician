@@ -23,7 +23,7 @@ from .config import DATA, OUTPUTS
 from .embed import resolve
 from .faces import detector, open_image
 
-SOURCES = ["extra", "depicts", "more", "wiki"]
+SOURCES = ["extra", "depicts", "more", "articles"]
 STRONG, WEAK = 0.70, 0.62  # FaceNet cosine; different people exceed them in 0.03% / 0.13% of pairs
 MARGIN = 0.05              # reject when another person's portrait is this much more similar
 COPY_FACE, COPY_FULL, COPY_HASH = 0.97, 0.95, 6  # near-identical face / whole image / perceptual-hash bits
