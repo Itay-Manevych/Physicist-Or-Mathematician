@@ -71,8 +71,6 @@ python -m physormath train                         # fixed train/test split, rep
 python -m physormath game                          # game data from held-out test people -> game/
 ```
 
-Guess the department: `dept fetch` → `process data/dept/people.csv _dept` → `dept train` → `dept game`.
-
 Optional extra data: `fetch-subfields`, `fetch-older`, `fetch-extra`, `fetch-depicts`, `fetch-more`, `fetch-wiki`
 (each followed by `process <csv> <tag>`). Cloud fine-tuning of bigger models: [kaggle/README.md](kaggle/README.md).
 Sources and data policy: [docs/DATA.md](docs/DATA.md).
@@ -86,17 +84,9 @@ Sources and data policy: [docs/DATA.md](docs/DATA.md).
 - **Live duel**: create a room, send the link, fight a friend in real time (15 s per round, answers hidden until both lock in, rematch).
 - **Party mode** (Jackbox-style): the host screen goes on a TV with a room code + QR; everyone answers on their phone;
   each reveal shows who picked what, points are 100 + a speed bonus, the machine plays too, and the game ends on a podium.
-- **Guess the department** (separate mode): 7 choices (physics, maths, chemistry, biology, computer science, philosophy,
-  economics), its own data, model and game files (`physormath/departments.py`, `game/dept/`); the main game is untouched.
 - After each guess the reveal shows what the machine noticed (CLIP concept probe), plus shareable scorecards and an OG link preview.
 
-Running it:
-
-- **Deploy:** Vercel serves `game/` and the functions in `api/` (`vercel.json`, no build step).
-- **Storage:** leaderboards, duels and parties use Upstash Redis — add the free **Upstash** integration in the Vercel project
-  (Storage → Upstash → Redis → connect) and redeploy. Without it, vs-machine scores stay on each device and duels/parties are off.
-- **Local:** `node dev/server.js` → http://localhost:8137 (in-memory store).
-- Photo credits: [game/CREDITS.md](game/CREDITS.md).
+Photo credits: [game/CREDITS.md](game/CREDITS.md).
 
 ## Layout
 
