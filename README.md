@@ -8,13 +8,44 @@ Held-out **test set** of 1,092 people the model never saw during training:
 
 | | AUC | Accuracy |
 |---|---|---|
-| All test people | 0.79 | 70% |
-| Its most confident 25% | — | 94% |
-| Several photos of one person, averaged | 0.89 | 77% |
+| All test people (one photo each) | 0.813 | 74.5% |
+| Its most confident 25% | — | 97% |
+| Its most confident 10% | — | 100% |
+| Using every verified photo of the person | 0.816 | 74.5% |
 
-Train accuracy is 74%, so overfitting is mild, and cross-validation on the training set (AUC 0.79) agrees with the test score.
-What the model picks up is mostly presentation — clothes, hair, expression, photo setting — not face shape.
-Details and every experiment: [docs/RESULTS.md](docs/RESULTS.md).
+Train accuracy is 73.2% and cross-validated AUC on the training set is 0.795, so there is no overfitting.
+What the model picks up is mostly presentation (clothes, hair, expression, photo setting), not face shape:
+a face-recognition embedding alone scores only 0.61. Details and every experiment: [docs/RESULTS.md](docs/RESULTS.md).
+
+## How it works
+
+**Data.** People on Wikidata with occupation physicist or mathematician, born 1900 or later, with a portrait on
+Wikimedia Commons. Labels are strict: anyone with an occupation outside physics, maths or generic academia
+(astronaut, engineer, politician, ...) or listed as both is left out, and paintings, drawings, statues and stamps are
+removed with a CLIP zero-shot check. That leaves 5,208 people. Training also uses photos the test never sees:
+non-strict physicists/mathematicians, people born 1850–1899, and extra photos of training people that passed a strict
+same-person and no-duplicate check (`verify`, see [docs/DATA.md](docs/DATA.md)).
+
+**Embeddings.** No network is trained from scratch. Each photo goes through frozen pretrained vision transformers:
+
+| View | Model | Size |
+|---|---|---|
+| Face crop (MTCNN, 1.6× the face box) | MetaCLIP-2 Worldwide ViT-H/14, 378 px | 1024 |
+| Whole photo, padded to a square | MetaCLIP-2 Worldwide ViT-H/14, 378 px | 1024 |
+| Whole photo, padded to a square | CLIP ViT-H/14 (DFN-5B) | 1024 |
+
+Embeddings are averaged over test-time views (face: original, mirrored, grayscale, grayscale mirrored; whole photo:
+colour and grayscale), so old black-and-white photos don't stand out by colour alone. Chosen by benchmark over CLIP-L, SigLIP2, EVA-02, DINOv2,
+ViT-bigG and combinations: adding more backbones didn't help.
+
+**Classifier.** Logistic regression on the 3,072 concatenated features. Regularisation strength and the decision
+threshold come from 5-fold cross-validation on the training set, grouped by person so no one is in two folds.
+A person with several photos is judged by the mean of their per-photo scores.
+
+**Evaluation.** A fixed 20% of people (`outputs/split.csv`), split by person and stratified by label, is the test set.
+None of a test person's photos are used for training or model selection, and the test set is scored once at the end.
+The game only shows test people. On university department headshots the model is at chance (AUC 0.50): each
+department's photographer sets the style, and style is what the model reads.
 
 ## Quickstart
 
@@ -35,20 +66,22 @@ python -m physormath predict friend1.jpg friend2.jpg friend3.jpg   # several pho
 python -m physormath fetch                         # Wikidata physicists & mathematicians + Commons photos
 python -m physormath process data/people.csv       # face crops + embeddings
 python -m physormath clean --apply                 # strict labels, real photos only
+python -m physormath verify                        # extra photos: same person for sure, no duplicates
 python -m physormath train                         # fixed train/test split, report in outputs/
 python -m physormath game                          # game data from held-out test people -> game/
 ```
 
 Guess the department: `dept fetch` → `process data/dept/people.csv _dept` → `dept train` → `dept game`.
 
-Optional extra data: `fetch-subfields`, `fetch-extra`, `scrape {discover,probe,crawl,simons}` (each followed by `process <csv> <tag>`).
+Optional extra data: `fetch-subfields`, `fetch-older`, `fetch-extra`, `fetch-depicts`, `fetch-more`, `fetch-wiki`
+(each followed by `process <csv> <tag>`). Cloud fine-tuning of bigger models: [kaggle/README.md](kaggle/README.md).
 Sources and data policy: [docs/DATA.md](docs/DATA.md).
 
 ## The game
 
 `game/` is a retro fighting game on held-out test people only (the model never trained on them):
 
-- **Vs the machine**: 10 rounds against the model; online leaderboard.
+- **Vs the machine**: 10 rounds against the model; online leaderboard. Fighters with extra verified photos show up to 3.
 - **Daily challenge**: the same 10 fighters for everyone each day (`game/daily.js`, shared with the API), one try, daily leaderboard, streaks.
 - **Live duel**: create a room, send the link, fight a friend in real time (15 s per round, answers hidden until both lock in, rematch).
 - **Party mode** (Jackbox-style): the host screen goes on a TV with a room code + QR; everyone answers on their phone;
@@ -74,6 +107,7 @@ game/         retro "human vs. machine" fighting game (static site)
 api/          serverless functions: leaderboards, live duel rooms, party rooms
 dev/          local server for the game + API
 docs/         results and data notes
+kaggle/       notebooks for fine-tuning on a free cloud GPU
 data/         photos, crops, embeddings   (not in git)
 outputs/      models, predictions, reports (not in git)
 ```
